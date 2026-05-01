@@ -27,9 +27,9 @@ const Styles = () => {
         <Reveal className="max-w-2xl mb-16 md:mb-20">
           <p className="eyebrow mb-5">Select Your Style</p>
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1]">
-            Three philosophies. One sense of warmth.
+            Three philosophies. <em className="not-italic text-[hsl(var(--gold-soft))]">One sense of warmth.</em>
           </h2>
-          <p className="mt-6 text-muted-foreground max-w-lg">
+          <p className="mt-6 text-muted-foreground max-w-lg leading-[1.85]">
             Choose a direction below — each one is a starting point we tailor to your home.
           </p>
         </Reveal>
@@ -41,12 +41,18 @@ const Styles = () => {
               <button
                 key={it.key}
                 onClick={() => setActive(it.key)}
-                className={`px-6 h-11 text-xs uppercase tracking-[0.28em] border transition-all duration-300 ${
+                className={`relative px-6 h-11 text-xs uppercase tracking-[0.28em] border transition-all duration-300 ${
                   isActive
                     ? "bg-[hsl(var(--wood-deep))] text-cream border-[hsl(var(--wood-deep))]"
                     : "bg-transparent text-foreground border-border hover:border-[hsl(var(--gold))] hover:text-[hsl(var(--wood-deep))]"
                 }`}
               >
+                {isActive && (
+                  <span
+                    className="absolute -top-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[hsl(var(--gold))] animate-fade-in"
+                    aria-hidden="true"
+                  />
+                )}
                 {it.title}
               </button>
             );
@@ -75,14 +81,15 @@ const Styles = () => {
             <p className="eyebrow mb-4">Style · {current.title}</p>
             <h3 key={current.title} className="font-serif text-4xl md:text-5xl animate-fade-up">{current.title}</h3>
             <div className="gold-line my-7 max-w-[100px]" />
-            <p key={current.desc} className="text-lg text-foreground leading-relaxed animate-fade-up">{current.desc}</p>
-            <p key={current.note} className="mt-4 text-muted-foreground leading-relaxed animate-fade-up">{current.note}</p>
+            <p key={current.desc} className="text-lg text-foreground leading-[1.85] animate-fade-up">{current.desc}</p>
+            <p key={current.note} className="mt-4 text-muted-foreground leading-[1.85] animate-fade-up">{current.note}</p>
 
             <button
               onClick={goToPortfolio}
-              className="mt-10 inline-block text-xs uppercase tracking-[0.28em] text-[hsl(var(--wood-deep))] border-b border-[hsl(var(--gold))] pb-1 hover:text-[hsl(var(--gold))] transition-colors"
+              className="mt-10 inline-flex items-center gap-3 text-xs uppercase tracking-[0.28em] text-[hsl(var(--wood-deep))] border-b border-[hsl(var(--gold))] pb-1 hover:text-[hsl(var(--gold))] transition-all duration-300 group hover:gap-4 w-fit"
             >
-              See {current.title} Projects →
+              See {current.title} Projects
+              <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
             </button>
           </div>
         </Reveal>

@@ -35,16 +35,16 @@ const Footer = () => (
         <div>
           <p className="font-serif text-3xl md:text-4xl">
             Interiors{" "}
-            <span className="text-[hsl(var(--gold-soft))]">by Dinesh</span>
+            <em className="not-italic text-[hsl(var(--gold-soft))]">by Dinesh</em>
           </p>
-          <p className="mt-3 text-cream/50 text-sm leading-relaxed max-w-sm">
+          <p className="mt-4 text-cream/50 text-sm leading-[1.85] max-w-sm">
             A premium interior design studio crafting homes where Indian
             heritage meets modern living.
           </p>
         </div>
         <Link
           to="/contact"
-          className="inline-flex items-center gap-3 border border-[hsl(var(--gold)/0.5)] text-[hsl(var(--gold-soft))] px-8 h-12 text-[11px] uppercase tracking-[0.3em] hover:bg-[hsl(var(--gold)/0.1)] transition-colors duration-300 group w-fit"
+          className="inline-flex items-center gap-3 border border-[hsl(var(--gold)/0.5)] text-[hsl(var(--gold-soft))] px-8 h-12 text-[11px] uppercase tracking-[0.3em] hover:bg-[hsl(var(--gold)/0.1)] transition-all duration-300 group w-fit hover:gap-4"
         >
           Begin a Project
           <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
@@ -63,7 +63,7 @@ const Footer = () => (
               <li key={l.to}>
                 <Link
                   to={l.to}
-                  className="text-sm text-cream/60 hover:text-cream transition-colors duration-300 ink-link"
+                  className="text-sm text-cream/60 hover:text-cream transition-colors duration-300 ink-link inline-block"
                 >
                   {l.label}
                 </Link>
@@ -77,15 +77,15 @@ const Footer = () => (
           <p className="text-[11px] uppercase tracking-[0.32em] text-[hsl(var(--gold-soft))] mb-6">
             Studio
           </p>
-          <ul className="space-y-3 text-sm text-cream/60">
+          <ul className="space-y-3 text-sm text-cream/60 leading-[1.85]">
             <li>14 Lavelle Road, Bengaluru</li>
             <li>
-              <a href="mailto:hello@interiorsbydinesh.com" className="hover:text-cream transition-colors duration-300 ink-link">
+              <a href="mailto:hello@interiorsbydinesh.com" className="hover:text-cream transition-colors duration-300 ink-link inline-block">
                 hello@interiorsbydinesh.com
               </a>
             </li>
             <li>
-              <a href="tel:+919999999999" className="hover:text-cream transition-colors duration-300 ink-link">
+              <a href="tel:+919999999999" className="hover:text-cream transition-colors duration-300 ink-link inline-block">
                 +91 99999 99999
               </a>
             </li>

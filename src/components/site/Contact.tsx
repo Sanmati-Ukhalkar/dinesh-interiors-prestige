@@ -52,7 +52,7 @@ const Contact = ({ showHeading = true }: Props) => {
               <p className="eyebrow mb-5">Begin a Project</p>
               <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1]">
                 Let's design something{" "}
-                <em className="not-italic text-[hsl(var(--wood))]">timeless</em> together.
+                <em className="not-italic text-[hsl(var(--gold-soft))]">timeless</em> together.
               </h2>
               <div className="gold-line my-10 max-w-[100px]" />
             </>
@@ -68,115 +68,121 @@ const Contact = ({ showHeading = true }: Props) => {
             href="https://wa.me/919999999999"
             target="_blank"
             rel="noreferrer"
-            className="mt-10 inline-flex items-center gap-3 bg-[hsl(var(--wood-deep))] text-cream px-7 h-12 hover:bg-[hsl(var(--wood))] transition-colors duration-300 group border border-[hsl(var(--gold)/0.2)]"
+            className="mt-10 inline-flex items-center gap-3 bg-[hsl(var(--wood-deep))] text-cream px-7 h-12 hover:bg-[hsl(var(--wood))] transition-all duration-300 group border border-[hsl(var(--gold)/0.2)] hover:gap-4"
           >
             <WhatsAppIcon />
             <span className="text-[11px] uppercase tracking-[0.28em]">Chat on WhatsApp</span>
-            <span className="ml-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-[hsl(var(--gold-soft))]" aria-hidden="true">→</span>
+            <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-[hsl(var(--gold-soft))]" aria-hidden="true">→</span>
           </a>
 
           {/* Contact details */}
           <dl className="mt-12 space-y-4">
             {contactDetails.map((d) => (
-              <div key={d.label} className="flex gap-4 text-sm">
-                <dt className="text-foreground font-medium min-w-[52px]">{d.label}</dt>
-                <dd className="text-muted-foreground">
-                  {d.href ? (
-                    <a href={d.href} className="ink-link hover:text-foreground transition-colors duration-300">
-                      {d.value}
-                    </a>
-                  ) : (
-                    d.value
-                  )}
-                </dd>
-              </div>
+               <div key={d.label} className="flex gap-4 text-sm">
+                 <dt className="text-foreground font-medium min-w-[52px]">{d.label}</dt>
+                 <dd className="text-muted-foreground">
+                   {d.href ? (
+                     <a href={d.href} className="ink-link hover:text-foreground transition-colors duration-300">
+                       {d.value}
+                     </a>
+                   ) : (
+                     d.value
+                   )}
+                 </dd>
+               </div>
             ))}
           </dl>
         </Reveal>
 
         {/* Right — form column */}
         <Reveal delay={120}>
-          <form
-            onSubmit={onSubmit}
-            className="bg-background p-8 md:p-12 border border-border space-y-8"
-          >
-            <div className="grid sm:grid-cols-2 gap-8">
-              <div>
-                <Label htmlFor="name" className="text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
-                  Name
-                </Label>
-                <Input
-                  id="name"
-                  name="name"
-                  required
-                  className="mt-3 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:ring-0 focus-visible:border-[hsl(var(--gold))] transition-colors duration-300"
-                />
-              </div>
-              <div>
-                <Label htmlFor="city" className="text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
-                  City
-                </Label>
-                <Input
-                  id="city"
-                  name="city"
-                  required
-                  className="mt-3 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:ring-0 focus-visible:border-[hsl(var(--gold))] transition-colors duration-300"
-                />
-              </div>
-            </div>
-
-            <div>
-              <Label className="text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
-                Budget
-              </Label>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {budgets.map((b) => (
-                  <button
-                    key={b}
-                    type="button"
-                    onClick={() => setBudget(b)}
-                    className={`px-4 h-9 text-[11px] uppercase tracking-[0.2em] border transition-colors duration-300 ${
-                      budget === b
-                        ? "bg-[hsl(var(--wood-deep))] text-cream border-[hsl(var(--wood-deep))]"
-                        : "border-border hover:border-[hsl(var(--gold))] hover:text-foreground"
-                    }`}
-                  >
-                    {b}
-                  </button>
-                ))}
-              </div>
-              <input type="hidden" name="budget" value={budget} />
-            </div>
-
-            <div>
-              <Label
-                htmlFor="requirement"
-                className="text-[11px] uppercase tracking-[0.24em] text-muted-foreground"
-              >
-                Requirement
-              </Label>
-              <Textarea
-                id="requirement"
-                name="requirement"
-                rows={4}
-                required
-                placeholder="Tell us about your home and timeline…"
-                className="mt-3 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:ring-0 focus-visible:border-[hsl(var(--gold))] resize-none transition-colors duration-300"
-              />
-            </div>
-
-            <Button
-              type="submit"
-              disabled={submitting}
-              className="w-full rounded-none bg-[hsl(var(--wood-deep))] text-cream hover:bg-[hsl(var(--wood))] h-12 text-[11px] uppercase tracking-[0.3em] transition-all duration-300"
-            >
-              {submitting ? "Sending…" : "Send Enquiry →"}
-            </Button>
-          </form>
-        </Reveal>
-      </div>
-    </section>
-  );
-};
-
-export default Contact;
+           <form
+             onSubmit={onSubmit}
+             className="bg-background p-8 md:p-12 border border-border space-y-8"
+           >
+             <div className="grid sm:grid-cols-2 gap-8">
+               <div>
+                 <Label htmlFor="name" className="text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
+                   Name
+                 </Label>
+                 <Input
+                   id="name"
+                   name="name"
+                   required
+                   className="mt-3 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:ring-0 focus-visible:border-[hsl(var(--gold))] transition-colors duration-300"
+                 />
+               </div>
+               <div>
+                 <Label htmlFor="city" className="text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
+                   City
+                 </Label>
+                 <Input
+                   id="city"
+                   name="city"
+                   required
+                   className="mt-3 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:ring-0 focus-visible:border-[hsl(var(--gold))] transition-colors duration-300"
+                 />
+               </div>
+             </div>
+ 
+             <div>
+               <Label className="text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
+                 Budget
+               </Label>
+               <div className="mt-3 flex flex-wrap gap-2">
+                 {budgets.map((b) => (
+                   <button
+                     key={b}
+                     type="button"
+                     onClick={() => setBudget(b)}
+                     className={`relative px-4 h-9 text-[11px] uppercase tracking-[0.2em] border transition-colors duration-300 ${
+                       budget === b
+                         ? "bg-[hsl(var(--wood-deep))] text-cream border-[hsl(var(--wood-deep))]"
+                         : "border-border hover:border-[hsl(var(--gold))] hover:text-foreground"
+                     }`}
+                   >
+                    {budget === b && (
+                        <span
+                          className="absolute -top-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[hsl(var(--gold))] animate-fade-in"
+                          aria-hidden="true"
+                        />
+                      )}
+                     {b}
+                   </button>
+                 ))}
+               </div>
+               <input type="hidden" name="budget" value={budget} />
+             </div>
+ 
+             <div>
+               <Label
+                 htmlFor="requirement"
+                 className="text-[11px] uppercase tracking-[0.24em] text-muted-foreground"
+               >
+                 Requirement
+               </Label>
+               <Textarea
+                 id="requirement"
+                 name="requirement"
+                 rows={4}
+                 required
+                 placeholder="Tell us about your home and timeline…"
+                 className="mt-3 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:ring-0 focus-visible:border-[hsl(var(--gold))] resize-none transition-colors duration-300"
+               />
+             </div>
+ 
+             <Button
+               type="submit"
+               disabled={submitting}
+               className="w-full rounded-none bg-[hsl(var(--wood-deep))] text-cream hover:bg-[hsl(var(--wood))] h-12 text-[11px] uppercase tracking-[0.3em] transition-all duration-300"
+             >
+               {submitting ? "Sending…" : "Send Enquiry →"}
+             </Button>
+           </form>
+         </Reveal>
+       </div>
+     </section>
+   );
+ };
+ 
+ export default Contact;

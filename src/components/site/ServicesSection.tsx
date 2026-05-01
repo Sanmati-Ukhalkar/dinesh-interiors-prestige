@@ -51,7 +51,7 @@ const ServicesSection = () => (
               <article className="group bg-background p-10 lg:p-12 h-full hover:bg-secondary/30 transition-colors duration-500 cursor-default">
                 {/* Number + expanding rule */}
                 <div className="flex items-center justify-between mb-8">
-                  <span className="font-serif text-3xl text-[hsl(var(--gold)/0.35)] leading-none select-none">
+                  <span className="font-serif text-[4rem] text-[hsl(var(--gold)/0.15)] leading-none select-none transition-colors duration-500 group-hover:text-[hsl(var(--gold)/0.3)]">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span className="h-px w-8 bg-[hsl(var(--gold))] transition-all duration-500 group-hover:w-20" />
@@ -60,11 +60,11 @@ const ServicesSection = () => (
                 <h3 className="font-serif text-3xl lg:text-[2rem] leading-tight">{s.title}</h3>
                 <p className="mt-5 text-muted-foreground leading-[1.8]">{s.desc}</p>
 
-                <ul className="mt-8 space-y-2.5 border-t border-border pt-6">
+                <ul className="mt-8 space-y-3 border-t border-border pt-6">
                   {s.items.map((it) => (
-                    <li key={it} className="text-sm text-foreground flex items-center gap-3">
+                    <li key={it} className="text-sm text-foreground flex items-center gap-4 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
                       <span className="h-px w-4 flex-shrink-0 bg-[hsl(var(--gold))]" />
-                      {it}
+                      <span className="tracking-wide">{it}</span>
                     </li>
                   ))}
                 </ul>
@@ -98,13 +98,13 @@ const ServicesSection = () => (
 
           {steps.map((s, i) => (
             <Reveal key={s.title} delay={i * 120}>
-              <div className="relative group">
+              <div className="relative group cursor-default">
                 {/* Circle */}
-                <div className="relative h-20 w-20 flex items-center justify-center rounded-full bg-background border border-[hsl(var(--gold)/0.5)] group-hover:border-[hsl(var(--gold))] group-hover:bg-[hsl(var(--gold)/0.06)] transition-all duration-500 mb-8">
-                  <span className="font-serif text-xl text-[hsl(var(--wood-deep))]">{s.n}</span>
+                <div className="relative h-20 w-20 flex items-center justify-center rounded-full bg-background border border-[hsl(var(--gold)/0.4)] group-hover:border-[hsl(var(--gold))] group-hover:bg-[hsl(var(--gold)/0.08)] transition-all duration-500 mb-8 mx-auto md:mx-0 shadow-sm">
+                  <span className="font-serif text-xl text-[hsl(var(--wood-deep))] transition-transform duration-500 group-hover:scale-110">{s.n}</span>
                 </div>
-                <h3 className="font-serif text-2xl mt-1">{s.title}</h3>
-                <p className="mt-3 text-muted-foreground leading-[1.8] text-sm">{s.desc}</p>
+                <h3 className="font-serif text-2xl mt-1 text-center md:text-left">{s.title}</h3>
+                <p className="mt-3 text-muted-foreground leading-[1.8] text-sm text-center md:text-left">{s.desc}</p>
               </div>
             </Reveal>
           ))}
