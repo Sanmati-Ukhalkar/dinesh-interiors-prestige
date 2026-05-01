@@ -13,9 +13,9 @@ const Index = () => (
   <main className="min-h-screen bg-background">
     <Navbar />
     <Hero />
-    {/* Indian arch separator from hero into About */}
-    <div className="relative -mt-1 bg-[hsl(var(--wood-deep))]">
-      <ArchDivider fill="hsl(var(--background))" flip />
+    {/* Arch separator dips down from hero into About */}
+    <div className="relative -mt-[80px] md:-mt-[120px] z-20">
+      <ArchDivider fill="hsl(var(--background))" />
     </div>
     <About />
     <Styles />
