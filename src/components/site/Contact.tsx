@@ -4,6 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
+import Reveal from "./Reveal";
+import JaliBackground from "./JaliBackground";
 
 const WhatsAppIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -11,8 +13,16 @@ const WhatsAppIcon = () => (
   </svg>
 );
 
-const Contact = () => {
+interface Props {
+  /** Show full version with eyebrow + heading; on the dedicated /contact page we hide them since the page hero already has them. */
+  showHeading?: boolean;
+}
+
+const budgets = ["Under ₹15L", "₹15L – ₹30L", "₹30L – ₹60L", "₹60L+"];
+
+const Contact = ({ showHeading = true }: Props) => {
   const [submitting, setSubmitting] = useState(false);
+  const [budget, setBudget] = useState<string>(budgets[1]);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,24 +35,28 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-36 bg-secondary/40">
-      <div className="container-luxe grid lg:grid-cols-2 gap-16 lg:gap-24">
-        <div>
-          <p className="eyebrow mb-5">Begin a Project</p>
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1]">
-            Let's design something timeless together.
-          </h2>
-          <div className="gold-line my-10 max-w-[120px]" />
+    <section id="contact" className="relative py-24 md:py-36 bg-secondary/40 overflow-hidden">
+      <JaliBackground opacity={0.04} />
+      <div className="relative container-luxe grid lg:grid-cols-2 gap-16 lg:gap-24">
+        <Reveal>
+          {showHeading && (
+            <>
+              <p className="eyebrow mb-5">Begin a Project</p>
+              <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1]">
+                Let's design something timeless together.
+              </h2>
+              <div className="gold-line my-10 max-w-[120px]" />
+            </>
+          )}
           <p className="text-muted-foreground leading-relaxed text-lg max-w-md">
-            Tell us a little about your space and how you'd like to live in it.
-            We respond personally within one working day.
+            Tell us a little about your space and how you'd like to live in it. We respond personally within one working day.
           </p>
 
           <a
             href="https://wa.me/919999999999"
             target="_blank"
             rel="noreferrer"
-            className="mt-10 inline-flex items-center gap-3 bg-[hsl(var(--wood-deep))] text-cream px-7 h-12 hover:bg-[hsl(var(--wood))] transition-colors"
+            className="mt-10 inline-flex items-center gap-3 bg-[#25D366] text-white px-7 h-12 hover:opacity-90 transition-opacity"
           >
             <WhatsAppIcon />
             <span className="text-xs uppercase tracking-[0.28em]">Chat on WhatsApp</span>
@@ -51,27 +65,48 @@ const Contact = () => {
           <div className="mt-14 space-y-3 text-sm text-muted-foreground">
             <p><span className="text-foreground">Studio</span> — 14 Lavelle Road, Bengaluru</p>
             <p><span className="text-foreground">Email</span> — hello@interiorsbydinesh.com</p>
-            <p><span className="text-foreground">Phone</span> — +91 99999 99999</p>
+            <p><span className="text-foreground">Phone</span> — <a href="tel:+919999999999" className="hover:text-[hsl(var(--gold))] transition-colors">+91 99999 99999</a></p>
+            <p><span className="text-foreground">Hours</span> — Mon–Sat, 10am – 7pm IST</p>
           </div>
-        </div>
+        </Reveal>
 
-        <form onSubmit={onSubmit} className="bg-background p-8 md:p-12 border border-border space-y-6">
-          <div>
-            <Label htmlFor="name" className="text-xs uppercase tracking-[0.22em]">Name</Label>
-            <Input id="name" name="name" required className="mt-2 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:ring-0 focus-visible:border-[hsl(var(--gold))]" />
-          </div>
-          <div>
-            <Label htmlFor="city" className="text-xs uppercase tracking-[0.22em]">City</Label>
-            <Input id="city" name="city" required className="mt-2 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:ring-0 focus-visible:border-[hsl(var(--gold))]" />
-          </div>
-          <div>
-            <Label htmlFor="requirement" className="text-xs uppercase tracking-[0.22em]">Requirement</Label>
-            <Textarea id="requirement" name="requirement" rows={4} required placeholder="Tell us about your home and timeline…" className="mt-2 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:ring-0 focus-visible:border-[hsl(var(--gold))] resize-none" />
-          </div>
-          <Button type="submit" disabled={submitting} className="w-full rounded-none bg-[hsl(var(--wood-deep))] text-cream hover:bg-[hsl(var(--wood))] h-12 text-xs uppercase tracking-[0.28em]">
-            {submitting ? "Sending…" : "Send Enquiry"}
-          </Button>
-        </form>
+        <Reveal delay={120}>
+          <form onSubmit={onSubmit} className="bg-background p-8 md:p-12 border border-border space-y-6">
+            <div>
+              <Label htmlFor="name" className="text-xs uppercase tracking-[0.22em]">Name</Label>
+              <Input id="name" name="name" required className="mt-2 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:ring-0 focus-visible:border-[hsl(var(--gold))]" />
+            </div>
+            <div>
+              <Label htmlFor="city" className="text-xs uppercase tracking-[0.22em]">City</Label>
+              <Input id="city" name="city" required className="mt-2 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:ring-0 focus-visible:border-[hsl(var(--gold))]" />
+            </div>
+            <div>
+              <Label className="text-xs uppercase tracking-[0.22em]">Budget</Label>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {budgets.map((b) => (
+                  <button
+                    key={b}
+                    type="button"
+                    onClick={() => setBudget(b)}
+                    className={`px-4 h-9 text-[11px] uppercase tracking-[0.2em] border transition-colors ${
+                      budget === b ? "bg-[hsl(var(--wood-deep))] text-cream border-[hsl(var(--wood-deep))]" : "border-border hover:border-[hsl(var(--gold))]"
+                    }`}
+                  >
+                    {b}
+                  </button>
+                ))}
+              </div>
+              <input type="hidden" name="budget" value={budget} />
+            </div>
+            <div>
+              <Label htmlFor="requirement" className="text-xs uppercase tracking-[0.22em]">Requirement</Label>
+              <Textarea id="requirement" name="requirement" rows={4} required placeholder="Tell us about your home and timeline…" className="mt-2 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:ring-0 focus-visible:border-[hsl(var(--gold))] resize-none" />
+            </div>
+            <Button type="submit" disabled={submitting} className="w-full rounded-none bg-[hsl(var(--wood-deep))] text-cream hover:bg-[hsl(var(--wood))] h-12 text-xs uppercase tracking-[0.28em]">
+              {submitting ? "Sending…" : "Send Enquiry"}
+            </Button>
+          </form>
+        </Reveal>
       </div>
     </section>
   );
