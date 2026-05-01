@@ -97,9 +97,9 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
               <button
                 key={f}
                 onClick={() => setFilter(f)}
-                className={`relative px-5 h-10 text-xs uppercase tracking-[0.24em] border transition-all duration-300 ${
+                className={`relative px-5 h-10 text-xs uppercase tracking-[0.24em] rounded-sm border transition-all duration-300 ${
                   filter === f
-                    ? "bg-[hsl(var(--wood-deep))] text-cream border-[hsl(var(--wood-deep))]"
+                    ? "bg-[hsl(var(--wood-deep))] text-cream border-[hsl(var(--wood-deep))] shadow-[0_4px_14px_0_hsl(var(--wood-deep)/0.39)]"
                     : "border-border hover:border-[hsl(var(--gold))] hover:text-foreground"
                 }`}
               >
@@ -185,7 +185,7 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
           <button
             onClick={() => setOpen(null)}
             aria-label="Close"
-            className="absolute top-5 right-5 md:top-8 md:right-8 h-11 w-11 flex items-center justify-center text-cream border border-cream/20 hover:border-[hsl(var(--gold))] hover:text-[hsl(var(--gold))] transition-all duration-300 z-10"
+            className="absolute top-5 right-5 md:top-8 md:right-8 h-11 w-11 flex items-center justify-center text-cream border border-cream/20 rounded-sm hover:border-[hsl(var(--gold))] hover:text-[hsl(var(--gold))] transition-all duration-300 z-10"
           >
             <CloseIcon />
           </button>
@@ -217,7 +217,7 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
               </div>
               <button
                 onClick={() => { setOpen(null); navigate("/contact"); }}
-                className="mt-10 inline-flex items-center gap-3 text-xs uppercase tracking-[0.28em] text-[hsl(var(--wood-deep))] border-b border-[hsl(var(--gold))] pb-1 hover:text-[hsl(var(--gold))] transition-all duration-300 hover:gap-4 w-fit group"
+                className="mt-10 inline-flex items-center gap-3 text-xs uppercase tracking-[0.28em] text-[hsl(var(--wood-deep))] border-b border-[hsl(var(--gold))] pb-1 hover:text-[hsl(var(--gold))] transition-all duration-300 hover:gap-4 w-fit group hover:-translate-y-0.5"
               >
                 Enquire about this project
                 <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>

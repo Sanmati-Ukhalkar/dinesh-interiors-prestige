@@ -112,7 +112,7 @@ const Hero = () => {
           <Button
             asChild
             size="lg"
-            className="rounded-none bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] hover:bg-[hsl(var(--gold-soft))] px-9 h-[52px] text-[11px] uppercase tracking-[0.3em] font-medium transition-all duration-300 hover:px-11"
+            className="rounded-full bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] hover:bg-[hsl(var(--gold-soft))] px-9 h-[54px] text-[11px] uppercase tracking-[0.3em] font-medium transition-all duration-500 hover:shadow-[0_8px_30px_-10px_hsl(var(--gold)/0.6)] hover:-translate-y-0.5"
           >
             <Link to="/portfolio">Explore Portfolio</Link>
           </Button>
@@ -120,7 +120,7 @@ const Hero = () => {
             asChild
             size="lg"
             variant="outline"
-            className="rounded-none bg-transparent border-cream/40 text-cream hover:bg-cream hover:text-[hsl(var(--wood-deep))] px-9 h-[52px] text-[11px] uppercase tracking-[0.3em] font-medium transition-all duration-300"
+            className="rounded-full bg-[hsl(var(--wood-deep))/0.2] backdrop-blur-sm border-cream/30 text-cream hover:bg-cream hover:text-[hsl(var(--wood-deep))] px-9 h-[54px] text-[11px] uppercase tracking-[0.3em] font-medium transition-all duration-500 hover:border-cream hover:-translate-y-0.5"
           >
             <Link to="/contact">Book Consultation</Link>
           </Button>

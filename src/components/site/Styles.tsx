@@ -41,9 +41,9 @@ const Styles = () => {
               <button
                 key={it.key}
                 onClick={() => setActive(it.key)}
-                className={`relative px-6 h-11 text-xs uppercase tracking-[0.28em] border transition-all duration-300 ${
+                className={`relative px-6 h-11 text-xs uppercase tracking-[0.28em] rounded-sm border transition-all duration-300 ${
                   isActive
-                    ? "bg-[hsl(var(--wood-deep))] text-cream border-[hsl(var(--wood-deep))]"
+                    ? "bg-[hsl(var(--wood-deep))] text-cream border-[hsl(var(--wood-deep))] shadow-[0_4px_14px_0_hsl(var(--wood-deep)/0.39)]"
                     : "bg-transparent text-foreground border-border hover:border-[hsl(var(--gold))] hover:text-[hsl(var(--wood-deep))]"
                 }`}
               >

@@ -7,7 +7,7 @@ const stats = [
 ];
 
 const SocialProof = () => (
-  <section className="py-20 md:py-28 bg-[hsl(var(--wood-deep))] relative overflow-hidden grain border-y border-[hsl(var(--gold)/0.15)]">
+  <section className="py-24 md:py-36 bg-[hsl(var(--wood-deep))] relative overflow-hidden grain border-y border-[hsl(var(--gold)/0.15)]">
     {/* Faint diagonal texture lines */}
     <div
       aria-hidden="true"

@@ -44,7 +44,7 @@ const Footer = () => (
         </div>
         <Link
           to="/contact"
-          className="inline-flex items-center gap-3 border border-[hsl(var(--gold)/0.5)] text-[hsl(var(--gold-soft))] px-8 h-12 text-[11px] uppercase tracking-[0.3em] hover:bg-[hsl(var(--gold)/0.1)] transition-all duration-300 group w-fit hover:gap-4"
+          className="inline-flex items-center justify-center gap-3 border border-[hsl(var(--gold)/0.5)] text-[hsl(var(--gold-soft))] px-8 h-12 rounded-full text-[11px] uppercase tracking-[0.3em] hover:bg-[hsl(var(--gold)/0.1)] transition-all duration-300 group w-fit hover:gap-4 hover:shadow-[0_4px_20px_-5px_hsl(var(--gold)/0.2)] hover:-translate-y-0.5"
         >
           Begin a Project
           <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
