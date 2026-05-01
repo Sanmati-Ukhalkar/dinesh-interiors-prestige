@@ -6,8 +6,8 @@ import hero from "@/assets/hero.jpg";
 import fusion from "@/assets/style-fusion.jpg";
 import Reveal from "./Reveal";
 
-const PlayIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+const PlayIcon = ({ size = 18 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
     <path d="M8 5v14l11-7L8 5z" />
   </svg>
 );
@@ -25,8 +25,9 @@ const youtube = [
 ];
 
 const VideoWall = () => (
-  <section className="relative py-24 md:py-36 bg-[hsl(var(--wood-deep))] text-cream overflow-hidden">
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.06]">
+  <section className="relative py-24 md:py-36 bg-[hsl(var(--wood-deep))] text-cream overflow-hidden grain">
+    {/* Jali SVG pattern */}
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.05]">
       <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <pattern id="vw-jali" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
@@ -42,54 +43,94 @@ const VideoWall = () => (
     </div>
 
     <div className="relative container-luxe">
-      <Reveal className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+      {/* Heading */}
+      <Reveal className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14 md:mb-16">
         <div className="max-w-2xl">
-          <p className="eyebrow text-[hsl(var(--gold-soft))] mb-5">From the Studio</p>
+          <p className="eyebrow text-[hsl(var(--gold-soft))] mb-5" style={{ letterSpacing: "0.38em" }}>
+            From the Studio
+          </p>
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1] text-cream">
-            Step inside our completed homes.
+            Step inside our{" "}
+            <em className="not-italic text-[hsl(var(--gold-soft))]">completed homes.</em>
           </h2>
         </div>
-        <p className="text-cream/70 max-w-md">
-          A wall of recent reels and full home walkthroughs — the most honest way to feel a space before you visit.
+        <p className="text-cream/55 max-w-sm leading-[1.85] text-sm">
+          Full walkthroughs and quick reels — the most honest way to feel a space before you visit.
         </p>
       </Reveal>
 
-      {/* YouTube horizontal */}
-      <div className="grid md:grid-cols-2 gap-6 lg:gap-8 mb-12">
+      {/* YouTube horizontal videos */}
+      <div className="grid md:grid-cols-2 gap-5 lg:gap-7 mb-10">
         {youtube.map((v, i) => (
           <Reveal key={v.title} delay={i * 120}>
-            <button type="button" className="group relative aspect-video w-full overflow-hidden bg-[hsl(var(--wood))] text-left">
-              <img src={v.img} alt={v.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--wood-deep))] via-[hsl(var(--wood-deep))]/30 to-transparent" />
+            <button
+              type="button"
+              className="group relative aspect-video w-full overflow-hidden bg-[hsl(var(--wood))] text-left"
+              aria-label={`Play: ${v.title}`}
+            >
+              <img
+                src={v.img}
+                alt={v.title}
+                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--wood-deep))] via-[hsl(var(--wood-deep))]/20 to-transparent" />
+
+              {/* Play button */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] transition-transform duration-500 group-hover:scale-110">
-                  <PlayIcon />
+                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] transition-all duration-500 group-hover:scale-110 shadow-[0_15px_40px_-10px_hsl(var(--gold)/0.6)] pl-0.5">
+                  <PlayIcon size={20} />
                 </span>
               </div>
+
+              {/* Title + duration */}
               <div className="absolute bottom-0 left-0 right-0 p-6 flex items-end justify-between">
-                <h3 className="font-serif text-xl md:text-2xl text-cream max-w-xs">{v.title}</h3>
-                <span className="text-[10px] tracking-[0.28em] text-[hsl(var(--gold-soft))]">{v.duration}</span>
+                <h3 className="font-serif text-xl md:text-2xl text-cream leading-tight max-w-[70%]">
+                  {v.title}
+                </h3>
+                <span className="text-[10px] tracking-[0.3em] text-[hsl(var(--gold-soft))] flex-shrink-0">
+                  {v.duration}
+                </span>
               </div>
             </button>
           </Reveal>
         ))}
       </div>
 
-      {/* Vertical reels */}
-      <Reveal>
-        <p className="text-xs uppercase tracking-[0.28em] text-[hsl(var(--gold-soft))] mb-5">Instagram Reels</p>
+      {/* Reels divider label */}
+      <Reveal className="flex items-center gap-6 mb-6">
+        <p className="text-[11px] uppercase tracking-[0.32em] text-[hsl(var(--gold-soft))] flex-shrink-0">
+          Instagram Reels
+        </p>
+        <div className="h-px flex-1 bg-[hsl(var(--gold)/0.15)]" />
       </Reveal>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
+
+      {/* Vertical reels grid */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-5">
         {reels.map((r, i) => (
           <Reveal key={r.label} delay={i * 80}>
-            <button type="button" className="group relative aspect-[9/16] w-full overflow-hidden bg-[hsl(var(--wood))] block">
-              <img src={r.img} alt={r.label} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-110" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--wood-deep))]/85 via-transparent to-transparent" />
-              <div className="absolute inset-0 ring-1 ring-inset ring-[hsl(var(--gold))]/0 group-hover:ring-[hsl(var(--gold))]/40 transition-all duration-500" />
-              <span className="absolute top-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-[hsl(var(--gold))]/90 text-[hsl(var(--wood-deep))]">
-                <PlayIcon />
+            <button
+              type="button"
+              className="group relative aspect-[9/16] w-full overflow-hidden bg-[hsl(var(--wood))] block"
+              aria-label={`Play reel: ${r.label}`}
+            >
+              <img
+                src={r.img}
+                alt={r.label}
+                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--wood-deep))]/90 via-transparent to-transparent" />
+              <div className="absolute inset-0 ring-1 ring-inset ring-[hsl(var(--gold))]/0 group-hover:ring-[hsl(var(--gold))]/35 transition-all duration-500" />
+
+              {/* Small play icon top-right */}
+              <span className="absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-[hsl(var(--gold))]/80 text-[hsl(var(--wood-deep))] group-hover:bg-[hsl(var(--gold))] transition-colors duration-300 pl-0.5">
+                <PlayIcon size={12} />
               </span>
-              <p className="absolute bottom-3 left-3 right-3 text-[11px] uppercase tracking-[0.22em] text-cream/85">{r.label}</p>
+
+              <p className="absolute bottom-3 left-3 right-3 text-[10px] uppercase tracking-[0.22em] text-cream/80 leading-tight">
+                {r.label}
+              </p>
             </button>
           </Reveal>
         ))}

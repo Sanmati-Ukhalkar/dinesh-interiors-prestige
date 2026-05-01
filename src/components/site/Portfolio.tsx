@@ -68,12 +68,18 @@ const Portfolio = () => {
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-5 h-10 text-xs uppercase tracking-[0.24em] border transition-colors ${
+              className={`relative px-5 h-10 text-xs uppercase tracking-[0.24em] border transition-all duration-300 ${
                 filter === f
                   ? "bg-[hsl(var(--wood-deep))] text-cream border-[hsl(var(--wood-deep))]"
-                  : "border-border hover:border-[hsl(var(--gold))]"
+                  : "border-border hover:border-[hsl(var(--gold))] hover:text-foreground"
               }`}
             >
+              {filter === f && (
+                <span
+                  className="absolute -top-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[hsl(var(--gold))] animate-fade-in"
+                  aria-hidden="true"
+                />
+              )}
               {f}
             </button>
           ))}
@@ -124,9 +130,11 @@ const Portfolio = () => {
           <button
             onClick={() => setOpen(null)}
             aria-label="Close"
-            className="absolute top-5 right-5 md:top-8 md:right-8 h-11 w-11 flex items-center justify-center text-cream border border-cream/30 hover:border-[hsl(var(--gold))] hover:text-[hsl(var(--gold))] transition-colors"
+            className="absolute top-5 right-5 md:top-8 md:right-8 h-11 w-11 flex items-center justify-center text-cream border border-cream/20 hover:border-[hsl(var(--gold))] hover:text-[hsl(var(--gold))] transition-all duration-300 group"
           >
-            ✕
+            <svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+              <path d="M1 1l12 12M13 1L1 13" />
+            </svg>
           </button>
           <div
             className="relative max-w-5xl w-full grid lg:grid-cols-3 gap-0 bg-background animate-scale-in"

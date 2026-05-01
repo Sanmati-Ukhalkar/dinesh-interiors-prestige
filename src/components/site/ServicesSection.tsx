@@ -33,30 +33,38 @@ const steps = [
 
 const ServicesSection = () => (
   <>
+    {/* Services grid */}
     <section className="relative py-24 md:py-36 bg-background overflow-hidden">
       <JaliBackground opacity={0.04} />
       <div className="relative container-luxe">
         <Reveal className="max-w-2xl mb-16 md:mb-20">
           <p className="eyebrow mb-5">What We Do</p>
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1]">
-            Considered services for considered homes.
+            Considered services for{" "}
+            <em className="not-italic text-[hsl(var(--wood))]">considered homes.</em>
           </h2>
         </Reveal>
 
         <div className="grid md:grid-cols-2 gap-px bg-border border border-border">
           {services.map((s, i) => (
             <Reveal key={s.title} delay={(i % 2) * 120}>
-              <article className="group bg-background p-10 lg:p-12 h-full hover:bg-secondary/40 transition-colors duration-500">
-                <div className="flex items-start justify-between mb-6">
-                  <span className="text-xs text-accent tracking-[0.28em]">0{i + 1}</span>
-                  <span className="h-px w-10 bg-[hsl(var(--gold))] mt-2 transition-all duration-500 group-hover:w-16" />
+              <article className="group bg-background p-10 lg:p-12 h-full hover:bg-secondary/30 transition-colors duration-500 cursor-default">
+                {/* Number + expanding rule */}
+                <div className="flex items-center justify-between mb-8">
+                  <span className="font-serif text-3xl text-[hsl(var(--gold)/0.35)] leading-none select-none">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="h-px w-8 bg-[hsl(var(--gold))] transition-all duration-500 group-hover:w-20" />
                 </div>
-                <h3 className="font-serif text-3xl lg:text-4xl">{s.title}</h3>
-                <p className="mt-5 text-muted-foreground leading-relaxed">{s.desc}</p>
-                <ul className="mt-8 space-y-2.5">
+
+                <h3 className="font-serif text-3xl lg:text-[2rem] leading-tight">{s.title}</h3>
+                <p className="mt-5 text-muted-foreground leading-[1.8]">{s.desc}</p>
+
+                <ul className="mt-8 space-y-2.5 border-t border-border pt-6">
                   {s.items.map((it) => (
                     <li key={it} className="text-sm text-foreground flex items-center gap-3">
-                      <span className="h-px w-4 bg-[hsl(var(--gold))]" /> {it}
+                      <span className="h-px w-4 flex-shrink-0 bg-[hsl(var(--gold))]" />
+                      {it}
                     </li>
                   ))}
                 </ul>
@@ -67,28 +75,36 @@ const ServicesSection = () => (
       </div>
     </section>
 
-    {/* Process */}
+    {/* Process steps */}
     <section className="py-24 md:py-36 bg-secondary/40">
       <div className="container-luxe">
         <Reveal className="max-w-2xl mb-16 md:mb-20">
           <p className="eyebrow mb-5">Our Process</p>
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1]">
-            From first conversation to final styling.
+            From first conversation to{" "}
+            <em className="not-italic text-[hsl(var(--wood))]">final styling.</em>
           </h2>
         </Reveal>
 
-        <div className="relative grid md:grid-cols-4 gap-10 md:gap-6">
-          <div aria-hidden="true" className="hidden md:block absolute top-[42px] left-[6%] right-[6%] h-px bg-gradient-to-r from-transparent via-[hsl(var(--gold))] to-transparent" />
+        <div className="relative grid md:grid-cols-4 gap-10 md:gap-8">
+          {/* Connector line */}
+          <div
+            aria-hidden="true"
+            className="hidden md:block absolute top-10 left-[10%] right-[10%] h-px"
+            style={{
+              background: "linear-gradient(90deg, transparent, hsl(var(--gold)/0.4) 20%, hsl(var(--gold)/0.4) 80%, transparent)",
+            }}
+          />
+
           {steps.map((s, i) => (
             <Reveal key={s.title} delay={i * 120}>
-              <div className="relative">
-                <div className="relative h-[84px] flex items-center">
-                  <span className="relative z-10 flex h-[84px] w-[84px] items-center justify-center rounded-full bg-background border border-[hsl(var(--gold))] font-serif text-xl text-[hsl(var(--wood-deep))]">
-                    {s.n}
-                  </span>
+              <div className="relative group">
+                {/* Circle */}
+                <div className="relative h-20 w-20 flex items-center justify-center rounded-full bg-background border border-[hsl(var(--gold)/0.5)] group-hover:border-[hsl(var(--gold))] group-hover:bg-[hsl(var(--gold)/0.06)] transition-all duration-500 mb-8">
+                  <span className="font-serif text-xl text-[hsl(var(--wood-deep))]">{s.n}</span>
                 </div>
-                <h3 className="font-serif text-2xl mt-7">{s.title}</h3>
-                <p className="mt-3 text-muted-foreground leading-relaxed text-sm">{s.desc}</p>
+                <h3 className="font-serif text-2xl mt-1">{s.title}</h3>
+                <p className="mt-3 text-muted-foreground leading-[1.8] text-sm">{s.desc}</p>
               </div>
             </Reveal>
           ))}
