@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import hero from "@/assets/hero.jpg";
 import { Button } from "@/components/ui/button";
 
@@ -66,10 +67,10 @@ const Hero = () => {
 
         <div className="mt-12 flex flex-col sm:flex-row gap-4 animate-fade-up" style={{ animationDelay: "400ms" }}>
           <Button asChild size="lg" className="rounded-none bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] hover:bg-[hsl(var(--gold-soft))] px-8 h-12 text-xs uppercase tracking-[0.28em]">
-            <a href="#portfolio">Explore Designs</a>
+            <Link to="/portfolio">Explore Portfolio</Link>
           </Button>
           <Button asChild size="lg" variant="outline" className="rounded-none bg-transparent border-cream/60 text-cream hover:bg-cream hover:text-[hsl(var(--wood-deep))] px-8 h-12 text-xs uppercase tracking-[0.28em]">
-            <a href="#contact">Book Consultation</a>
+            <Link to="/contact">Book Consultation</Link>
           </Button>
         </div>
       </div>
