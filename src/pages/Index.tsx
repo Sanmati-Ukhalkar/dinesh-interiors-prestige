@@ -1,30 +1,23 @@
-import Navbar from "@/components/site/Navbar";
 import Hero from "@/components/site/Hero";
 import About from "@/components/site/About";
 import Styles from "@/components/site/Styles";
-import Portfolio from "@/components/site/Portfolio";
-import Videos from "@/components/site/Videos";
-import Contact from "@/components/site/Contact";
-import Footer from "@/components/site/Footer";
-import WhatsAppFab from "@/components/site/WhatsAppFab";
+import PortfolioGrid from "@/components/site/PortfolioGrid";
+import VideoWall from "@/components/site/VideoWall";
+import SocialProof from "@/components/site/SocialProof";
 import ArchDivider from "@/components/site/ArchDivider";
 
 const Index = () => (
-  <main className="min-h-screen bg-background">
-    <Navbar />
+  <>
     <Hero />
-    {/* Arch separator dips down from hero into About */}
     <div className="relative -mt-[80px] md:-mt-[120px] z-20">
       <ArchDivider fill="hsl(var(--background))" />
     </div>
     <About />
     <Styles />
-    <Portfolio />
-    <Videos />
-    <Contact />
-    <Footer />
-    <WhatsAppFab />
-  </main>
+    <PortfolioGrid preview />
+    <VideoWall />
+    <SocialProof />
+  </>
 );
 
 export default Index;
