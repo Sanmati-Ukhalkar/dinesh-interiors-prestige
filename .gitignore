@@ -24,5 +24,5 @@ dist-ssr
 *.sw?
 
 # Hero frame assets (large binaries — store separately or in CDN)
-public/frames/
+# public/frames/ has been un-ignored because the WebP files are small enough for GitHub and needed for Netlify deployment
 src/assets/hero section frames/
