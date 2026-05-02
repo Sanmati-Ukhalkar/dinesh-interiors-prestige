@@ -118,7 +118,10 @@ const TextPressure = ({
 
   useEffect(() => {
     let rafId;
+    let isVisible = true;
+    
     const animate = () => {
+      if (!isVisible) return;
       mouseRef.current.x += (cursorRef.current.x - mouseRef.current.x) / 15;
       mouseRef.current.y += (cursorRef.current.y - mouseRef.current.y) / 15;
 
@@ -153,11 +156,28 @@ const TextPressure = ({
         });
       }
 
-      rafId = requestAnimationFrame(animate);
+      if (isVisible) {
+        rafId = requestAnimationFrame(animate);
+      }
     };
 
-    animate();
-    return () => cancelAnimationFrame(rafId);
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      if (isVisible) {
+        rafId = requestAnimationFrame(animate);
+      } else {
+        cancelAnimationFrame(rafId);
+      }
+    });
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(rafId);
+    };
   }, [width, weight, italic, alpha]);
 
   const styleElement = useMemo(() => {

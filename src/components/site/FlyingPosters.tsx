@@ -386,6 +386,7 @@ class Canvas {
   }
 
   update() {
+    if (!this.isVisible) return;
     this.scroll.current = lerp(this.scroll.current, this.scroll.target, this.scroll.ease);
 
     if (this.medias) {
@@ -393,7 +394,14 @@ class Canvas {
     }
     this.renderer.render({ scene: this.scene, camera: this.camera });
     this.scroll.last = this.scroll.current;
-    requestAnimationFrame(this.update);
+    this.rafId = requestAnimationFrame(this.update);
+  }
+
+  stop() {
+    if (this.rafId) {
+      cancelAnimationFrame(this.rafId);
+      this.rafId = null;
+    }
   }
 
   addEventListeners() {
@@ -443,7 +451,7 @@ export default function FlyingPosters({
   useEffect(() => {
     if (!containerRef.current) return;
 
-    instanceRef.current = new Canvas({
+    const canvasObj = new Canvas({
       container: containerRef.current,
       canvas: canvasRef.current,
       items,
@@ -455,9 +463,25 @@ export default function FlyingPosters({
       cameraZ
     });
 
+    canvasObj.isVisible = true;
+    canvasObj.rafId = null;
+    instanceRef.current = canvasObj;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      canvasObj.isVisible = entry.isIntersecting;
+      if (entry.isIntersecting) {
+        canvasObj.update();
+      } else {
+        canvasObj.stop();
+      }
+    });
+    observer.observe(containerRef.current);
+
     return () => {
+      observer.disconnect();
       if (instanceRef.current) {
         instanceRef.current.destroy();
+        instanceRef.current.stop();
         instanceRef.current = null;
       }
     };

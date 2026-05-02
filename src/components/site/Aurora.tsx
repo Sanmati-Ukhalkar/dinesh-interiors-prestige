@@ -171,24 +171,38 @@ export default function Aurora(props) {
     ctn.appendChild(gl.canvas);
 
     let animateId = 0;
+    let isVisible = true;
+
     const update = t => {
-      animateId = requestAnimationFrame(update);
-      const { time = t * 0.01, speed = 1.0 } = propsRef.current;
-      program.uniforms.uTime.value = time * speed * 0.1;
-      program.uniforms.uAmplitude.value = propsRef.current.amplitude ?? 1.0;
-      program.uniforms.uBlend.value = propsRef.current.blend ?? blend;
-      const stops = propsRef.current.colorStops ?? colorStops;
-      program.uniforms.uColorStops.value = stops.map(hex => {
-        const c = new Color(hex);
-        return [c.r, c.g, c.b];
-      });
-      renderer.render({ scene: mesh });
+      if (isVisible) {
+        animateId = requestAnimationFrame(update);
+        const { time = t * 0.01, speed = 1.0 } = propsRef.current;
+        program.uniforms.uTime.value = time * speed * 0.1;
+        program.uniforms.uAmplitude.value = propsRef.current.amplitude ?? 1.0;
+        program.uniforms.uBlend.value = propsRef.current.blend ?? blend;
+        const stops = propsRef.current.colorStops ?? colorStops;
+        program.uniforms.uColorStops.value = stops.map(hex => {
+          const c = new Color(hex);
+          return [c.r, c.g, c.b];
+        });
+        renderer.render({ scene: mesh });
+      }
     };
-    animateId = requestAnimationFrame(update);
+
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      if (isVisible) {
+        animateId = requestAnimationFrame(update);
+      } else {
+        cancelAnimationFrame(animateId);
+      }
+    });
+    observer.observe(ctn);
 
     resize();
 
     return () => {
+      observer.disconnect();
       cancelAnimationFrame(animateId);
       window.removeEventListener('resize', resize);
       if (ctn && gl.canvas.parentNode === ctn) {

@@ -87,14 +87,37 @@ const DecayCard = ({
       }
 
       cachedCursor.current = { ...cursor.current };
-
-      rafId = requestAnimationFrame(render);
     };
 
-    let rafId = requestAnimationFrame(render);
+    let rafId = null;
+    let isVisible = true;
+
+    const loop = () => {
+      if (isVisible) {
+        render();
+        rafId = requestAnimationFrame(loop);
+      }
+    };
+
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      if (isVisible) {
+        if (!rafId) rafId = requestAnimationFrame(loop);
+      } else {
+        if (rafId) {
+          cancelAnimationFrame(rafId);
+          rafId = null;
+        }
+      }
+    });
+
+    if (svgRef.current) {
+      observer.observe(svgRef.current);
+    }
 
     return () => {
-      cancelAnimationFrame(rafId);
+      observer.disconnect();
+      if (rafId) cancelAnimationFrame(rafId);
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
     };

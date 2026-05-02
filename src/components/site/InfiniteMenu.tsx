@@ -604,6 +604,8 @@ class InfiniteGridMenu {
     this.onMovementChange = onMovementChange || (() => {});
     this.scaleFactor = scale;
     this.camera.position[2] = 3 * scale;
+    this.isVisible = true;
+    this.rafId = null;
     this.#init(onInit);
   }
 
@@ -620,6 +622,7 @@ class InfiniteGridMenu {
   }
 
   run(time = 0) {
+    if (!this.isVisible) return;
     this.#deltaTime = Math.min(32, time - this.#time);
     this.#time = time;
     this.#deltaFrames = this.#deltaTime / this.TARGET_FRAME_DURATION;
@@ -628,7 +631,14 @@ class InfiniteGridMenu {
     this.#animate(this.#deltaTime);
     this.#render();
 
-    requestAnimationFrame(t => this.run(t));
+    this.rafId = requestAnimationFrame(t => this.run(t));
+  }
+  
+  stop() {
+    if (this.rafId) {
+      cancelAnimationFrame(this.rafId);
+      this.rafId = null;
+    }
   }
 
   #init(onInit) {
@@ -942,13 +952,26 @@ export default function InfiniteMenu({ items = [], scale = 1.0 }) {
       }
     };
 
-    window.addEventListener('resize', handleResize);
-    handleResize();
+      window.addEventListener('resize', handleResize);
+      handleResize();
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [items, scale]);
+      const observer = new IntersectionObserver(([entry]) => {
+        if (!sketch) return;
+        sketch.isVisible = entry.isIntersecting;
+        if (entry.isIntersecting) {
+          sketch.run();
+        } else {
+          sketch.stop();
+        }
+      });
+      observer.observe(canvasRef.current);
+
+      return () => {
+        window.removeEventListener('resize', handleResize);
+        observer.disconnect();
+        if (sketch) sketch.stop();
+      };
+    }, [items, scale]);
 
   const handleButtonClick = () => {
     if (!activeItem?.link) return;

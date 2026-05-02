@@ -186,35 +186,48 @@ const Particles = ({
     let animationFrameId;
     let lastTime = performance.now();
     let elapsed = 0;
+    let isVisible = true;
 
     const update = t => {
-      animationFrameId = requestAnimationFrame(update);
-      const delta = t - lastTime;
-      lastTime = t;
-      elapsed += delta * speed;
+      if (isVisible) {
+        animationFrameId = requestAnimationFrame(update);
+        const delta = t - lastTime;
+        lastTime = t;
+        elapsed += delta * speed;
 
-      program.uniforms.uTime.value = elapsed * 0.001;
+        program.uniforms.uTime.value = elapsed * 0.001;
 
-      if (moveParticlesOnHover) {
-        particles.position.x = -mouseRef.current.x * particleHoverFactor;
-        particles.position.y = -mouseRef.current.y * particleHoverFactor;
-      } else {
-        particles.position.x = 0;
-        particles.position.y = 0;
+        if (moveParticlesOnHover) {
+          particles.position.x = -mouseRef.current.x * particleHoverFactor;
+          particles.position.y = -mouseRef.current.y * particleHoverFactor;
+        } else {
+          particles.position.x = 0;
+          particles.position.y = 0;
+        }
+
+        if (!disableRotation) {
+          particles.rotation.x = Math.sin(elapsed * 0.0002) * 0.1;
+          particles.rotation.y = Math.cos(elapsed * 0.0005) * 0.15;
+          particles.rotation.z += 0.01 * speed;
+        }
+
+        renderer.render({ scene: particles, camera });
       }
-
-      if (!disableRotation) {
-        particles.rotation.x = Math.sin(elapsed * 0.0002) * 0.1;
-        particles.rotation.y = Math.cos(elapsed * 0.0005) * 0.15;
-        particles.rotation.z += 0.01 * speed;
-      }
-
-      renderer.render({ scene: particles, camera });
     };
 
-    animationFrameId = requestAnimationFrame(update);
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      if (isVisible) {
+        lastTime = performance.now();
+        animationFrameId = requestAnimationFrame(update);
+      } else {
+        cancelAnimationFrame(animationFrameId);
+      }
+    });
+    observer.observe(container);
 
     return () => {
+      observer.disconnect();
       window.removeEventListener('resize', resize);
       if (moveParticlesOnHover) {
         container.removeEventListener('mousemove', handleMouseMove);

@@ -112,9 +112,11 @@ const DotGrid = ({
     if (!circlePath) return;
 
     let rafId;
+    let isVisible = true;
     const proxSq = proximity * proximity;
 
     const draw = () => {
+      if (!isVisible) return;
       const canvas = canvasRef.current;
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
@@ -147,11 +149,28 @@ const DotGrid = ({
         ctx.restore();
       }
 
-      rafId = requestAnimationFrame(draw);
+      if (isVisible) {
+        rafId = requestAnimationFrame(draw);
+      }
     };
 
-    draw();
-    return () => cancelAnimationFrame(rafId);
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      if (isVisible) {
+        rafId = requestAnimationFrame(draw);
+      } else {
+        cancelAnimationFrame(rafId);
+      }
+    });
+
+    if (canvasRef.current) {
+      observer.observe(canvasRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(rafId);
+    };
   }, [proximity, baseColor, activeRgb, baseRgb, circlePath]);
 
   useEffect(() => {

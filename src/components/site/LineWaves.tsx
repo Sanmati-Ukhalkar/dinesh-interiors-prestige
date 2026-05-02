@@ -215,26 +215,39 @@ export default function LineWaves({
     }
 
     let animationFrameId;
+    let isVisible = true;
 
     function update(time) {
-      animationFrameId = requestAnimationFrame(update);
-      program.uniforms.uTime.value = time * 0.001;
+      if (isVisible) {
+        animationFrameId = requestAnimationFrame(update);
+        program.uniforms.uTime.value = time * 0.001;
 
-      if (enableMouseInteraction) {
-        currentMouse[0] += 0.05 * (targetMouse[0] - currentMouse[0]);
-        currentMouse[1] += 0.05 * (targetMouse[1] - currentMouse[1]);
-        program.uniforms.uMouse.value[0] = currentMouse[0];
-        program.uniforms.uMouse.value[1] = currentMouse[1];
-      } else {
-        program.uniforms.uMouse.value[0] = 0.5;
-        program.uniforms.uMouse.value[1] = 0.5;
+        if (enableMouseInteraction) {
+          currentMouse[0] += 0.05 * (targetMouse[0] - currentMouse[0]);
+          currentMouse[1] += 0.05 * (targetMouse[1] - currentMouse[1]);
+          program.uniforms.uMouse.value[0] = currentMouse[0];
+          program.uniforms.uMouse.value[1] = currentMouse[1];
+        } else {
+          program.uniforms.uMouse.value[0] = 0.5;
+          program.uniforms.uMouse.value[1] = 0.5;
+        }
+
+        renderer.render({ scene: mesh });
       }
-
-      renderer.render({ scene: mesh });
     }
-    animationFrameId = requestAnimationFrame(update);
+
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      if (isVisible) {
+        animationFrameId = requestAnimationFrame(update);
+      } else {
+        cancelAnimationFrame(animationFrameId);
+      }
+    });
+    observer.observe(container);
 
     return () => {
+      observer.disconnect();
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', resize);
       if (enableMouseInteraction) {

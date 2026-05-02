@@ -3,16 +3,34 @@ import { forwardRef, useMemo, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
 import './VariableProximity.css';
 
-function useAnimationFrame(callback) {
+function useAnimationFrame(callback, containerRef) {
   useEffect(() => {
+    if (!containerRef?.current) return;
     let frameId;
+    let isVisible = false;
+
     const loop = () => {
+      if (!isVisible) return;
       callback();
       frameId = requestAnimationFrame(loop);
     };
-    frameId = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(frameId);
-  }, [callback]);
+
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      if (isVisible) {
+        frameId = requestAnimationFrame(loop);
+      } else {
+        cancelAnimationFrame(frameId);
+      }
+    });
+
+    observer.observe(containerRef.current);
+
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(frameId);
+    };
+  }, [callback, containerRef]);
 }
 
 function useMousePositionRef(containerRef) {
@@ -140,7 +158,7 @@ const VariableProximity = forwardRef((props, ref) => {
       interpolatedSettingsRef.current[index] = newSettings;
       letterRef.style.fontVariationSettings = newSettings;
     });
-  });
+  }, containerRef);
 
   const words = label.split(' ');
   let letterIndex = 0;

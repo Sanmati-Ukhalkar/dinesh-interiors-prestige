@@ -19,7 +19,11 @@ const GridMotion = ({ items = [], gradientColor = 'black' }) => {
       mouseXRef.current = e.clientX;
     };
 
+    let isVisible = true;
+    let isActive = false;
+
     const updateMotion = () => {
+      if (!isVisible) return;
       const maxMoveAmount = 300;
       const baseDuration = 0.8;
       const inertiaFactors = [0.6, 0.4, 0.3, 0.2];
@@ -39,13 +43,31 @@ const GridMotion = ({ items = [], gradientColor = 'black' }) => {
       });
     };
 
-    const removeAnimationLoop = gsap.ticker.add(updateMotion);
+    const toggleTicker = (active) => {
+      if (active && !isActive) {
+        gsap.ticker.add(updateMotion);
+        isActive = true;
+      } else if (!active && isActive) {
+        gsap.ticker.remove(updateMotion);
+        isActive = false;
+      }
+    };
+
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      toggleTicker(isVisible);
+    });
+
+    if (gridRef.current) {
+      observer.observe(gridRef.current);
+    }
 
     window.addEventListener('mousemove', handleMouseMove);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      removeAnimationLoop();
+      observer.disconnect();
+      toggleTicker(false);
     };
   }, []);
 
