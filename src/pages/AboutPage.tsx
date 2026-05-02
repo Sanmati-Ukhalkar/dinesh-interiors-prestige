@@ -6,7 +6,7 @@ import JaliBackground from "@/components/site/JaliBackground";
 const pillars = [
   {
     title: "Experience",
-    body: "Fifteen years designing premium homes across Bengaluru, Mumbai, Delhi and beyond — for families, founders and creatives.",
+    body: "Fifteen years designing premium homes across Pune and beyond — for families, founders and creatives.",
   },
   {
     title: "Philosophy",

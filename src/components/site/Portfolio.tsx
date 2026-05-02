@@ -17,9 +17,9 @@ type Item = {
 };
 
 const items: Item[] = [
-  { title: "Marble & Brass Kitchen", category: "Kitchen", place: "Bengaluru Residence", img: kitchen, ratio: "aspect-[4/5]" },
+  { title: "Marble & Brass Kitchen", category: "Kitchen", place: "Pune Residence", img: kitchen, ratio: "aspect-[4/5]" },
   { title: "Carved Heritage Bedroom", category: "Bedroom", place: "Jaipur Villa", img: bedroom, ratio: "aspect-[3/4]" },
-  { title: "Arched Living Room", category: "Living Room", place: "Mumbai Apartment", img: living, ratio: "aspect-[4/3]" },
+  { title: "Arched Living Room", category: "Living Room", place: "Pune Apartment", img: living, ratio: "aspect-[4/3]" },
   { title: "Dawn Sitting Hall", category: "Living Room", place: "Hyderabad Home", img: hero, ratio: "aspect-[3/4]" },
   { title: "Fusion Lounge", category: "Living Room", place: "Pune Penthouse", img: fusion, ratio: "aspect-[4/5]" },
   { title: "Heritage Drawing Room", category: "Living Room", place: "Udaipur Haveli", img: traditional, ratio: "aspect-[3/4]" },

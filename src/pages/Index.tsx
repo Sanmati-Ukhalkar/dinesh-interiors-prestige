@@ -1,4 +1,4 @@
-import Hero from "@/components/site/Hero";
+import HeroCanvas from "@/components/site/HeroCanvas";
 import About from "@/components/site/About";
 import Styles from "@/components/site/Styles";
 import PortfolioGrid from "@/components/site/PortfolioGrid";
@@ -8,7 +8,7 @@ import ArchDivider from "@/components/site/ArchDivider";
 
 const Index = () => (
   <>
-    <Hero />
+    <HeroCanvas />
     <div className="relative -mt-[80px] md:-mt-[120px] z-20">
       <ArchDivider fill="hsl(var(--background))" />
     </div>

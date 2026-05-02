@@ -181,3 +181,198 @@
     width: 100%;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO CANVAS — Scroll-Driven Frame Sequence
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Section wrapper: tall scroll container ── */
+.hero-sequence-section {
+  position: relative;
+  width: 100%;
+  /* height set inline (400vh) */
+}
+
+/* ── Sticky viewport layer (pinned by GSAP) ── */
+.hero-sequence-sticky {
+  position: relative;        /* GSAP will make this sticky via CSS pin */
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Canvas: fills entire sticky area ── */
+.hero-sequence-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: hsl(var(--wood-deep));
+}
+
+/* ── Gradient overlay (darkens/lightens on scroll via GSAP) ── */
+.hero-sequence-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    hsl(var(--wood-deep) / 0.7) 0%,
+    hsl(var(--wood-deep) / 0.2) 40%,
+    hsl(var(--wood-deep) / 0.65) 100%
+  );
+  z-index: 1;
+}
+
+/* ── Decorative arch SVG ── */
+.hero-arch-svg {
+  position: absolute;
+  z-index: 2;
+  opacity: 0.12;
+}
+
+/* ── Content layer ── */
+.hero-sequence-content {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  will-change: opacity, transform;
+}
+
+/* ── Bottom bar ── */
+.hero-sequence-bottom {
+  position: absolute;
+  bottom: 1.75rem;
+  left: 0;
+  right: 0;
+  z-index: 4;
+}
+
+/* ─── Scroll Indicator ───────────────────────────────────────── */
+.scroll-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.scroll-indicator__track {
+  width: 1px;
+  height: 44px;
+  background: hsl(var(--gold-soft) / 0.25);
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.scroll-indicator__dot {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 12px;
+  background: hsl(var(--gold-soft) / 0.7);
+  border-radius: 2px;
+  animation: scrollDotDrop 1.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+@keyframes scrollDotDrop {
+  0%   { top: -8px; opacity: 0; }
+  10%  { opacity: 1; }
+  80%  { opacity: 0.8; }
+  100% { top: 44px; opacity: 0; }
+}
+
+.scroll-indicator__label {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: hsl(var(--gold-soft) / 0.55);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* ─── Loading Overlay ────────────────────────────────────────── */
+.hero-loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: hsl(var(--wood-deep));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: loaderFadeOut 0.6s ease 0.15s both;
+  animation-play-state: paused; /* controlled by .ready class */
+}
+
+/* Fade out is triggered by JS removing the element */
+.hero-loading-overlay[data-ready="true"] {
+  animation-play-state: running;
+}
+
+.hero-loading-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.hero-loading-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.hero-loading-name {
+  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  font-weight: 300;
+  color: hsl(var(--cream));
+  letter-spacing: 0.04em;
+}
+
+.hero-loading-sub {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: hsl(var(--gold-soft) / 0.7);
+}
+
+.hero-loading-bar-wrap {
+  width: min(320px, 60vw);
+  height: 1px;
+  background: hsl(var(--gold-soft) / 0.15);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-loading-bar-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, hsl(var(--gold) / 0.6), hsl(var(--gold-soft)));
+  border-radius: 2px;
+  transition: width 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 0 12px hsl(var(--gold) / 0.4);
+}
+
+.hero-loading-pct {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  color: hsl(var(--gold-soft) / 0.5);
+}
+
+@keyframes loaderFadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; pointer-events: none; }
+}

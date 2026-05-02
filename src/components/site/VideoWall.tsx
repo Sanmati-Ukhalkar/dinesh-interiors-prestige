@@ -20,7 +20,7 @@ const reels = [
 ];
 
 const youtube = [
-  { img: hero, title: "Bengaluru Penthouse — Full Walkthrough", duration: "06:24" },
+  { img: hero, title: "Pune Penthouse — Full Walkthrough", duration: "06:24" },
   { img: fusion, title: "Jaipur Heritage Home Tour", duration: "08:11" },
 ];
 

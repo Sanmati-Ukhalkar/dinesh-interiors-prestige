@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Hero frame assets (large binaries — store separately or in CDN)
+public/frames/
+src/assets/hero section frames/

@@ -20,7 +20,7 @@ interface Props {
 const budgets = ["Under ₹15L", "₹15L – ₹30L", "₹30L – ₹60L", "₹60L+"];
 
 const contactDetails = [
-  { label: "Studio", value: "14 Lavelle Road, Bengaluru" },
+  { label: "Studio", value: "Pune, Maharashtra" },
   { label: "Email", value: "hello@interiorsbydinesh.com", href: "mailto:hello@interiorsbydinesh.com" },
   { label: "Phone", value: "+91 99999 99999", href: "tel:+919999999999" },
   { label: "Hours", value: "Mon–Sat, 10am – 7pm IST" },

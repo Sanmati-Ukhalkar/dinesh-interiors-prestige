@@ -1,7 +1,7 @@
 import Reveal from "./Reveal";
 
 const videos = [
-  { title: "Bengaluru Penthouse — Walkthrough", duration: "06:24" },
+  { title: "Pune Penthouse — Walkthrough", duration: "06:24" },
   { title: "Jaipur Heritage Home Tour", duration: "08:11" },
 ];
 

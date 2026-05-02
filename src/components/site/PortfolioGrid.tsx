@@ -22,9 +22,9 @@ type Item = {
 };
 
 export const portfolioItems: Item[] = [
-  { title: "Marble & Brass Kitchen", category: "Kitchen", place: "Bengaluru Residence", img: kitchen, ratio: "aspect-[4/5]" },
+  { title: "Marble & Brass Kitchen", category: "Kitchen", place: "Pune Residence", img: kitchen, ratio: "aspect-[4/5]" },
   { title: "Carved Heritage Bedroom", category: "Bedroom", place: "Jaipur Villa", img: bedroom, ratio: "aspect-[3/4]" },
-  { title: "Arched Living Room", category: "Living", place: "Mumbai Apartment", img: living, ratio: "aspect-[4/3]" },
+  { title: "Arched Living Room", category: "Living", place: "Pune Apartment", img: living, ratio: "aspect-[4/3]" },
   { title: "Walk-in Wardrobe", category: "Storage", place: "Whitefield Home", img: storage, ratio: "aspect-[3/4]" },
   { title: "Dawn Sitting Hall", category: "Living", place: "Hyderabad Home", img: hero, ratio: "aspect-[3/4]" },
   { title: "Fusion Lounge", category: "Living", place: "Pune Penthouse", img: fusion, ratio: "aspect-[4/5]" },

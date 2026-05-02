@@ -72,7 +72,7 @@ const Hero = () => {
           className="eyebrow text-[hsl(var(--gold-soft))] mb-7 animate-fade-in"
           style={{ letterSpacing: "0.38em" }}
         >
-          Est. 2009 · Bengaluru
+          Est. 2009 · Pune
         </p>
 
         {/* Headline */}
@@ -132,7 +132,7 @@ const Hero = () => {
         className="absolute bottom-7 left-0 right-0 z-10 container-luxe flex items-end justify-between text-cream/50 text-[10px] tracking-[0.32em] uppercase animate-fade-in"
         style={{ animationDelay: "700ms" }}
       >
-        <span>Bengaluru · Mumbai · Delhi</span>
+        <span>Pune</span>
         <span className="hidden md:flex items-center gap-3">
           <span
             className="h-8 w-px"

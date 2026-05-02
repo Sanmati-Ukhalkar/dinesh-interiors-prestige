@@ -279,7 +279,7 @@ const Navbar = () => {
             }}
           >
             <p className="text-xs uppercase tracking-[0.28em] text-muted-foreground">
-              Bengaluru · Mumbai · Delhi
+              Pune
             </p>
             <a
               href="https://wa.me/919999999999"

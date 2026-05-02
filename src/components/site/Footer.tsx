@@ -78,7 +78,7 @@ const Footer = () => (
             Studio
           </p>
           <ul className="space-y-3 text-sm text-cream/60 leading-[1.85]">
-            <li>14 Lavelle Road, Bengaluru</li>
+            <li>Pune, Maharashtra</li>
             <li>
               <a href="mailto:hello@interiorsbydinesh.com" className="hover:text-cream transition-colors duration-300 ink-link inline-block">
                 hello@interiorsbydinesh.com
@@ -119,7 +119,7 @@ const Footer = () => (
       {/* Bottom bar */}
       <div className="mt-14 pt-8 border-t border-cream/10 flex flex-col md:flex-row justify-between gap-3 text-[11px] text-cream/35 tracking-wide">
         <p>© {new Date().getFullYear()} Interiors by Dinesh. All rights reserved.</p>
-        <p>Crafted with care · Bengaluru</p>
+        <p>Crafted with care · Pune</p>
       </div>
     </div>
   </footer>
