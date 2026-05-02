@@ -1,0 +1,42 @@
+/* StarBorder — rotating dot border sweep */
+.star-border-rb {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+/* Bottom sweep: left → right */
+.star-border-bottom {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 300%; height: 50%;
+  animation: star-sweep-bottom linear infinite;
+  will-change: transform;
+}
+/* Top sweep: right → left */
+.star-border-top {
+  position: absolute;
+  top: 0; right: 0;
+  width: 300%; height: 50%;
+  animation: star-sweep-top linear infinite;
+  will-change: transform;
+}
+
+.star-border-inner {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes star-sweep-bottom {
+  0%   { transform: translateX(-66.6%); }
+  100% { transform: translateX(0%); }
+}
+@keyframes star-sweep-top {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-66.6%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .star-border-bottom,
+  .star-border-top { animation: none; }
+}

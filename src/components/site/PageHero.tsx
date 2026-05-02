@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import JaliBackground from "./JaliBackground";
 import ArchDivider from "./ArchDivider";
 import SplitText from "./SplitText";
+import Aurora from "./Aurora";
 
 interface Props {
   eyebrow: string;
@@ -12,6 +13,13 @@ interface Props {
 
 const PageHero = ({ eyebrow, title, intro, archFill = "hsl(var(--background))" }: Props) => (
   <section className="relative pt-44 pb-24 md:pt-52 md:pb-32 bg-[hsl(var(--wood-deep))] text-cream overflow-hidden grain">
+    <div className="absolute inset-0 pointer-events-none opacity-20 z-0">
+      <Aurora 
+        colorStops={["#573d2a", "#875f3a", "#a27a4d"]} 
+        speed={0.5} 
+        amplitude={1.2} 
+      />
+    </div>
     <JaliBackground opacity={0.06} />
 
     {/* Left vertical rule — matches hero grid */}

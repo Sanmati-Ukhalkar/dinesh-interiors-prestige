@@ -1,0 +1,45 @@
+/* BorderGlow — edge proximity gradient border */
+.border-glow-rb {
+  position: relative;
+  border-radius: var(--border-radius, 0px);
+  background: var(--card-bg, transparent);
+  isolation: isolate;
+}
+
+/* Pseudo-element carries the glowing conic gradient border */
+.border-glow-rb__edge {
+  pointer-events: none;
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from calc(var(--cursor-angle, 180deg) - 40deg),
+    transparent 0deg,
+    var(--glow-color-10, transparent) 20deg,
+    var(--glow-color-30, transparent) 40deg,
+    var(--glow-color-60, transparent) 60deg,
+    var(--glow-color, transparent) 80deg,
+    var(--glow-color-60, transparent) 100deg,
+    var(--glow-color-30, transparent) 120deg,
+    var(--glow-color-10, transparent) 140deg,
+    transparent 160deg,
+    transparent 360deg
+  );
+  opacity: calc(var(--edge-proximity, 0) / 100);
+  z-index: -1;
+  transition: opacity 0.15s ease;
+  mask: 
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  padding: 1px;
+}
+
+.border-glow-rb__inner {
+  position: relative;
+  z-index: 1;
+}

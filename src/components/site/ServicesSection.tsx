@@ -5,6 +5,9 @@ import SpotlightCard from "./SpotlightCard";
 import GlareHover from "./GlareHover";
 import ProcessStepper from "./ProcessStepper";
 import GradientText from "./GradientText";
+import DotGrid from "./DotGrid";
+import GlassIcons from "./GlassIcons";
+import { Home, CookingPot, Shirt, Hammer } from "lucide-react";
 
 const services = [
   {
@@ -40,6 +43,9 @@ const ServicesSection = () => (
   <>
     {/* Services grid */}
     <section className="relative py-24 md:py-36 bg-background overflow-hidden">
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-20 mix-blend-overlay">
+        <DotGrid color="#d4af37" size={24} />
+      </div>
       <JaliBackground opacity={0.04} />
       <div className="relative container-luxe">
         <Reveal className="max-w-2xl mb-16 md:mb-20">
@@ -52,6 +58,17 @@ const ServicesSection = () => (
           >
             Considered services for considered homes.
           </SplitText>
+        </Reveal>
+
+        <Reveal className="mb-12" delay={0.1}>
+          <GlassIcons
+            items={[
+              { icon: <Home size={24} strokeWidth={1.5} />, color: "orange", label: "Interiors" },
+              { icon: <CookingPot size={24} strokeWidth={1.5} />, color: "blue", label: "Kitchens" },
+              { icon: <Shirt size={24} strokeWidth={1.5} />, color: "purple", label: "Wardrobes" },
+              { icon: <Hammer size={24} strokeWidth={1.5} />, color: "green", label: "Renovation" }
+            ]}
+          />
         </Reveal>
 
         <div className="grid md:grid-cols-2 gap-px bg-border border border-border">

@@ -1,0 +1,10 @@
+/* MagnetLines — each span rotates toward cursor */
+.magnet-lines-rb span {
+  display: block;
+  border-radius: 2px;
+  transform: rotate(var(--rotate, -10deg));
+  transition: transform 0.08s linear;
+  justify-self: center;
+  align-self: center;
+  will-change: transform;
+}

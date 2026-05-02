@@ -5,6 +5,7 @@ import modern from "@/assets/style-modern.jpg";
 import fusion from "@/assets/style-fusion.jpg";
 import Reveal from "./Reveal";
 import JaliBackground from "./JaliBackground";
+import InfiniteMenu from "./InfiniteMenu";
 
 const items = [
   { key: "traditional", title: "Traditional", desc: "Carved teak, jharokhas, brass and rich textiles rooted in Indian heritage.", note: "For homes that celebrate craft, story, and the depth of ornament.", img: traditional, filter: "Living" },
@@ -60,21 +61,15 @@ const Styles = () => {
         </Reveal>
 
         <Reveal className="grid lg:grid-cols-5 gap-10 lg:gap-16 items-center">
-          <div className="lg:col-span-3 relative">
-            <div className="relative overflow-hidden bg-secondary" style={{ borderRadius: "50% 50% 8px 8px / 28% 28% 8px 8px" }}>
-              <img
-                key={current.key}
-                src={current.img}
-                alt={`${current.title} interior style`}
-                width={1024}
-                height={1280}
-                loading="lazy"
-                className="w-full h-[520px] md:h-[600px] object-cover animate-scale-in"
-              />
-            </div>
-            <svg aria-hidden="true" viewBox="0 0 600 600" className="pointer-events-none absolute -inset-3 w-[calc(100%+1.5rem)] h-[calc(100%+1.5rem)]" preserveAspectRatio="none">
-              <path d="M10 590 L10 300 Q10 10 300 10 Q590 10 590 300 L590 590" fill="none" stroke="hsl(var(--gold))" strokeWidth="1" opacity="0.5" />
-            </svg>
+          <div className="lg:col-span-3 relative h-[600px] border border-border overflow-hidden">
+            <InfiniteMenu 
+              items={items.map(i => ({
+                image: i.img,
+                link: `/portfolio?style=${i.filter}`,
+                title: i.title,
+                description: i.desc
+              }))}
+            />
           </div>
 
           <div className="lg:col-span-2">

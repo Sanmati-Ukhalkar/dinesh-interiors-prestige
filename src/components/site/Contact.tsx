@@ -6,7 +6,12 @@ import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 import Reveal from "./Reveal";
 import JaliBackground from "./JaliBackground";
+import Aurora from "./Aurora";
 import SplitText from "./SplitText";
+import MagnetLines from "./MagnetLines";
+import AnimatedList from "./AnimatedList";
+import BorderGlow from "./BorderGlow";
+import ElasticSlider from "./ElasticSlider";
 
 const WhatsAppIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -43,6 +48,13 @@ const Contact = ({ showHeading = true }: Props) => {
 
   return (
     <section id="contact" className="relative py-24 md:py-36 bg-secondary overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none opacity-40 mix-blend-overlay">
+        <Aurora 
+          colorStops={["#d4af37", "#2a221b", "#1a1511"]} 
+          amplitude={0.6} 
+          blend={0.5} 
+        />
+      </div>
       <JaliBackground opacity={0.06} type="mandala" />
       <div className="relative container-luxe grid lg:grid-cols-2 gap-16 lg:gap-24">
 
@@ -80,27 +92,40 @@ const Contact = ({ showHeading = true }: Props) => {
             <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-[hsl(var(--gold-soft))]" aria-hidden="true">→</span>
           </a>
 
-          {/* Contact details */}
-          <dl className="mt-12 space-y-4">
-            {contactDetails.map((d) => (
-               <div key={d.label} className="flex gap-4 text-sm">
-                 <dt className="text-foreground font-medium min-w-[52px]">{d.label}</dt>
-                 <dd className="text-muted-foreground">
-                   {d.href ? (
-                     <a href={d.href} className="ink-link hover:text-foreground transition-colors duration-300">
-                       {d.value}
-                     </a>
-                   ) : (
-                     d.value
-                   )}
-                 </dd>
-               </div>
+          {/* Contact details as AnimatedList */}
+          <AnimatedList
+            className="mt-12 space-y-4"
+            itemClassName=""
+            delay={0.1}
+            items={contactDetails.map((d) => (
+              <div key={d.label} className="flex gap-4 text-sm">
+                <dt className="text-foreground font-medium min-w-[52px]">{d.label}</dt>
+                <dd className="text-muted-foreground">
+                  {d.href ? (
+                    <a href={d.href} className="ink-link hover:text-foreground transition-colors duration-300">{d.value}</a>
+                  ) : d.value}
+                </dd>
+              </div>
             ))}
-          </dl>
+          />
+
+          {/* MagnetLines decorative element */}
+          <div className="mt-14 hidden lg:block opacity-25">
+            <MagnetLines
+              rows={5}
+              columns={10}
+              containerSize="280px"
+              lineColor="hsl(43,65%,62%)"
+              lineWidth="2px"
+              lineHeight="16px"
+              baseAngle={-10}
+            />
+          </div>
         </Reveal>
 
-        {/* Right — form column */}
+        {/* Right — form column with BorderGlow */}
         <Reveal delay={120}>
+          <BorderGlow glowColor="43 70 60" borderRadius={0} backgroundColor="hsl(var(--background))">
            <form
              onSubmit={onSubmit}
              className="bg-background p-8 md:p-12 border border-border space-y-8"
@@ -129,36 +154,30 @@ const Contact = ({ showHeading = true }: Props) => {
                  />
                </div>
              </div>
- 
+
              <div>
                <Label className="text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
-                 Budget
+                 Budget ({budget})
                </Label>
-               <div className="mt-3 flex flex-wrap gap-2">
-                 {budgets.map((b) => (
-                   <button
-                     key={b}
-                     type="button"
-                     onClick={() => setBudget(b)}
-                     className={`relative px-4 h-9 text-[11px] uppercase tracking-[0.2em] rounded-sm border transition-all duration-300 ${
-                       budget === b
-                         ? "bg-[hsl(var(--wood-deep))] text-cream border-[hsl(var(--wood-deep))] shadow-[0_4px_14px_0_hsl(var(--wood-deep)/0.39)]"
-                         : "border-border hover:border-[hsl(var(--gold))] hover:text-foreground"
-                     }`}
-                   >
-                    {budget === b && (
-                        <span
-                          className="absolute -top-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[hsl(var(--gold))] animate-fade-in"
-                          aria-hidden="true"
-                        />
-                      )}
-                     {b}
-                   </button>
-                 ))}
+               <div className="mt-6 pl-2 pr-4">
+                 <ElasticSlider
+                   startingValue={0}
+                   maxValue={3}
+                   defaultValue={budgets.indexOf(budget)}
+                   isStepped={true}
+                   stepSize={1}
+                   className="w-full"
+                 />
+                 <div className="flex justify-between mt-8 text-[10px] uppercase tracking-widest text-muted-foreground">
+                   <span>{budgets[0]}</span>
+                   <span>{budgets[1]}</span>
+                   <span>{budgets[2]}</span>
+                   <span>{budgets[3]}</span>
+                 </div>
                </div>
                <input type="hidden" name="budget" value={budget} />
              </div>
- 
+
              <div>
                <Label
                  htmlFor="requirement"
@@ -175,7 +194,7 @@ const Contact = ({ showHeading = true }: Props) => {
                  className="mt-3 rounded-none border-0 border-b border-border bg-transparent px-0 focus-visible:ring-0 focus-visible:border-[hsl(var(--gold))] resize-none transition-colors duration-300"
                />
              </div>
- 
+
              <Button
                type="submit"
                disabled={submitting}
@@ -184,6 +203,7 @@ const Contact = ({ showHeading = true }: Props) => {
                {submitting ? "Sending…" : "Send Enquiry →"}
              </Button>
            </form>
+          </BorderGlow>
          </Reveal>
        </div>
      </section>

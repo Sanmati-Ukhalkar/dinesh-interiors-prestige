@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import GradualBlur from "./GradualBlur";
+import FlowingMenu from "./FlowingMenu";
+
+import img1 from "@/assets/portfolio-kitchen.jpg";
+import img2 from "@/assets/about.jpg";
+import img3 from "@/assets/style-traditional.jpg";
+import img4 from "@/assets/hero.jpg";
 
 const leftLinks = [
   { label: "Portfolio", to: "/portfolio", n: "01", badge: "New" },
@@ -54,10 +61,14 @@ const Navbar = () => {
       <header
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
           solid
-            ? "bg-[hsl(var(--cream)/0.92)] backdrop-blur-md border-b border-[hsl(var(--border))]"
+            ? "bg-transparent"
             : "bg-transparent"
         }`}
       >
+        {/* GradualBlur background */}
+        {solid && (
+          <GradualBlur preset="header" zIndex={-1} className="absolute top-0 left-0 w-full pointer-events-none" />
+        )}
         {/* Gold accent top line — only when scrolled */}
         <div
           className={`absolute top-0 left-0 right-0 h-[2px] transition-opacity duration-700 ${
@@ -71,7 +82,7 @@ const Navbar = () => {
         />
 
         <div
-          className={`container-luxe grid grid-cols-[1fr_auto_1fr] items-center transition-all duration-500 ${
+          className={`relative z-10 container-luxe grid grid-cols-[1fr_auto_1fr] items-center transition-all duration-500 ${
             solid ? "py-3.5" : "py-5 md:py-6"
           }`}
         >
@@ -236,38 +247,20 @@ const Navbar = () => {
         </svg>
 
         <nav className="flex flex-col justify-center h-full px-8 pt-24 pb-12 gap-0">
-          {allLinks.map((l, i) => (
-            <NavLink
-              key={l.to}
-              to={l.to}
-              onClick={() => setOpen(false)}
-              className={({ isActive }) =>
-                `group flex items-baseline gap-4 py-5 border-b border-[hsl(var(--border))] transition-all duration-300 ${
-                  isActive
-                    ? "text-[hsl(var(--wood-deep))]"
-                    : "text-muted-foreground"
-                }`
-              }
-              style={{
-                transitionDelay: open ? `${i * 60}ms` : "0ms",
-                transform: open ? "translateX(0)" : "translateX(-24px)",
-                opacity: open ? 1 : 0,
-                transition: `transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) ${i * 60}ms, opacity 0.4s ease ${i * 60}ms, color 0.3s`,
-              }}
-            >
-              <span className="font-serif text-sm text-[hsl(var(--gold)/0.5)] w-6">
-                {l.n}
-              </span>
-              <span className="font-serif text-4xl group-hover:text-[hsl(var(--wood-deep))] transition-colors">
-                {l.label}
-              </span>
-              {"badge" in l && (
-                <span className="text-[10px] font-bold uppercase tracking-[0.18em] bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] px-2 py-0.5 rounded-sm leading-none self-center shadow-sm">
-                  {l.badge}
-                </span>
-              )}
-            </NavLink>
-          ))}
+          <div className="flex-1 w-full flex items-center justify-center mt-8">
+            <FlowingMenu
+              items={[
+                { link: "/portfolio", text: "Portfolio", image: img1 },
+                { link: "/about", text: "About", image: img2 },
+                { link: "/services", text: "Services", image: img3 },
+                { link: "/contact", text: "Contact", image: img4 },
+              ]}
+              bgColor="transparent"
+              textColor="hsl(var(--wood-deep))"
+              marqueeTextColor="hsl(var(--wood-deep))"
+              marqueeBgColor="hsl(var(--gold))"
+            />
+          </div>
 
           {/* Footer strip */}
           <div

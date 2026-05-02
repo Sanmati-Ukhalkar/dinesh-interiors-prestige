@@ -9,9 +9,13 @@ import fusion from "@/assets/style-fusion.jpg";
 import traditional from "@/assets/style-traditional.jpg";
 import modern from "@/assets/style-modern.jpg";
 import Reveal from "./Reveal";
+import FadeContent from "./FadeContent";
 import JaliBackground from "./JaliBackground";
 import GlareHover from "./GlareHover";
 import SplitText from "./SplitText";
+import FlyingPosters from "./FlyingPosters";
+import ChromaGrid from "./ChromaGrid";
+import DecayCard from "./DecayCard";
 
 export type Category = "Kitchen" | "Bedroom" | "Living" | "Storage";
 
@@ -120,12 +124,20 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
           </Reveal>
         )}
 
+        {preview && (
+          <div className="relative w-full h-[60vh] mb-12 hidden md:block">
+            <FlyingPosters items={portfolioItems.map(i => i.img)} />
+          </div>
+        )}
+
         {/* Masonry grid */}
         <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 lg:gap-7 [column-fill:_balance]">
           {visible.map((it, i) => (
-            <Reveal
+            <FadeContent
               key={it.title + filter}
-              delay={(i % 3) * 100}
+              delay={(i % 3) * 0.1}
+              duration={0.85}
+              blur={true}
               className="mb-5 lg:mb-7 break-inside-avoid"
             >
               <GlareHover glareOpacity={0.15} className="block">
@@ -136,17 +148,17 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
                   aria-label={`View ${it.title}`}
                 >
                   <div className={`relative ${it.ratio} overflow-hidden bg-secondary`}>
-                    <img
-                      src={it.img}
-                      alt={`${it.title} — ${it.place}`}
-                      loading="lazy"
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-108"
-                      style={{ transitionDuration: "1200ms" }}
-                    />
+                    <div className="absolute inset-0 z-0">
+                      <DecayCard 
+                        image={it.img} 
+                        width="100%" 
+                        height="100%" 
+                      />
+                    </div>
                     {/* Gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--wood-deep))]/80 via-[hsl(var(--wood-deep))]/20 to-transparent transition-opacity duration-500 group-hover:opacity-95" />
+                    <div className="absolute inset-0 z-10 bg-gradient-to-t from-[hsl(var(--wood-deep))]/80 via-[hsl(var(--wood-deep))]/20 to-transparent transition-opacity duration-500 group-hover:opacity-95 pointer-events-none" />
                     {/* Gold ring */}
-                    <div className="absolute inset-0 ring-1 ring-inset ring-[hsl(var(--gold))]/0 group-hover:ring-[hsl(var(--gold))]/35 transition-all duration-500" />
+                    <div className="absolute inset-0 z-10 ring-1 ring-inset ring-[hsl(var(--gold))]/0 group-hover:ring-[hsl(var(--gold))]/35 transition-all duration-500 pointer-events-none" />
                   </div>
                   {/* Caption */}
                   <div className="absolute bottom-0 left-0 right-0 p-5 lg:p-6 text-cream translate-y-1.5 group-hover:translate-y-0 transition-transform duration-500">
@@ -160,7 +172,7 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
                   </div>
                 </button>
               </GlareHover>
-            </Reveal>
+            </FadeContent>
           ))}
         </div>
 
@@ -176,6 +188,22 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
             </button>
           </Reveal>
         )}
+        {/* ChromaGrid Alternative View */}
+        {!preview && (
+          <Reveal className="mt-24 mb-12 relative w-full h-[600px] border border-border">
+            <ChromaGrid 
+              items={visible.map(item => ({
+                image: item.img,
+                title: item.title,
+                subtitle: item.category,
+                handle: item.place,
+                borderColor: 'hsl(var(--gold-soft))',
+                gradient: 'linear-gradient(145deg, hsl(var(--wood-deep)), #000)'
+              }))}
+            />
+          </Reveal>
+        )}
+
       </div>
 
       {/* Lightbox */}
