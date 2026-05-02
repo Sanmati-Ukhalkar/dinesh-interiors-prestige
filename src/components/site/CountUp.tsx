@@ -4,7 +4,7 @@
  * Triggers only when element enters viewport (once).
  */
 import { useRef, useEffect, useCallback } from "react";
-import { useInView, useMotionValue, useSpring } from "framer-motion";
+import { useInView, useMotionValue, useSpring } from "motion/react";
 
 interface CountUpProps {
   to: number;

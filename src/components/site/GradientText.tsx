@@ -4,7 +4,7 @@
  * No layout, no paint — GPU composited via background-clip:text.
  */
 import { useRef } from "react";
-import { motion, useMotionValue, useAnimationFrame, useTransform } from "framer-motion";
+import { motion, useMotionValue, useAnimationFrame, useTransform } from "motion/react";
 import "./GradientText.css";
 
 interface GradientTextProps {

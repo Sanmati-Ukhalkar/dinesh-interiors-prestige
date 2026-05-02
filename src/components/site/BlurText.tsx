@@ -3,7 +3,7 @@
  * Performance: GPU-only (filter + transform). Zero layout thrash.
  */
 import { useRef } from "react";
-import { motion, useInView, Variants } from "framer-motion";
+import { motion, useInView, Variants } from "motion/react";
 
 interface BlurTextProps {
   children: string;

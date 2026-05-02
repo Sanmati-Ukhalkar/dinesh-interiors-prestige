@@ -19,7 +19,7 @@
  */
 
 import { useRef, useState, useEffect, ElementType, ReactNode } from "react";
-import { motion, useInView, Variants } from "framer-motion";
+import { motion, useInView, Variants } from "motion/react";
 
 interface SplitTextProps {
   children: ReactNode;

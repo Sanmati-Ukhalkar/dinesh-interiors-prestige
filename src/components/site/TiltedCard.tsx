@@ -4,7 +4,7 @@
  * Auto-disabled on touch devices via media query check.
  */
 import { useRef, ReactNode } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "motion/react";
 
 interface TiltedCardProps {
   children: ReactNode;

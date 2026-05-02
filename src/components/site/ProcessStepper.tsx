@@ -5,7 +5,7 @@
  * NOT an interactive multi-step wizard — purely visual / informational.
  */
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView } from "motion/react";
 
 export interface ProcessStep {
   number: string;
