@@ -1,13 +1,15 @@
 import { ReactNode } from "react";
 import JaliBackground from "./JaliBackground";
+import ArchDivider from "./ArchDivider";
 
 interface Props {
   eyebrow: string;
   title: ReactNode;
   intro?: ReactNode;
+  archFill?: string;
 }
 
-const PageHero = ({ eyebrow, title, intro }: Props) => (
+const PageHero = ({ eyebrow, title, intro, archFill = "hsl(var(--background))" }: Props) => (
   <section className="relative pt-44 pb-24 md:pt-52 md:pb-32 bg-[hsl(var(--wood-deep))] text-cream overflow-hidden grain">
     <JaliBackground opacity={0.06} />
 
@@ -70,6 +72,11 @@ const PageHero = ({ eyebrow, title, intro }: Props) => (
         strokeWidth="0.75"
       />
     </svg>
+
+    {/* Transition arch */}
+    <div className="absolute bottom-[-2px] left-0 right-0 z-20 pointer-events-none">
+      <ArchDivider fill={archFill} />
+    </div>
   </section>
 );
 

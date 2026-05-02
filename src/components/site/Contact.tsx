@@ -41,7 +41,7 @@ const Contact = ({ showHeading = true }: Props) => {
   };
 
   return (
-    <section id="contact" className="relative py-24 md:py-36 bg-secondary/40 overflow-hidden">
+    <section id="contact" className="relative py-24 md:py-36 bg-secondary overflow-hidden">
       <JaliBackground opacity={0.06} type="mandala" />
       <div className="relative container-luxe grid lg:grid-cols-2 gap-16 lg:gap-24">
 
