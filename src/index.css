@@ -111,6 +111,22 @@
     color: hsl(var(--wood-deep));
   }
 
+  /* Custom Premium Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--wood-deep));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--gold-soft) / 0.4);
+    border-radius: 10px;
+    border: 2px solid hsl(var(--wood-deep)); /* adds a tiny gap effect */
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--gold));
+  }
+
   h1, h2, h3, h4, .font-serif {
     font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
     font-weight: 400;
