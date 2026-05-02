@@ -104,7 +104,7 @@ const Navbar = () => {
 
                     {/* Badge */}
                     {"badge" in l && (
-                      <span className="text-[9px] uppercase tracking-[0.18em] bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] px-1.5 py-px leading-none">
+                      <span className="text-[10px] font-bold uppercase tracking-[0.18em] bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] px-2 py-0.5 rounded-sm leading-none ml-1 shadow-sm">
                         {l.badge}
                       </span>
                     )}
@@ -262,7 +262,7 @@ const Navbar = () => {
                 {l.label}
               </span>
               {"badge" in l && (
-                <span className="text-[9px] uppercase tracking-[0.18em] bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] px-1.5 py-px leading-none self-center">
+                <span className="text-[10px] font-bold uppercase tracking-[0.18em] bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] px-2 py-0.5 rounded-sm leading-none self-center shadow-sm">
                   {l.badge}
                 </span>
               )}

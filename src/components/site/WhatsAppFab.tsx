@@ -1,7 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const WhatsAppFab = () => {
   const [hovered, setHovered] = useState(false);
+  const [isNearBottom, setIsNearBottom] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const distanceToBottom = document.body.scrollHeight - window.scrollY - window.innerHeight;
+      setIsNearBottom(distanceToBottom < 300); // 300px from the bottom
+    };
+    
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    // check immediately on mount
+    handleScroll();
+    
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <a
@@ -11,7 +25,7 @@ const WhatsAppFab = () => {
       aria-label="Chat on WhatsApp"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="fixed bottom-6 right-6 z-50 flex items-center gap-0 overflow-hidden h-12 rounded-none transition-all duration-500 ease-out shadow-[0_12px_40px_-12px_hsl(var(--wood-deep)/0.45)] hover:shadow-[0_20px_50px_-15px_hsl(var(--gold)/0.5)] animate-float hover:[animation-play-state:paused]"
+      className={`fixed right-6 z-50 flex items-center gap-0 overflow-hidden h-12 rounded-full transition-all duration-500 ease-out shadow-[0_12px_40px_-12px_hsl(var(--wood-deep)/0.45)] hover:shadow-[0_20px_50px_-15px_hsl(var(--gold)/0.5)] animate-float hover:[animation-play-state:paused] ${isNearBottom ? "bottom-[-100px] opacity-0 pointer-events-none" : "bottom-6 opacity-100"}`}
       style={{
         background: "hsl(var(--wood-deep))",
         border: "1px solid hsl(var(--gold)/0.4)",
