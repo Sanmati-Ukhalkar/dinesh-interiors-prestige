@@ -4,6 +4,9 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Button } from "@/components/ui/button";
 import { useScrollFrameSequence } from "@/hooks/useScrollFrameSequence";
+import BlurText from "./BlurText";
+import ShinyText from "./ShinyText";
+import Magnet from "./Magnet";
 
 // Register GSAP plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -259,10 +262,10 @@ const HeroCanvas = () => {
             <div className="container-luxe flex flex-col justify-center h-full pt-32 pb-28">
               {/* Eyebrow */}
               <p
-                className="hero-content-item eyebrow text-[hsl(var(--gold-soft))] mb-7"
+                className="hero-content-item mb-7"
                 style={{ letterSpacing: "0.38em" }}
               >
-                Est. 2009 · Pune
+                <ShinyText text="Est. 2009 · Pune" className="eyebrow" speed={4} />
               </p>
 
               {/* Headline */}
@@ -270,9 +273,9 @@ const HeroCanvas = () => {
                 className="hero-content-item font-serif text-[clamp(2.8rem,7vw,5.5rem)] leading-[1.03] text-cream max-w-[17ch]"
                 style={{ fontWeight: 300 }}
               >
-                Where Tradition{" "}
-                <em className="not-italic text-[hsl(var(--gold-soft))]">Meets</em>{" "}
-                Modern Living
+                <BlurText className="text-cream" threshold={0.1}>
+                  Where Tradition Meets Modern Living
+                </BlurText>
               </h1>
 
               {/* Gold rule */}
@@ -292,21 +295,25 @@ const HeroCanvas = () => {
 
               {/* CTAs */}
               <div className="hero-content-item mt-12 flex flex-col sm:flex-row gap-4">
-                <Button
-                  asChild
-                  size="lg"
-                  className="rounded-full bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] hover:bg-[hsl(var(--gold-soft))] px-9 h-[54px] text-[11px] uppercase tracking-[0.3em] font-medium transition-all duration-500 hover:shadow-[0_8px_30px_-10px_hsl(var(--gold)/0.6)] hover:-translate-y-0.5"
-                >
-                  <Link to="/portfolio">Explore Portfolio</Link>
-                </Button>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="rounded-full bg-[hsl(var(--wood-deep))]/20 backdrop-blur-sm border-cream/30 text-cream hover:bg-cream hover:text-[hsl(var(--wood-deep))] px-9 h-[54px] text-[11px] uppercase tracking-[0.3em] font-medium transition-all duration-500 hover:border-cream hover:-translate-y-0.5"
-                >
-                  <Link to="/contact">Book Consultation</Link>
-                </Button>
+                <Magnet magnetStrength={3} padding={60}>
+                  <Button
+                    asChild
+                    size="lg"
+                    className="rounded-full bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] hover:bg-[hsl(var(--gold-soft))] px-9 h-[54px] text-[11px] uppercase tracking-[0.3em] font-medium transition-all duration-500 hover:shadow-[0_8px_30px_-10px_hsl(var(--gold)/0.6)]"
+                  >
+                    <Link to="/portfolio">Explore Portfolio</Link>
+                  </Button>
+                </Magnet>
+                <Magnet magnetStrength={3} padding={60}>
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="rounded-full bg-[hsl(var(--wood-deep))]/20 backdrop-blur-sm border-cream/30 text-cream hover:bg-cream hover:text-[hsl(var(--wood-deep))] px-9 h-[54px] text-[11px] uppercase tracking-[0.3em] font-medium transition-all duration-500 hover:border-cream"
+                  >
+                    <Link to="/contact">Book Consultation</Link>
+                  </Button>
+                </Magnet>
               </div>
             </div>
           </div>

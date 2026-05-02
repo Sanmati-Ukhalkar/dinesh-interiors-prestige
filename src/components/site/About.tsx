@@ -1,11 +1,14 @@
 import about from "@/assets/about.jpg";
 import Reveal from "./Reveal";
 import JaliBackground from "./JaliBackground";
+import SplitText from "./SplitText";
+import CountUp from "./CountUp";
 
+// Parsed stats for CountUp: { num, suffix, label }
 const stats = [
-  { k: "15+", v: "Years of Craft" },
-  { k: "120+", v: "Homes Designed" },
-  { k: "40+", v: "Artisan Partners" },
+  { num: 15, suffix: "+", label: "Years of Craft" },
+  { num: 120, suffix: "+", label: "Homes Designed" },
+  { num: 40, suffix: "+", label: "Artisan Partners" },
 ];
 
 const About = () => (
@@ -60,10 +63,14 @@ const About = () => (
       {/* Text column */}
       <Reveal delay={120}>
         <p className="eyebrow mb-6">The Studio</p>
-        <h2 className="font-serif text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.1] text-foreground">
-          A quiet philosophy of&nbsp;living,{" "}
-          <em className="not-italic text-[hsl(var(--wood))]">beautifully made.</em>
-        </h2>
+        <SplitText
+          tag="h2"
+          className="font-serif text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.1] text-foreground"
+          delay={0.06}
+          duration={0.85}
+        >
+          A quiet philosophy of living, beautifully made.
+        </SplitText>
 
         <div className="gold-line my-9 max-w-[100px]" />
 
@@ -82,15 +89,14 @@ const About = () => (
         {/* Stats row */}
         <div className="mt-14 grid grid-cols-3 gap-6 border-t border-border pt-10">
           {stats.map((s, i) => (
-            <div key={s.v} className="group">
+            <div key={s.label} className="group">
               <p
                 className="font-serif text-4xl md:text-5xl text-[hsl(var(--wood))] transition-colors group-hover:text-[hsl(var(--gold))] duration-300"
-                style={{ animationDelay: `${i * 100}ms` }}
               >
-                {s.k}
+                <CountUp to={s.num} suffix={s.suffix} duration={2.2} delay={i * 0.15} />
               </p>
               <p className="mt-2 text-[11px] uppercase tracking-[0.24em] text-muted-foreground leading-tight">
-                {s.v}
+                {s.label}
               </p>
             </div>
           ))}

@@ -1,0 +1,29 @@
+/* ShinyText — pure CSS metallic sheen sweep */
+.shiny-text-rb {
+  background-image: linear-gradient(
+    120deg,
+    var(--shiny-color) 0%,
+    var(--shiny-color) 35%,
+    var(--shiny-shine) 50%,
+    var(--shiny-color) 65%,
+    var(--shiny-color) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shiny-sweep var(--shiny-speed, 3s) linear infinite;
+}
+
+@keyframes shiny-sweep {
+  0%   { background-position: 150% center; }
+  100% { background-position: -50% center; }
+}
+
+/* Respect reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .shiny-text-rb {
+    animation: none;
+    -webkit-text-fill-color: var(--shiny-color);
+  }
+}

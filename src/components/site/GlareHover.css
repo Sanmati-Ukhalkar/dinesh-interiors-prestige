@@ -1,0 +1,28 @@
+/* GlareHover — diagonal light sweep on hover */
+.glare-hover-rb {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.glare-hover-rb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    var(--gh-angle, -45deg),
+    transparent 0%,
+    transparent 40%,
+    var(--gh-rgba, rgba(201,169,110,0.18)) 50%,
+    transparent 60%,
+    transparent 100%
+  );
+  transform: translateX(-110%);
+  transition: transform var(--gh-duration, 600ms) ease;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.glare-hover-rb:hover::after {
+  transform: translateX(110%);
+}

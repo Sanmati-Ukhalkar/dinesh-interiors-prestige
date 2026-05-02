@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import JaliBackground from "./JaliBackground";
 import ArchDivider from "./ArchDivider";
+import SplitText from "./SplitText";
 
 interface Props {
   eyebrow: string;
@@ -30,9 +31,21 @@ const PageHero = ({ eyebrow, title, intro, archFill = "hsl(var(--background))" }
       >
         {eyebrow}
       </p>
-      <h1 className="font-serif text-[clamp(2.8rem,6vw,4.5rem)] leading-[1.05] text-cream animate-fade-up max-w-[22ch]">
-        {title}
-      </h1>
+      {typeof title === "string" ? (
+        <SplitText
+          tag="h1"
+          className="font-serif text-[clamp(2.8rem,6vw,4.5rem)] leading-[1.05] text-cream max-w-[22ch]"
+          delay={0.065}
+          duration={0.9}
+          from={{ opacity: 0, y: 30 }}
+        >
+          {title}
+        </SplitText>
+      ) : (
+        <h1 className="font-serif text-[clamp(2.8rem,6vw,4.5rem)] leading-[1.05] text-cream animate-fade-up max-w-[22ch]">
+          {title}
+        </h1>
+      )}
 
       {/* Gold rule — left-anchored */}
       <div

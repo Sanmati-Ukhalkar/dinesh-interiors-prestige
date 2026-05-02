@@ -10,6 +10,8 @@ import traditional from "@/assets/style-traditional.jpg";
 import modern from "@/assets/style-modern.jpg";
 import Reveal from "./Reveal";
 import JaliBackground from "./JaliBackground";
+import GlareHover from "./GlareHover";
+import SplitText from "./SplitText";
 
 export type Category = "Kitchen" | "Bedroom" | "Living" | "Storage";
 
@@ -79,11 +81,14 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
         <Reveal className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12 md:mb-16">
           <div className="max-w-2xl">
             <p className="eyebrow mb-5">{preview ? "Selected Work" : "Full Portfolio"}</p>
-            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1]">
-              {preview
-                ? "A glimpse of our recent homes."
-                : "A gallery of considered homes."}
-            </h2>
+            <SplitText
+              tag="h2"
+              className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1]"
+              delay={0.055}
+              duration={0.8}
+            >
+              {preview ? "A glimpse of our recent homes." : "A gallery of considered homes."}
+            </SplitText>
           </div>
           <p className="text-muted-foreground max-w-sm leading-[1.8]">
             Each project is shaped by the family who lives in it — bespoke from the first sketch to the last brass handle.
@@ -123,37 +128,38 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
               delay={(i % 3) * 100}
               className="mb-5 lg:mb-7 break-inside-avoid"
             >
-              <button
-                type="button"
-                onClick={() => setOpen(it)}
-                className="group relative w-full block overflow-hidden text-left"
-                aria-label={`View ${it.title}`}
-              >
-                <div className={`relative ${it.ratio} overflow-hidden bg-secondary`}>
-                  <img
-                    src={it.img}
-                    alt={`${it.title} — ${it.place}`}
-                    loading="lazy"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-108"
-                    style={{ transitionDuration: "1200ms" }}
-                  />
-                  {/* Gradient — always present, deepens on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--wood-deep))]/80 via-[hsl(var(--wood-deep))]/20 to-transparent transition-opacity duration-500 group-hover:opacity-95" />
-                  {/* Gold ring on hover */}
-                  <div className="absolute inset-0 ring-1 ring-inset ring-[hsl(var(--gold))]/0 group-hover:ring-[hsl(var(--gold))]/35 transition-all duration-500" />
-                </div>
-
-                {/* Caption — slides up on hover */}
-                <div className="absolute bottom-0 left-0 right-0 p-5 lg:p-6 text-cream translate-y-1.5 group-hover:translate-y-0 transition-transform duration-500">
-                  <p className="text-[10px] uppercase tracking-[0.3em] text-[hsl(var(--gold-soft))]">
-                    {it.category} · {it.place}
-                  </p>
-                  <h3 className="font-serif text-xl lg:text-2xl mt-1.5 leading-tight">{it.title}</h3>
-                  <p className="mt-2.5 text-[10px] uppercase tracking-[0.24em] text-cream/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    View Project →
-                  </p>
-                </div>
-              </button>
+              <GlareHover glareOpacity={0.15} className="block">
+                <button
+                  type="button"
+                  onClick={() => setOpen(it)}
+                  className="group relative w-full block overflow-hidden text-left"
+                  aria-label={`View ${it.title}`}
+                >
+                  <div className={`relative ${it.ratio} overflow-hidden bg-secondary`}>
+                    <img
+                      src={it.img}
+                      alt={`${it.title} — ${it.place}`}
+                      loading="lazy"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-108"
+                      style={{ transitionDuration: "1200ms" }}
+                    />
+                    {/* Gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--wood-deep))]/80 via-[hsl(var(--wood-deep))]/20 to-transparent transition-opacity duration-500 group-hover:opacity-95" />
+                    {/* Gold ring */}
+                    <div className="absolute inset-0 ring-1 ring-inset ring-[hsl(var(--gold))]/0 group-hover:ring-[hsl(var(--gold))]/35 transition-all duration-500" />
+                  </div>
+                  {/* Caption */}
+                  <div className="absolute bottom-0 left-0 right-0 p-5 lg:p-6 text-cream translate-y-1.5 group-hover:translate-y-0 transition-transform duration-500">
+                    <p className="text-[10px] uppercase tracking-[0.3em] text-[hsl(var(--gold-soft))]">
+                      {it.category} · {it.place}
+                    </p>
+                    <h3 className="font-serif text-xl lg:text-2xl mt-1.5 leading-tight">{it.title}</h3>
+                    <p className="mt-2.5 text-[10px] uppercase tracking-[0.24em] text-cream/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      View Project →
+                    </p>
+                  </div>
+                </button>
+              </GlareHover>
             </Reveal>
           ))}
         </div>

@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import SplitText from "./SplitText";
 
 const stats = [
   { platform: "Instagram", handle: "@interiorsbydinesh", count: "182K", label: "Followers" },
@@ -24,9 +25,15 @@ const SocialProof = () => (
         <p className="eyebrow text-[hsl(var(--gold-soft))] mb-4" style={{ letterSpacing: "0.38em" }}>
           A Community of Homemakers
         </p>
-        <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight max-w-2xl mx-auto text-cream">
-          Trusted by <em className="not-italic text-[hsl(var(--gold-soft))]">hundreds of thousands</em> across India.
-        </h2>
+        <SplitText
+          tag="h2"
+          className="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight max-w-2xl mx-auto text-cream"
+          delay={0.06}
+          duration={0.8}
+          from={{ opacity: 0, y: 20 }}
+        >
+          Trusted by hundreds of thousands across India.
+        </SplitText>
       </Reveal>
 
       <div className="grid md:grid-cols-3 gap-px bg-[hsl(var(--gold)/0.15)] ring-1 ring-[hsl(var(--gold)/0.15)]">

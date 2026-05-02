@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 import Reveal from "./Reveal";
 import JaliBackground from "./JaliBackground";
+import SplitText from "./SplitText";
 
 const WhatsAppIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -50,10 +51,14 @@ const Contact = ({ showHeading = true }: Props) => {
           {showHeading && (
             <>
               <p className="eyebrow mb-5">Begin a Project</p>
-              <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1]">
-                Let's design something{" "}
-                <em className="not-italic text-[hsl(var(--gold-soft))]">timeless</em> together.
-              </h2>
+              <SplitText
+                tag="h2"
+                className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1]"
+                delay={0.06}
+                duration={0.85}
+              >
+                Let's design something timeless together.
+              </SplitText>
               <div className="gold-line my-10 max-w-[100px]" />
             </>
           )}

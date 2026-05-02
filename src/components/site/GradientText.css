@@ -1,0 +1,4 @@
+/* GradientText CSS — minimal, just ensures proper text rendering */
+.rb-gradient-text {
+  will-change: background-position;
+}
