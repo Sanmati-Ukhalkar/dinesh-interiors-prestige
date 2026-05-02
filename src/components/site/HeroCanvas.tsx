@@ -7,6 +7,9 @@ import { useScrollFrameSequence } from "@/hooks/useScrollFrameSequence";
 import BlurText from "./BlurText";
 import ShinyText from "./ShinyText";
 import Magnet from "./Magnet";
+import RotatingText from "./RotatingText";
+import StarBorder from "./StarBorder";
+import Particles from "./Particles";
 
 // Register GSAP plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -69,17 +72,14 @@ const HeroCanvas = () => {
   const [contentVisible, setContentVisible] = useState(false);
   const [isLowPerf, setIsLowPerf] = useState(false);
 
-  // Detect low-performance / small-screen fallback
+  // Detect low-performance fallback
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 480px)");
     const check = () => {
       const lowMem =
         "deviceMemory" in navigator && (navigator as Navigator & { deviceMemory: number }).deviceMemory < 2;
-      setIsLowPerf(mq.matches || lowMem);
+      setIsLowPerf(lowMem);
     };
     check();
-    mq.addEventListener("change", check);
-    return () => mq.removeEventListener("change", check);
   }, []);
 
   const { canvasRef, loadStatus, loadProgress, setCurrentFrame } =
@@ -223,6 +223,20 @@ const HeroCanvas = () => {
             style={{ opacity: 0.55 }}
           />
 
+          {/* Golden particles overlay */}
+          <div className="absolute inset-0 pointer-events-none z-[5] opacity-60">
+            <Particles
+              particleColors={["#ffffff", "#d4af37", "#f3ead3"]}
+              particleCount={180}
+              particleSpread={12}
+              speed={0.06}
+              particleBaseSize={70}
+              alphaParticles={true}
+              disableRotation={false}
+              className="w-full h-full"
+            />
+          </div>
+
           {/* Decorative gold arch — right */}
           <svg
             aria-hidden="true"
@@ -291,6 +305,17 @@ const HeroCanvas = () => {
                 A premium interior design studio crafting homes that honour Indian
                 heritage through a quiet, modern lens — handpicked materials,
                 considered light, and rooms that feel like you.
+              </p>
+
+              {/* Rotating room types */}
+              <p className="hero-content-item mt-6 flex items-center gap-3 text-[hsl(var(--gold-soft))] text-sm uppercase tracking-[0.28em]">
+                <span className="text-cream/50">Crafting</span>
+                <RotatingText
+                  texts={["Kitchens", "Bedrooms", "Living Rooms", "Wardrobes", "Dining Spaces"]}
+                  interval={2000}
+                  className="text-[hsl(var(--gold-soft))] font-medium"
+                  mainClassName="min-w-[130px]"
+                />
               </p>
 
               {/* CTAs */}
