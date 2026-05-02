@@ -134,7 +134,7 @@ const AnimatedList = ({
             onClick={() => handleItemClick(item, index)}
           >
             <div className={`item ${selectedIndex === index ? 'selected' : ''} ${itemClassName}`}>
-              <p className="item-text">{item}</p>
+              <div className="item-text">{item}</div>
             </div>
           </AnimatedItem>
         ))}
