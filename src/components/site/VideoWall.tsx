@@ -65,7 +65,7 @@ const VideoWall = () => (
           <Reveal key={v.title} delay={i * 120}>
             <button
               type="button"
-              className="group relative aspect-video w-full overflow-hidden bg-[hsl(var(--wood))] text-left"
+              className="group relative aspect-video w-full overflow-hidden rounded-sm bg-[hsl(var(--wood))] text-left shadow-[0_4px_20px_-5px_hsl(var(--wood-deep)/0.3)] hover:shadow-[0_8px_30px_-10px_hsl(var(--gold)/0.2)] transition-shadow duration-500"
               aria-label={`Play: ${v.title}`}
             >
               <img
@@ -111,7 +111,7 @@ const VideoWall = () => (
           <Reveal key={r.label} delay={i * 80}>
             <button
               type="button"
-              className="group relative aspect-[9/16] w-full overflow-hidden bg-[hsl(var(--wood))] block"
+              className="group relative aspect-[9/16] w-full overflow-hidden rounded-sm bg-[hsl(var(--wood))] block shadow-[0_4px_20px_-5px_hsl(var(--wood-deep)/0.3)] hover:shadow-[0_8px_30px_-10px_hsl(var(--gold)/0.2)] transition-shadow duration-500"
               aria-label={`Play reel: ${r.label}`}
             >
               <img
