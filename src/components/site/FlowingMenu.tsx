@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
+import { Link } from 'react-router-dom';
 
 import './FlowingMenu.css';
 
@@ -32,8 +33,6 @@ function FlowingMenu({
   );
 }
 
-import { Link } from 'react-router-dom';
-
 function MenuItem({ link, text, image, speed, textColor, marqueeBgColor, marqueeTextColor, borderColor }) {
   const itemRef = useRef(null);
   const marqueeRef = useRef(null);
@@ -64,6 +63,8 @@ function MenuItem({ link, text, image, speed, textColor, marqueeBgColor, marquee
       if (!marqueeContent) return;
 
       const contentWidth = marqueeContent.offsetWidth;
+      if (contentWidth === 0) return;
+      
       const viewportWidth = window.innerWidth;
 
       // Calculate how many copies we need to fill viewport + extra for seamless loop
