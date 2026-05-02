@@ -15,7 +15,7 @@ const ArchDivider = ({ fill = "hsl(var(--background))", flip = false, className 
       className={`block w-full h-[80px] md:h-[120px] ${flip ? "rotate-180" : ""}`}
     >
       <path
-        d="M0,120 L0,60 Q360,-40 720,60 Q1080,160 1440,60 L1440,120 Z"
+        d="M0,120 L0,100 C 300,100 450,0 720,0 C 990,0 1140,100 1440,100 L1440,120 Z"
         fill={fill}
       />
     </svg>
