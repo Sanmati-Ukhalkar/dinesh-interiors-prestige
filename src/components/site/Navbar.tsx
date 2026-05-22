@@ -23,18 +23,20 @@ const allLinks = [...leftLinks, ...rightLinks];
 const Navbar = () => {
   const { pathname } = useLocation();
   const isHome = pathname === "/";
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(() => typeof window !== "undefined" ? window.scrollY > 40 : false);
   const [open, setOpen] = useState(false);
+  const [prevPathname, setPrevPathname] = useState(pathname);
+
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
+    setOpen(false);
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  // Close on route change
-  useEffect(() => { setOpen(false); }, [pathname]);
 
   // Lock body scroll when menu open
   useEffect(() => {
@@ -126,7 +128,7 @@ const Navbar = () => {
                         className="absolute -bottom-1 left-0 right-0 flex justify-center"
                         aria-hidden="true"
                       >
-                        <span className="w-1 h-1 rounded-full bg-[hsl(var(--gold))]" />
+                        <span className="size-1 rounded-full bg-[hsl(var(--gold))]" />
                       </span>
                     )}
                   </>
@@ -183,7 +185,7 @@ const Navbar = () => {
                         className="absolute -bottom-1 left-0 right-0 flex justify-center"
                         aria-hidden="true"
                       >
-                        <span className="w-1 h-1 rounded-full bg-[hsl(var(--gold))]" />
+                        <span className="size-1 rounded-full bg-[hsl(var(--gold))]" />
                       </span>
                     )}
                   </>
@@ -194,8 +196,8 @@ const Navbar = () => {
 
           {/* Mobile hamburger — span full right */}
           <div className="md:hidden col-start-3 flex justify-end">
-            <button
-              className={`h-10 w-10 flex flex-col justify-center items-center gap-[5px] transition-colors ${
+            <button type="button"
+              className={`size-10 flex flex-col justify-center items-center gap-[5px] transition-colors ${
                 open ? "text-foreground" : solid ? "text-foreground" : "text-cream"
               }`}
               onClick={() => setOpen((o) => !o)}

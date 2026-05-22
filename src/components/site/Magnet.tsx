@@ -60,7 +60,7 @@ const Magnet = ({
           transition: active
             ? "transform 0.3s cubic-bezier(0.22,1,0.36,1)"
             : "transform 0.5s cubic-bezier(0.22,1,0.36,1)",
-          willChange: "transform",
+          
         }}
       >
         {children}

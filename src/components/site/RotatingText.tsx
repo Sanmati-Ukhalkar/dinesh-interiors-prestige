@@ -4,7 +4,7 @@
  * GPU-only: transform + opacity. Zero layout.
  */
 import { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { m as motion, AnimatePresence  } from 'framer-motion';
 
 interface RotatingTextProps {
   texts: string[];
@@ -37,13 +37,13 @@ const RotatingText = ({
     >
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
-          key={index}
+          key={texts[index]}
           className={className}
           initial={{ y: "110%", opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: "-120%", opacity: 0 }}
           transition={{ type: "spring", damping: 25, stiffness: 300 }}
-          style={{ display: "inline-block", willChange: "transform, opacity" }}
+          style={{ display: "inline-block", }}
         >
           {texts[index]}
         </motion.span>

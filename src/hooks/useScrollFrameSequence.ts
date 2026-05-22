@@ -40,6 +40,11 @@ export function useScrollFrameSequence({
   const totalLoadedRef = useRef(0);
 
   const [loadStatus, setLoadStatus] = useState<LoadStatus>("idle");
+  const [prevTotalFrames, setPrevTotalFrames] = useState(totalFrames);
+  if (totalFrames !== prevTotalFrames) {
+    setPrevTotalFrames(totalFrames);
+    setLoadStatus("loading");
+  }
   const [loadProgress, setLoadProgress] = useState(0);
   const [currentFrame, setCurrentFrameState] = useState(0);
 
@@ -192,7 +197,9 @@ export function useScrollFrameSequence({
 
   // ── Bootstrap: priority frames → ready, then stream rest in background ─────
   useEffect(() => {
-    setLoadStatus("loading");
+    let isActive = true;
+    let timerId: ReturnType<typeof setTimeout>;
+
     let hasSetReady = false;
 
     const bootstrap = async () => {
@@ -201,6 +208,8 @@ export function useScrollFrameSequence({
       await Promise.all(
         Array.from({ length: priorityCount }, (_, i) => loadFrame(i))
       );
+
+      if (!isActive) return;
 
       if (!hasSetReady) {
         hasSetReady = true;
@@ -211,23 +220,39 @@ export function useScrollFrameSequence({
 
       // Phase 2 — background stream: load remaining frames in small batches
       // with a yield between each to avoid blocking scroll/input
-      const BATCH = 8;
-      for (let i = priorityCount; i < totalFrames; i += BATCH) {
-        await Promise.all(
-          Array.from({ length: Math.min(BATCH, totalFrames - i) }, (_, j) =>
-            loadFrame(i + j)
-          )
-        );
-        await new Promise<void>((r) => setTimeout(r, 25));
-      }
+      const loadChunks = async () => {
+        const BATCH = 8;
+        let i = priorityCount;
+        const processNextChunk = async () => {
+          if (!isActive || i >= totalFrames) return;
+          await Promise.all(
+            Array.from({ length: Math.min(BATCH, totalFrames - i) }, (_, j) =>
+              loadFrame(i + j)
+            )
+          );
+          i += BATCH;
+          if (isActive && i < totalFrames) {
+            await new Promise<void>((r) => {
+              timerId = setTimeout(r, 25);
+            });
+            await processNextChunk();
+          }
+        };
+        await processNextChunk();
+      };
+      await loadChunks();
     };
 
-    bootstrap().catch(() => setLoadStatus("error"));
+    bootstrap().catch(() => {
+      if (isActive) setLoadStatus("error");
+    });
 
     return () => {
+      isActive = false;
+      clearTimeout(timerId);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [getFrameUrl, totalFrames, priorityFrames, loadFrame, renderFrame, prefetchWindow]);
+  }, [totalFrames, priorityFrames, loadFrame, renderFrame, prefetchWindow]);
 
   return { canvasRef, loadStatus, loadProgress, currentFrame, setCurrentFrame };
 }

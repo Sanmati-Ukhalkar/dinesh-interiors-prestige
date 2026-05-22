@@ -1,0 +1,118 @@
+﻿[1mreact-doctor[22m [2mv0.2.2[22m
+
+[32mΓ£ö[39m Select projects to scan [2mΓÇ║[22m vite_react_shadcn_ts
+[2mScanning C:\Projects\Interior...[22m
+
+
+
+  [31mΓ£ù[39m [31mreact-doctor/only-export-components           [39m [90m├ù4[39m
+[90m      Fast refresh only works when a file only exports components. Move non-component exports to a separate file.[39m
+[90m      ΓåÆ Move non-component exports out of files that export components.[39m
+[90m      src/components/ui/badge.tsx:29[39m
+[90m      src/components/ui/button.tsx:47[39m
+[90m      src/components/ui/sonner.tsx:27[39m
+[90m      src/components/ui/toggle.tsx:37[39m
+
+  [33mΓÜá[39m [33mreact-doctor/use-lazy-motion                  [39m [90m├ù6[39m
+[90m      Import "m" with LazyMotion instead of "motion" ΓÇö saves ~30kb in bundle size[39m
+[90m      ΓåÆ Use `import { LazyMotion, m } from "framer-motion"` with `domAnimation` features ΓÇö saves ~30kb[39m
+[90m      src/components/site/SplitText.tsx:22[39m
+[90m      src/components/site/TiltedCard.tsx:7[39m
+[90m      src/components/site/BlurText.tsx:6[39m
+[90m      src/components/site/FadeContent.tsx:6[39m
+[90m      src/components/site/GradientText.tsx:7[39m
+[90m      src/components/site/RotatingText.tsx:7[39m
+
+  [33mΓÜá[39m [33mreact-doctor/no-multi-comp                    [39m [90m├ù6[39m
+[90m      Declare only one React component per file. Found extra component: AvatarImage.[39m
+[90m      ΓåÆ Move secondary components into their own files.[39m
+[90m      src/components/ui/avatar.tsx:18[39m
+[90m      src/components/ui/avatar.tsx:26[39m
+[90m      src/components/ui/alert.tsx:29[39m
+[90m      src/components/ui/alert.tsx:36[39m
+[90m      src/components/ui/tabs.tsx:23[39m
+[90m      src/components/ui/tabs.tsx:38[39m
+
+  [33mΓÜá[39m [33mreact-doctor/no-permanent-will-change         [39m [90m├ù5[39m
+[90m      Permanent will-change wastes GPU memory ΓÇö apply only during active animation and remove after[39m
+[90m      ΓåÆ Add will-change on animation start (`onMouseEnter`) and remove on end (`onAnimationEnd`). Permanent promotion wastes GPU memory and can degrade performance[39m
+[90m      src/components/site/SplitText.tsx:115[39m
+[90m      src/components/site/TiltedCard.tsx:54[39m
+[90m      src/components/site/BlurText.tsx:56[39m
+[90m      src/components/site/FadeContent.tsx:41[39m
+[90m      src/components/site/RotatingText.tsx:46[39m
+
+  [33mΓÜá[39m [33mreact-doctor/no-array-index-as-key            [39m [90m├ù4[39m
+[90m      Array index "i" used as key ΓÇö causes bugs when list is reordered or filtered[39m
+[90m      ΓåÆ Use a stable unique identifier: `key={item.id}` or `key={item.slug}` ΓÇö index keys break on reorder/filter[39m
+[90m      src/components/site/SplitText.tsx:110[39m
+[90m      src/components/site/BlurText.tsx:48[39m
+[90m      src/components/site/DecryptedText.tsx:107[39m
+[90m      src/components/site/RotatingText.tsx:40[39m
+
+  [33mΓÜá[39m [33mreact-doctor/jsx-no-constructed-context-values[39m [90m├ù3[39m
+[90m      Context `value` prop is constructed inline ΓÇö wrap with `useMemo`/`useCallback` or hoist a constant to avoid re-renders.[39m
+[90m      ΓåÆ Memoize the context value (`useMemo`) or hoist it outside the render.[39m
+[90m      src/components/ui/form.tsx:27[39m
+[90m      src/components/ui/form.tsx:67[39m
+[90m      src/components/ui/toggle-group.tsx:18[39m
+
+  [33mΓÜá[39m [33mreact-doctor/no-array-index-key               [39m [90m├ù2[39m
+[90m      Array index in `key` doesn't uniquely identify the element ΓÇö re-renders may use stale state.[39m
+[90m      ΓåÆ Use a stable, data-derived `key` instead of the array index.[39m
+[90m      src/components/site/SplitText.tsx:110[39m
+[90m      src/components/site/BlurText.tsx:48[39m
+
+  [33mΓÜá[39m [33mreact-doctor/heading-has-content              [39m [90m├ù2[39m
+[90m      Heading elements must contain accessible text content (or `aria-label` / `aria-labelledby`).[39m
+[90m      ΓåÆ Provide visible or aria-labelled text in every heading.[39m
+[90m      src/components/ui/card.tsx:19[39m
+[90m      src/components/ui/alert.tsx:31[39m
+
+  [33mΓÜá[39m [33mreact-doctor/exhaustive-deps                  [39m [90m├ù2[39m
+[90m      React Hook `useEffect` is missing dependency `colorStops.map, blend, colorStops` ΓÇö list it in the dependency array, or call the hook unconditionally.[39m
+[90m      ΓåÆ List every value the hook callback captures in its dependency array.[39m
+[90m      src/components/site/Aurora.tsx:214[39m
+[90m      src/hooks/useScrollFrameSequence.ts:194[39m
+
+  [33mΓÜá[39m [33mreact-doctor/no-polymorphic-children[39m
+[90m      Polymorphic `typeof children === "string"` check ΓÇö expose explicit subcomponents (e.g. `<Button.Text>`) instead of branching on what the consumer passed[39m
+[90m      ΓåÆ Expose explicit subcomponents (`<Button.Text>`, `<Button.Icon>`) so consumers don't need to switch on `typeof children`[39m
+[90m      src/components/site/SplitText.tsx:89[39m
+
+  [33mΓÜá[39m [33mreact-doctor/no-derived-useState[39m
+[90m      useState initialized from prop "text" ΓÇö if this value should stay in sync with the prop, derive it during render instead[39m
+[90m      ΓåÆ Remove useState and compute the value inline: `const value = transform(propName)`[39m
+[90m      src/components/site/DecryptedText.tsx:27[39m
+
+  [33mΓÜá[39m [33mreact-doctor/no-static-element-interactions[39m
+[90m      Static HTML elements with event handlers require a role ΓÇö add `role="ΓÇª"` or use a semantic HTML element instead.[39m
+[90m      ΓåÆ Static HTML elements with event handlers require a role, or use a semantic HTML element instead.[39m
+[90m      src/components/site/VariableProximity.tsx:167[39m
+
+  [33mΓÜá[39m [33mreact-doctor/no-initialize-state[39m
+[90m      Avoid initializing state in an effect. Instead, initialize "isMobile"'s `useState()` with "window.innerWidth < MOBILE_BREAKPOINT". For SSR hydration, prefer `useSyncExternalStore()`.[39m
+[90m      ΓåÆ Pass the initial value directly to useState() instead of setting it from a mount-only useEffect. For SSR hydration, prefer useSyncExternalStore().[39m
+[90m      src/hooks/use-mobile.tsx:14[39m
+
+  [33mΓÜá[39m [33mreact-doctor/no-adjust-state-on-prop-change[39m
+[90m      Avoid adjusting state when a prop changes. Instead, adjust the state directly during render, or refactor your state to avoid this need entirely.[39m
+[90m      ΓåÆ Adjust the state inline during render instead of via a useEffect, or refactor the state to avoid the need entirely. See https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes[39m
+[90m      src/hooks/useScrollFrameSequence.ts:198[39m
+
+  [32mΓöîΓöÇΓöÇΓöÇΓöÇΓöÇΓöÉ[39m  [32m89[39m [2m/ 100[22m [32mGreat[39m
+  [32mΓöé Γùá Γùá Γöé[39m  [32mΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê[39m[2mΓûæΓûæΓûæΓûæΓûæ[22m
+  [32mΓöé  Γû╜  Γöé[39m  React Doctor [2m(www.react.doctor)[22m
+  [32mΓööΓöÇΓöÇΓöÇΓöÇΓöÇΓöÿ[39m
+
+  [31m39 issues[39m [2macross 21/130 files  in 1.1s[22m
+[90m  Full diagnostics written to C:\Users\sanma\AppData\Local\Temp\react-doctor-2ce6a35f-5406-457f-a648-31ee9b04708d[39m
+
+  [1mΓåÆ Share your results:[22m [36mhttps://www.react.doctor/share?p=vite_react_shadcn_ts&s=89&e=4&w=35&f=21[39m
+
+  [1mΓåÆ Catch these issues on every PR:[22m [36mhttps://react.review[39m
+  [2mReact Review is a GitHub App built on React Doctor, and it runs on each pull request,[22m
+  [2mposts new issues as inline review comments, and tracks your team's score over time.[22m
+
+
+

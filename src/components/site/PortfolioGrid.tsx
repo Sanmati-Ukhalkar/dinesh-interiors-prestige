@@ -103,7 +103,7 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
         {!preview && (
           <Reveal className="flex flex-wrap gap-2 mb-12">
             {filters.map((f) => (
-              <button
+              <button type="button"
                 key={f}
                 onClick={() => setFilter(f)}
                 className={`relative px-5 h-10 text-xs uppercase tracking-[0.24em] rounded-sm border transition-all duration-300 ${
@@ -114,7 +114,7 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
               >
                 {filter === f && (
                   <span
-                    className="absolute -top-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[hsl(var(--gold))] animate-fade-in"
+                    className="absolute -top-1 left-1/2 -translate-x-1/2 size-1 rounded-full bg-[hsl(var(--gold))] animate-fade-in"
                     aria-hidden="true"
                   />
                 )}
@@ -179,7 +179,7 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
         {/* View all CTA */}
         {preview && (
           <Reveal className="mt-16 text-center">
-            <button
+            <button type="button"
               onClick={() => navigate("/portfolio")}
               className="inline-flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[hsl(var(--wood-deep))] border-b border-[hsl(var(--gold))] pb-1 hover:text-[hsl(var(--gold))] transition-all duration-300 hover:gap-4 group"
             >
@@ -216,10 +216,10 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
           aria-label={open.title}
         >
           {/* Close */}
-          <button
+          <button type="button"
             onClick={() => setOpen(null)}
             aria-label="Close"
-            className="absolute top-5 right-5 md:top-8 md:right-8 h-11 w-11 flex items-center justify-center text-cream border border-cream/20 rounded-sm hover:border-[hsl(var(--gold))] hover:text-[hsl(var(--gold))] transition-all duration-300 z-10"
+            className="absolute top-5 right-5 md:top-8 md:right-8 size-11 flex items-center justify-center text-cream border border-cream/20 rounded-sm hover:border-[hsl(var(--gold))] hover:text-[hsl(var(--gold))] transition-all duration-300 z-10"
           >
             <CloseIcon />
           </button>
@@ -233,7 +233,7 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
               <img
                 src={open.img}
                 alt={open.title}
-                className="w-full h-full max-h-[75vh] object-cover"
+                className="size-full max-h-[75vh] object-cover"
               />
             </div>
 
@@ -249,7 +249,7 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
                   lighting designed to honour the architecture of the space.
                 </p>
               </div>
-              <button
+              <button type="button"
                 onClick={() => { setOpen(null); navigate("/contact"); }}
                 className="mt-10 inline-flex items-center gap-3 text-xs uppercase tracking-[0.28em] text-[hsl(var(--wood-deep))] border-b border-[hsl(var(--gold))] pb-1 hover:text-[hsl(var(--gold))] transition-all duration-300 hover:gap-4 w-fit group hover:-translate-y-0.5"
               >

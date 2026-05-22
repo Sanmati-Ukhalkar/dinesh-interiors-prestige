@@ -406,15 +406,15 @@ class Canvas {
 
   addEventListeners() {
     window.addEventListener('resize', this.onResize);
-    window.addEventListener('wheel', this.onWheel);
+    window.addEventListener("wheel", this.onWheel, { passive: true });
     window.addEventListener('mousewheel', this.onWheel);
 
     window.addEventListener('mousedown', this.onTouchDown);
     window.addEventListener('mousemove', this.onTouchMove);
     window.addEventListener('mouseup', this.onTouchUp);
 
-    window.addEventListener('touchstart', this.onTouchDown);
-    window.addEventListener('touchmove', this.onTouchMove);
+    window.addEventListener("touchstart", this.onTouchDown, { passive: true });
+    window.addEventListener("touchmove", this.onTouchMove, { passive: true });
     window.addEventListener('touchend', this.onTouchUp);
   }
 

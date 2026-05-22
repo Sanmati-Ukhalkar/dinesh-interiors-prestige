@@ -19,7 +19,7 @@
  */
 
 import { useRef, useState, useEffect, ElementType, ReactNode } from "react";
-import { motion, useInView, Variants } from "motion/react";
+import { m as motion, useInView, Variants  } from 'framer-motion';
 
 interface SplitTextProps {
   children: ReactNode;
@@ -86,7 +86,7 @@ const SplitText = ({
   const isInView = useInView(ref, { once, amount: threshold });
 
   // Stringify children to split into units
-  const text = typeof children === "string" ? children : "";
+  const text = String(children);
 
   const units =
     splitBy === "chars"
@@ -107,12 +107,12 @@ const SplitText = ({
       >
         {units.map((unit, i) => (
           <motion.span
-            key={i}
+            key={`${unit}-${i}`}
             variants={childVariants}
             aria-hidden="true"
             style={{
               display: "inline-block",
-              willChange: "transform, opacity",
+              
               // Add space between words when splitting by words
               ...(splitBy === "words" && i < units.length - 1
                 ? { marginRight: "0.28em" }

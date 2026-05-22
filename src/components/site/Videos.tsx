@@ -46,7 +46,7 @@ const Videos = () => (
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--wood))_0%,hsl(var(--wood-deep))_100%)]" />
               <div className="absolute inset-0 ring-1 ring-inset ring-[hsl(var(--gold))]/0 group-hover:ring-[hsl(var(--gold))]/40 transition-all duration-500" />
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="flex h-20 w-20 items-center justify-center rounded-full bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] transition-transform duration-500 group-hover:scale-110 shadow-[0_15px_40px_-10px_hsl(var(--gold)/0.5)]">
+                <span className="flex size-20 items-center justify-center rounded-full bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] transition-transform duration-500 group-hover:scale-110 shadow-[0_15px_40px_-10px_hsl(var(--gold)/0.5)]">
                   <PlayIcon />
                 </span>
               </div>

@@ -4,15 +4,14 @@
  * Text is rendered once, looped via translateX modulo — no DOM duplication.
  */
 import { useRef, useLayoutEffect, useState } from "react";
-import {
-  motion,
+import { m as motion,
   useScroll,
   useSpring,
   useTransform,
   useMotionValue,
   useVelocity,
   useAnimationFrame,
-} from "motion/react";
+ } from 'framer-motion';
 
 function useElementWidth(ref: React.RefObject<HTMLElement | null>) {
   const [width, setWidth] = useState(0);

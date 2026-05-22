@@ -237,7 +237,6 @@ const Particles = ({
         container.removeChild(gl.canvas);
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     particleCount,
     particleSpread,
@@ -249,7 +248,8 @@ const Particles = ({
     sizeRandomness,
     cameraDistance,
     disableRotation,
-    pixelRatio
+    pixelRatio,
+    particleColors
   ]);
 
   return <div ref={containerRef} className={`particles-container ${className}`} />;

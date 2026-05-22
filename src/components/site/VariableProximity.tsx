@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { forwardRef, useMemo, useRef, useEffect } from 'react';
-import { motion } from 'motion/react';
+import { m as motion } from 'framer-motion';
 import './VariableProximity.css';
 
 function useAnimationFrame(callback, containerRef) {
@@ -53,7 +53,7 @@ function useMousePositionRef(containerRef) {
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('touchmove', handleTouchMove);
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('touchmove', handleTouchMove);
@@ -168,16 +168,19 @@ const VariableProximity = forwardRef((props, ref) => {
       ref={ref}
       className={`${className} variable-proximity`}
       onClick={onClick}
+      onKeyDown={onClick ? (e) => (e.key === 'Enter' || e.key === ' ') && onClick(e) : undefined}
+      role={onClick ? "button" : undefined}
+      tabIndex={onClick ? 0 : undefined}
       style={{ display: 'inline', ...style }}
       {...restProps}
     >
       {words.map((word, wordIndex) => (
-        <span key={wordIndex} style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
-          {word.split('').map(letter => {
+        <span key={`${word}-${wordIndex}`} style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
+          {word.split('').map((letter, letterIndexInWord) => {
             const currentLetterIndex = letterIndex++;
             return (
               <motion.span
-                key={currentLetterIndex}
+                key={`${letter}-${currentLetterIndex}`}
                 ref={el => {
                   letterRefs.current[currentLetterIndex] = el;
                 }}

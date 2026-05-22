@@ -4,7 +4,7 @@
  * Auto-disabled on touch devices via media query check.
  */
 import { useRef, ReactNode } from "react";
-import { motion, useMotionValue, useSpring } from "motion/react";
+import { m as motion, useMotionValue, useSpring  } from 'framer-motion';
 
 interface TiltedCardProps {
   children: ReactNode;
@@ -51,7 +51,7 @@ const TiltedCard = ({
       onMouseMove={onMove}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
-      style={{ rotateX, rotateY, scale, transformPerspective: 800, willChange: "transform" }}
+      style={{ rotateX, rotateY, scale, transformPerspective: 800, }}
     >
       {children}
     </motion.div>

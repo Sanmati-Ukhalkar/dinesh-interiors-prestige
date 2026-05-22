@@ -39,7 +39,7 @@ const Styles = () => {
           {items.map((it) => {
             const isActive = it.key === active;
             return (
-              <button
+              <button type="button"
                 key={it.key}
                 onClick={() => setActive(it.key)}
                 className={`relative px-6 h-11 text-xs uppercase tracking-[0.28em] rounded-sm border transition-all duration-300 ${
@@ -50,7 +50,7 @@ const Styles = () => {
               >
                 {isActive && (
                   <span
-                    className="absolute -top-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[hsl(var(--gold))] animate-fade-in"
+                    className="absolute -top-1 left-1/2 -translate-x-1/2 size-1 rounded-full bg-[hsl(var(--gold))] animate-fade-in"
                     aria-hidden="true"
                   />
                 )}
@@ -79,7 +79,7 @@ const Styles = () => {
             <p key={current.desc} className="text-lg text-foreground leading-[1.85] animate-fade-up">{current.desc}</p>
             <p key={current.note} className="mt-4 text-muted-foreground leading-[1.85] animate-fade-up">{current.note}</p>
 
-            <button
+            <button type="button"
               onClick={goToPortfolio}
               className="mt-10 inline-flex items-center gap-3 text-xs uppercase tracking-[0.28em] text-[hsl(var(--wood-deep))] border-b border-[hsl(var(--gold))] pb-1 hover:text-[hsl(var(--gold))] transition-all duration-300 group hover:gap-4 w-fit"
             >

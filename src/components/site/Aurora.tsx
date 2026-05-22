@@ -110,8 +110,10 @@ void main() {
 }
 `;
 
+const DEFAULT_COLOR_STOPS = ['#5227FF', '#7cff67', '#5227FF'];
+
 export default function Aurora(props) {
-  const { colorStops = ['#5227FF', '#7cff67', '#5227FF'], amplitude = 1.0, blend = 0.5 } = props;
+  const { colorStops = DEFAULT_COLOR_STOPS, amplitude = 1.0, blend = 0.5 } = props;
   const propsRef = useRef(props);
   propsRef.current = props;
 
@@ -211,7 +213,7 @@ export default function Aurora(props) {
       gl.getExtension('WEBGL_lose_context')?.loseContext();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [amplitude]);
+  }, [amplitude, blend, colorStops]);
 
   return <div ref={ctnDom} className="aurora-container" />;
 }

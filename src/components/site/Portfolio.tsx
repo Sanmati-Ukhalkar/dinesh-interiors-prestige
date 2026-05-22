@@ -65,7 +65,7 @@ const Portfolio = () => {
 
         <Reveal className="flex flex-wrap gap-2 mb-12">
           {filters.map((f) => (
-            <button
+            <button type="button"
               key={f}
               onClick={() => setFilter(f)}
               className={`relative px-5 h-10 text-xs uppercase tracking-[0.24em] border transition-all duration-300 ${
@@ -76,7 +76,7 @@ const Portfolio = () => {
             >
               {filter === f && (
                 <span
-                  className="absolute -top-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[hsl(var(--gold))] animate-fade-in"
+                  className="absolute -top-1 left-1/2 -translate-x-1/2 size-1 rounded-full bg-[hsl(var(--gold))] animate-fade-in"
                   aria-hidden="true"
                 />
               )}
@@ -99,7 +99,7 @@ const Portfolio = () => {
                     src={it.img}
                     alt={`${it.title} — ${it.place}`}
                     loading="lazy"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-110"
+                    className="absolute inset-0 size-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--wood-deep))]/85 via-transparent to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-500" />
                   <div className="absolute inset-0 ring-1 ring-inset ring-[hsl(var(--gold))]/0 group-hover:ring-[hsl(var(--gold))]/40 transition-all duration-500" />
@@ -127,10 +127,10 @@ const Portfolio = () => {
           role="dialog"
           aria-modal="true"
         >
-          <button
+          <button type="button"
             onClick={() => setOpen(null)}
             aria-label="Close"
-            className="absolute top-5 right-5 md:top-8 md:right-8 h-11 w-11 flex items-center justify-center text-cream border border-cream/20 hover:border-[hsl(var(--gold))] hover:text-[hsl(var(--gold))] transition-all duration-300 group"
+            className="absolute top-5 right-5 md:top-8 md:right-8 size-11 flex items-center justify-center text-cream border border-cream/20 hover:border-[hsl(var(--gold))] hover:text-[hsl(var(--gold))] transition-all duration-300 group"
           >
             <svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
               <path d="M1 1l12 12M13 1L1 13" />
@@ -144,7 +144,7 @@ const Portfolio = () => {
               <img
                 src={open.img}
                 alt={open.title}
-                className="w-full h-full max-h-[80vh] object-cover"
+                className="size-full max-h-[80vh] object-cover"
               />
             </div>
             <div className="p-8 lg:p-10 flex flex-col justify-between">

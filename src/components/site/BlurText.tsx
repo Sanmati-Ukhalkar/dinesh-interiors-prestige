@@ -3,7 +3,7 @@
  * Performance: GPU-only (filter + transform). Zero layout thrash.
  */
 import { useRef } from "react";
-import { motion, useInView, Variants } from "motion/react";
+import { m as motion, useInView, Variants } from "framer-motion";
 
 interface BlurTextProps {
   children: string;
@@ -45,7 +45,7 @@ const BlurText = ({
     <span ref={ref} className={className} style={{ display: "block" }} aria-label={children}>
       {words.map((word, i) => (
         <motion.span
-          key={i}
+          key={`${word}-${i}`}
           custom={i}
           variants={wordVariants}
           initial="hidden"
@@ -53,7 +53,6 @@ const BlurText = ({
           aria-hidden="true"
           style={{
             display: "inline-block",
-            willChange: "transform, opacity, filter",
             marginRight: i < words.length - 1 ? "0.28em" : 0,
           }}
         >

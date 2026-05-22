@@ -70,17 +70,10 @@ const HeroCanvas = () => {
   const contentRef = useRef<HTMLDivElement>(null);
   const [scrollIndicatorVisible, setScrollIndicatorVisible] = useState(true);
   const [contentVisible, setContentVisible] = useState(false);
-  const [isLowPerf, setIsLowPerf] = useState(false);
-
-  // Detect low-performance fallback
-  useEffect(() => {
-    const check = () => {
-      const lowMem =
-        "deviceMemory" in navigator && (navigator as Navigator & { deviceMemory: number }).deviceMemory < 2;
-      setIsLowPerf(lowMem);
-    };
-    check();
-  }, []);
+  const [isLowPerf, setIsLowPerf] = useState(() => {
+    if (typeof navigator === "undefined") return false;
+    return "deviceMemory" in navigator && (navigator as Navigator & { deviceMemory: number }).deviceMemory < 2;
+  });
 
   const { canvasRef, loadStatus, loadProgress, setCurrentFrame } =
     useScrollFrameSequence({
@@ -213,7 +206,6 @@ const HeroCanvas = () => {
           <canvas
             ref={canvasRef}
             className="hero-sequence-canvas"
-            aria-hidden="true"
           />
 
           {/* Gradient overlay — enriches dark-to-light effect */}
@@ -233,7 +225,7 @@ const HeroCanvas = () => {
               particleBaseSize={70}
               alphaParticles={true}
               disableRotation={false}
-              className="w-full h-full"
+              className="size-full"
             />
           </div>
 
@@ -277,7 +269,7 @@ const HeroCanvas = () => {
               {/* Eyebrow */}
               <p
                 className="hero-content-item mb-7"
-                style={{ letterSpacing: "0.38em" }}
+                style={{ letterSpacing: "0.05em" }}
               >
                 <ShinyText text="Est. 2009 · Pune" className="eyebrow" speed={4} />
               </p>
@@ -370,7 +362,7 @@ function StaticHeroFallback() {
       <div className="relative z-10 container-luxe flex min-h-screen flex-col justify-center pt-32 pb-28">
         <p
           className="eyebrow text-[hsl(var(--gold-soft))] mb-7"
-          style={{ letterSpacing: "0.38em" }}
+          style={{ letterSpacing: "0.05em" }}
         >
           Est. 2009 · Pune
         </p>

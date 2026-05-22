@@ -88,10 +88,7 @@ function MenuItem({ link, text, image, speed, textColor, marqueeBgColor, marquee
       const contentWidth = marqueeContent.offsetWidth;
       if (contentWidth === 0) return;
 
-      if (animationRef.current) {
-        animationRef.current.kill();
-      }
-
+      gsap.killTweensOf(marqueeInnerRef.current);
       // Animate exactly one content width for seamless loop
       animationRef.current = gsap.to(marqueeInnerRef.current, {
         x: -contentWidth,
@@ -106,8 +103,8 @@ function MenuItem({ link, text, image, speed, textColor, marqueeBgColor, marquee
 
     return () => {
       clearTimeout(timer);
-      if (animationRef.current) {
-        animationRef.current.kill();
+      if (marqueeInnerRef.current) {
+        gsap.killTweensOf(marqueeInnerRef.current);
       }
     };
   }, [text, image, repetitions, speed]);

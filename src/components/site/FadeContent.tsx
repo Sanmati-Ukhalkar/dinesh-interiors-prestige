@@ -3,7 +3,7 @@
  * Replaces our simple Reveal with a more premium blur effect.
  */
 import { useRef } from "react";
-import { motion, useInView } from "motion/react";
+import { m as motion, useInView  } from 'framer-motion';
 
 interface FadeContentProps {
   children: React.ReactNode;
@@ -38,7 +38,7 @@ const FadeContent = ({
         delay,
         ease: [0.22, 1, 0.36, 1],
       }}
-      style={{ willChange: "transform, opacity, filter" }}
+      style={{ }}
     >
       {children}
     </motion.div>

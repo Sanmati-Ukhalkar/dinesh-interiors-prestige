@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { LazyMotion, domAnimation } from "framer-motion";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -19,21 +20,23 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <SmoothScroll>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/portfolio" element={<PortfolioPage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/services" element={<ServicesPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Layout>
-        </SmoothScroll>
-      </BrowserRouter>
+      <LazyMotion features={domAnimation}>
+        <BrowserRouter>
+          <SmoothScroll>
+            <Layout>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/portfolio" element={<PortfolioPage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/services" element={<ServicesPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Layout>
+          </SmoothScroll>
+        </BrowserRouter>
+      </LazyMotion>
     </TooltipProvider>
   </QueryClientProvider>
 );

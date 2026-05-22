@@ -3,7 +3,7 @@
  * Uses Framer Motion's useInView and AnimatePresence.
  */
 import { useRef, useMemo } from "react";
-import { motion, useInView, Variants } from "motion/react";
+import { m as motion, useInView, Variants  } from 'framer-motion';
 
 interface ScrollFloatProps {
   children: React.ReactNode;
@@ -65,8 +65,7 @@ const ScrollFloat = ({
             style={{ 
               display: "inline-block", 
               whiteSpace: el.trim() === "" ? "pre" : "normal",
-              willChange: "transform, opacity" 
-            }}
+              }}
           >
             {el}
           </motion.span>
@@ -77,7 +76,7 @@ const ScrollFloat = ({
           animate={isInView ? "visible" : "hidden"}
           custom={0}
           variants={variants}
-          style={{ willChange: "transform, opacity" }}
+          style={{ }}
         >
           {children}
         </motion.div>

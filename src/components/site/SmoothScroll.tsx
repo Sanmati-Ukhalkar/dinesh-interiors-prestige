@@ -24,16 +24,18 @@ const SmoothScroll = ({ children }: { children: React.ReactNode }) => {
     lenis.on("scroll", ScrollTrigger.update);
 
     // Drive Lenis via GSAP ticker (ensures both run in same rAF)
-    gsap.ticker.add((time) => {
+    const tickerCallback = (time: number) => {
       lenis.raf(time * 1000); // GSAP gives seconds, Lenis wants ms
-    });
+    };
+    gsap.ticker.add(tickerCallback);
 
     // Prevent GSAP ticker from lagging behind when tab is backgrounded
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      lenis.off("scroll", ScrollTrigger.update);
+      gsap.ticker.remove(tickerCallback);
       lenis.destroy();
-      gsap.ticker.remove((time) => lenis.raf(time * 1000));
     };
   }, []);
 

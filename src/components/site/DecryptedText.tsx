@@ -24,7 +24,8 @@ const DecryptedText = ({
   revealDirection = "start",
   animateOn = "view",
 }: DecryptedTextProps) => {
-  const [display, setDisplay] = useState(text);
+  const initialText = text;
+  const [display, setDisplay] = useState(initialText);
   const [revealed, setRevealed] = useState<Set<number>>(new Set());
   const [done, setDone] = useState(false);
   const containerRef = useRef<HTMLSpanElement>(null);
@@ -104,7 +105,7 @@ const DecryptedText = ({
         {display.split("").map((char, i) => {
           const isRevealed = revealed.has(i) || done;
           return (
-            <span key={i} className={isRevealed ? className : encryptedClassName}>
+            <span key={`${char}-${i}`} className={isRevealed ? className : encryptedClassName}>
               {char}
             </span>
           );
