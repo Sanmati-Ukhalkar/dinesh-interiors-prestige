@@ -55,6 +55,16 @@ const PortfolioPage = () => {
   const styleParam = params.get("style");
   const initial = (validCategories.includes(styleParam as Category) ? styleParam : "All") as "All" | Category;
 
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <>
       <PageHero
@@ -87,9 +97,10 @@ const PortfolioPage = () => {
           images={portfolioItems.map(item => ({ src: item.img, alt: item.title }))}
           grayscale={false}
           overlayBlurColor={CREAM_HEX}
-          fit={0.62}
+          fit={isMobile ? 0.95 : 0.62}
           fitBasis="width"
-          minRadius={400}
+          minRadius={isMobile ? 220 : 400}
+          segments={isMobile ? 20 : 35}
         />
         <DomeHint />
         {/* Bottom blend */}

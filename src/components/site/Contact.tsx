@@ -9,7 +9,6 @@ import JaliBackground from "./JaliBackground";
 import Aurora from "./Aurora";
 import SplitText from "./SplitText";
 import MagnetLines from "./MagnetLines";
-import AnimatedList from "./AnimatedList";
 import BorderGlow from "./BorderGlow";
 import ElasticSlider from "./ElasticSlider";
 
@@ -85,22 +84,30 @@ const Contact = ({ showHeading = true }: Props) => {
             <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-[hsl(var(--gold-soft))]" aria-hidden="true">→</span>
           </a>
 
-          {/* Contact details as AnimatedList */}
-          <AnimatedList
-            className="mt-12 space-y-4"
-            itemClassName=""
-            delay={0.1}
-            items={contactDetails.map((d) => (
-              <div key={d.label} className="flex gap-4 text-sm">
-                <dt className="text-foreground font-medium min-w-[52px]">{d.label}</dt>
-                <dd className="text-muted-foreground">
-                  {d.href ? (
-                    <a href={d.href} className="ink-link hover:text-foreground transition-colors duration-300">{d.value}</a>
-                  ) : d.value}
-                </dd>
-              </div>
+          {/* Contact details */}
+          <div className="mt-12 space-y-5">
+            {contactDetails.map((d, idx) => (
+              <Reveal key={d.label} delay={100 + idx * 60}>
+                <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 text-sm border-b border-border/20 pb-4">
+                  <dt className="text-muted-foreground font-medium min-w-[70px] uppercase tracking-[0.2em] text-[10px]">
+                    {d.label}
+                  </dt>
+                  <dd className="text-foreground">
+                    {d.href ? (
+                      <a 
+                        href={d.href} 
+                        className="hover:text-[hsl(var(--gold))] transition-colors duration-300 font-serif text-base md:text-lg"
+                      >
+                        {d.value}
+                      </a>
+                    ) : (
+                      <span className="font-serif text-base md:text-lg">{d.value}</span>
+                    )}
+                  </dd>
+                </div>
+              </Reveal>
             ))}
-          />
+          </div>
 
           {/* MagnetLines decorative element */}
           <div className="mt-14 hidden lg:block opacity-25">

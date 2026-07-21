@@ -16,8 +16,8 @@
 }
 
 .sphere,
-.item,
-.item__image {
+.dg-item,
+.dg-item__image {
   transform-style: preserve-3d;
 }
 
@@ -67,7 +67,7 @@ main.sphere-main {
   backdrop-filter: blur(3px);
 }
 
-.item {
+.dg-item {
   width: calc(var(--item-width) * var(--item-size-x));
   height: calc(var(--item-height) * var(--item-size-y));
   position: absolute;
@@ -84,7 +84,7 @@ main.sphere-main {
     translateZ(var(--radius));
 }
 
-.item__image {
+.dg-item__image {
   position: absolute;
   display: block;
   inset: 10px;
@@ -101,11 +101,11 @@ main.sphere-main {
   transform: translateZ(0);
 }
 
-.item__image:focus {
+.dg-item__image:focus {
   outline: none;
 }
 
-.item__image img {
+.dg-item__image img {
   width: 100%;
   height: 100%;
   object-fit: cover;

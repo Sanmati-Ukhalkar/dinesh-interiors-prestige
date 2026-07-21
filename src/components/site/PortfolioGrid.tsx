@@ -234,7 +234,7 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
           </button>
 
           <div
-            className="relative max-w-5xl w-full grid lg:grid-cols-[3fr_2fr] gap-0 bg-background animate-scale-in shadow-[0_40px_120px_-20px_hsl(var(--wood-deep))]"
+            className="relative max-w-5xl w-full grid lg:grid-cols-[3fr_2fr] gap-0 bg-background animate-scale-in shadow-[0_40px_120px_-20px_hsl(var(--wood-deep))] max-h-[90vh] overflow-y-auto lg:overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Image */}
@@ -242,7 +242,7 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
               <img
                 src={open.img}
                 alt={open.title}
-                className="size-full max-h-[75vh] object-cover"
+                className="w-full h-[40vh] lg:h-auto lg:max-h-[75vh] object-cover"
               />
             </div>
 

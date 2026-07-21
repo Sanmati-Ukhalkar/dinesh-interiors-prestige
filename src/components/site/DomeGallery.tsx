@@ -1,3 +1,4 @@
+/* eslint-disable */
 // @ts-nocheck
 import { useEffect, useMemo, useRef, useCallback } from 'react';
 import { useGesture } from '@use-gesture/react';
@@ -328,7 +329,7 @@ export default function DomeGallery({
         }
         if (last) {
           draggingRef.current = false;
-          let [vMagX, vMagY] = velocity;
+          const [vMagX, vMagY] = velocity;
           const [dirX, dirY] = direction;
           let vx = vMagX * dirX;
           let vy = vMagY * dirY;
@@ -469,7 +470,7 @@ export default function DomeGallery({
       parent.style.setProperty('--rot-y-delta', `${rotY}deg`);
       parent.style.setProperty('--rot-x-delta', `${rotX}deg`);
       const refDiv = document.createElement('div');
-      refDiv.className = 'item__image item__image--reference';
+      refDiv.className = 'dg-item__image dg-item__image--reference';
       refDiv.style.opacity = '0';
       refDiv.style.transform = `rotateX(${-parentRot.rotateX}deg) rotateY(${-parentRot.rotateY}deg)`;
       parent.appendChild(refDiv);
@@ -609,7 +610,7 @@ export default function DomeGallery({
             {items.map((it, i) => (
               <div
                 key={`${it.x},${it.y},${i}`}
-                className="item"
+                className="dg-item"
                 data-src={it.src}
                 data-offset-x={it.x}
                 data-offset-y={it.y}
@@ -623,7 +624,7 @@ export default function DomeGallery({
                 }}
               >
                 <div
-                  className="item__image"
+                  className="dg-item__image"
                   role="button"
                   tabIndex={0}
                   aria-label={it.alt || 'Open image'}

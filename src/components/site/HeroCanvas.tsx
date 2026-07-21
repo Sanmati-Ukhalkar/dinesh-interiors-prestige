@@ -318,7 +318,7 @@ const HeroCanvas = () => {
                   <Button
                     asChild
                     size="lg"
-                    className="rounded-full bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] hover:bg-[hsl(var(--gold-soft))] px-9 h-[54px] text-[11px] uppercase tracking-[0.3em] font-medium transition-all duration-500 hover:shadow-[0_8px_30px_-10px_hsl(var(--gold)/0.6)]"
+                    className="w-full sm:w-auto rounded-full bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] hover:bg-[hsl(var(--gold-soft))] px-9 h-[54px] text-[11px] uppercase tracking-[0.3em] font-medium transition-all duration-500 hover:shadow-[0_8px_30px_-10px_hsl(var(--gold)/0.6)]"
                   >
                     <Link to="/portfolio">Explore Portfolio</Link>
                   </Button>
@@ -328,7 +328,7 @@ const HeroCanvas = () => {
                     asChild
                     size="lg"
                     variant="outline"
-                    className="rounded-full bg-[hsl(var(--wood-deep))]/20 backdrop-blur-sm border-cream/30 text-cream hover:bg-cream hover:text-[hsl(var(--wood-deep))] px-9 h-[54px] text-[11px] uppercase tracking-[0.3em] font-medium transition-all duration-500 hover:border-cream"
+                    className="w-full sm:w-auto rounded-full bg-[hsl(var(--wood-deep))]/20 backdrop-blur-sm border-cream/30 text-cream hover:bg-cream hover:text-[hsl(var(--wood-deep))] px-9 h-[54px] text-[11px] uppercase tracking-[0.3em] font-medium transition-all duration-500 hover:border-cream"
                   >
                     <Link to="/contact">Book Consultation</Link>
                   </Button>
@@ -393,13 +393,13 @@ function StaticHeroFallback() {
         <div className="mt-12 flex flex-col sm:flex-row gap-4">
           <Button
             asChild size="lg"
-            className="rounded-full bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] px-9 h-[54px] text-[11px] uppercase tracking-[0.3em] font-medium"
+            className="w-full sm:w-auto rounded-full bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] px-9 h-[54px] text-[11px] uppercase tracking-[0.3em] font-medium"
           >
             <Link to="/portfolio">Explore Portfolio</Link>
           </Button>
           <Button
             asChild size="lg" variant="outline"
-            className="rounded-full border-cream/30 text-cream px-9 h-[54px] text-[11px] uppercase tracking-[0.3em] font-medium"
+            className="w-full sm:w-auto rounded-full border-cream/30 text-cream px-9 h-[54px] text-[11px] uppercase tracking-[0.3em] font-medium"
           >
             <Link to="/contact">Book Consultation</Link>
           </Button>

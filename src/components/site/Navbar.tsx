@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { Menu, X } from "lucide-react";
 import GradualBlur from "./GradualBlur";
 
 const leftLinks = [
@@ -16,6 +17,12 @@ const Navbar = () => {
   const { pathname } = useLocation();
   const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(() => typeof window !== "undefined" ? window.scrollY > 40 : false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -64,7 +71,7 @@ const Navbar = () => {
         />
 
         <div
-          className={`relative z-10 container-luxe grid grid-cols-[1fr_auto_1fr] items-center transition-all duration-500 ${
+          className={`relative z-10 container-luxe grid grid-cols-[1fr_auto_1fr] md:grid-cols-[1fr_auto_1fr] items-center transition-all duration-500 ${
             solid ? "py-3.5" : "py-5 md:py-6"
           }`}
         >
@@ -173,8 +180,58 @@ const Navbar = () => {
               </NavLink>
             ))}
           </nav>
+
+          {/* MOBILE MENU TOGGLE */}
+          <div className="md:hidden flex justify-end">
+            <button 
+              type="button" 
+              onClick={() => setMobileMenuOpen(true)}
+              className={`p-2 -mr-2 transition-colors ${solid ? "text-foreground" : "text-cream"}`}
+              aria-label="Open menu"
+            >
+              <Menu size={22} strokeWidth={1.5} />
+            </button>
+          </div>
         </div>
       </header>
+
+      {/* ─── Mobile Menu Overlay ─── */}
+      <div 
+        className={`fixed inset-0 z-50 bg-background/98 backdrop-blur-md flex flex-col items-center justify-center transition-all duration-500 md:hidden ${
+          mobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <button 
+          type="button" 
+          onClick={() => setMobileMenuOpen(false)}
+          className="absolute top-6 right-6 p-2 text-foreground/80 hover:text-foreground transition-colors"
+          aria-label="Close menu"
+        >
+          <X size={26} strokeWidth={1.5} />
+        </button>
+
+        <nav className="flex flex-col items-center gap-8">
+          {[...leftLinks, ...rightLinks].map((l) => (
+            <NavLink
+              key={l.to}
+              to={l.to}
+              onClick={() => setMobileMenuOpen(false)}
+              className={({ isActive }) => 
+                `font-serif text-3xl tracking-widest uppercase transition-colors duration-300 ${
+                  isActive ? "text-[hsl(var(--gold))]" : "text-foreground hover:text-[hsl(var(--gold)/0.7)]"
+                }`
+              }
+            >
+              {l.label}
+            </NavLink>
+          ))}
+        </nav>
+        
+        <div className="absolute bottom-10 flex flex-col items-center gap-3">
+          <p className="eyebrow text-muted-foreground">Interiors by Dinesh</p>
+          <div className="h-px w-10 bg-[hsl(var(--gold))]" />
+        </div>
+      </div>
 
     </>
   );

@@ -110,11 +110,11 @@ const About = () => {
         </ScrollFloat>
 
         {/* Stats row */}
-        <div className="mt-14 grid grid-cols-3 gap-6 border-t border-border pt-10">
+        <div className="mt-14 grid grid-cols-3 gap-3 sm:gap-6 border-t border-border pt-10">
           {stats.map((s, i) => (
             <div key={s.label} className="group">
               <p
-                className="font-serif text-4xl md:text-5xl text-[hsl(var(--wood))] transition-colors group-hover:text-[hsl(var(--gold))] duration-300"
+                className="font-serif text-3xl sm:text-4xl md:text-5xl text-[hsl(var(--wood))] transition-colors group-hover:text-[hsl(var(--gold))] duration-300"
               >
                 <CountUp to={s.num} suffix={s.suffix} duration={2.2} delay={i * 0.15} />
               </p>
