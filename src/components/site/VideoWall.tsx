@@ -72,13 +72,13 @@ const VideoWall = () => (
                 src={v.img}
                 alt={v.title}
                 loading="lazy"
-                className="absolute inset-0 size-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700"
+                className="absolute inset-0 size-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-colors transition-opacity transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--wood-deep))] via-[hsl(var(--wood-deep))]/20 to-transparent" />
 
               {/* Play button */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="flex size-16 items-center justify-center rounded-full bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] transition-all duration-500 shadow-[0_8px_30px_-5px_hsl(var(--gold)/0.4)] group-hover:scale-110 group-hover:shadow-[0_15px_40px_-10px_hsl(var(--gold)/0.6)] pl-0.5">
+                <span className="flex size-16 items-center justify-center rounded-full bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] transition-colors transition-opacity transition-transform duration-500 shadow-[0_8px_30px_-5px_hsl(var(--gold)/0.4)] group-hover:scale-110 group-hover:shadow-[0_15px_40px_-10px_hsl(var(--gold)/0.6)] pl-0.5">
                   <PlayIcon size={20} />
                 </span>
               </div>
@@ -121,10 +121,10 @@ const VideoWall = () => (
                 className="absolute inset-0 size-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--wood-deep))]/90 via-transparent to-transparent" />
-              <div className="absolute inset-0 ring-1 ring-inset ring-[hsl(var(--gold))]/0 group-hover:ring-[hsl(var(--gold))]/35 transition-all duration-500" />
+              <div className="absolute inset-0 ring-1 ring-inset ring-[hsl(var(--gold))]/0 group-hover:ring-[hsl(var(--gold))]/35 transition-colors transition-opacity transition-transform duration-500" />
 
               {/* Small play icon top-right */}
-              <span className="absolute top-3 right-3 flex size-8 items-center justify-center rounded-full bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] shadow-[0_4px_15px_-2px_hsl(var(--gold)/0.4)] group-hover:scale-110 transition-all duration-300 pl-0.5">
+              <span className="absolute top-3 right-3 flex size-8 items-center justify-center rounded-full bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] shadow-[0_4px_15px_-2px_hsl(var(--gold)/0.4)] group-hover:scale-110 transition-colors transition-opacity transition-transform duration-300 pl-0.5">
                 <PlayIcon size={12} />
               </span>
 

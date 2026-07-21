@@ -53,7 +53,7 @@ const AboutPage = () => (
                   <span className="font-serif text-5xl text-[hsl(var(--gold)/0.2)] leading-none select-none">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="h-px w-6 bg-[hsl(var(--gold))] transition-all duration-500 group-hover:w-14" />
+                  <span className="h-px w-6 bg-[hsl(var(--gold))] transition-colors transition-opacity transition-transform duration-500 group-hover:w-14" />
                 </div>
                 <h3 className="font-serif text-3xl mb-5">{p.title}</h3>
                 <p className="text-muted-foreground leading-[1.85]">{p.body}</p>

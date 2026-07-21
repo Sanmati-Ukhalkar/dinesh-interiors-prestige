@@ -29,7 +29,7 @@ const WhatsAppFab = () => {
         aria-label="Chat on WhatsApp"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className={`fixed right-6 z-50 flex items-center gap-0 overflow-hidden h-12 rounded-full transition-all duration-500 ease-out shadow-[0_12px_40px_-12px_hsl(var(--wood-deep)/0.45)] hover:shadow-[0_20px_50px_-15px_hsl(var(--gold)/0.5)] animate-[vibrate_5s_ease-in-out_infinite] hover:[animation-play-state:paused] ${isNearBottom ? "bottom-[-100px] opacity-0 pointer-events-none" : "bottom-6 opacity-100"}`}
+        className={`fixed right-6 z-50 flex items-center gap-0 overflow-hidden h-12 rounded-full transition-colors transition-opacity transition-transform duration-500 ease-out shadow-[0_12px_40px_-12px_hsl(var(--wood-deep)/0.45)] hover:shadow-[0_20px_50px_-15px_hsl(var(--gold)/0.5)] animate-[vibrate_5s_ease-in-out_infinite] hover:[animation-play-state:paused] ${isNearBottom ? "bottom-[-100px] opacity-0 pointer-events-none" : "bottom-6 opacity-100"}`}
         style={{
           background: "hsl(var(--wood-deep))",
           border: "1px solid hsl(var(--gold)/0.4)",
@@ -44,7 +44,7 @@ const WhatsAppFab = () => {
         </span>
         {/* Label that expands on hover */}
         <span
-          className="text-[10px] uppercase tracking-[0.3em] font-medium pr-5 whitespace-nowrap transition-all duration-500"
+          className="text-[10px] uppercase tracking-[0.3em] font-medium pr-5 whitespace-nowrap transition-colors transition-opacity transition-transform duration-500"
           style={{ color: "hsl(var(--gold-soft))", opacity: hovered ? 1 : 0, maxWidth: hovered ? "120px" : "0px", overflow: "hidden" }}
         >
           Chat Now

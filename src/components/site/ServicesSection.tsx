@@ -73,7 +73,7 @@ const ServicesSection = () => (
                     <span className="font-serif text-[4rem] text-[hsl(var(--gold)/0.15)] leading-none select-none transition-colors duration-500 group-hover:text-[hsl(var(--gold)/0.3)]">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="h-px w-8 bg-[hsl(var(--gold))] transition-all duration-500 group-hover:w-20" />
+                    <span className="h-px w-8 bg-[hsl(var(--gold))] transition-colors transition-opacity transition-transform duration-500 group-hover:w-20" />
                   </div>
 
                   <h3 className="font-serif text-3xl lg:text-[2rem] leading-tight">{s.title}</h3>

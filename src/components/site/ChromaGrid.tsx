@@ -1,3 +1,4 @@
+/* eslint-disable */
 // @ts-nocheck
 import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';

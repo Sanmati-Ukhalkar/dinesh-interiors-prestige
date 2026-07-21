@@ -318,7 +318,7 @@ const HeroCanvas = () => {
                   <Button
                     asChild
                     size="lg"
-                    className="w-full sm:w-auto rounded-full bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] hover:bg-[hsl(var(--gold-soft))] px-9 h-[54px] text-[11px] uppercase tracking-[0.3em] font-medium transition-all duration-500 hover:shadow-[0_8px_30px_-10px_hsl(var(--gold)/0.6)]"
+                    className="w-full sm:w-auto rounded-full bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] hover:bg-[hsl(var(--gold-soft))] px-9 h-[54px] text-[11px] uppercase tracking-[0.3em] font-medium transition-colors transition-opacity transition-transform duration-500 hover:shadow-[0_8px_30px_-10px_hsl(var(--gold)/0.6)]"
                   >
                     <Link to="/portfolio">Explore Portfolio</Link>
                   </Button>
@@ -328,7 +328,7 @@ const HeroCanvas = () => {
                     asChild
                     size="lg"
                     variant="outline"
-                    className="w-full sm:w-auto rounded-full bg-[hsl(var(--wood-deep))]/20 backdrop-blur-sm border-cream/30 text-cream hover:bg-cream hover:text-[hsl(var(--wood-deep))] px-9 h-[54px] text-[11px] uppercase tracking-[0.3em] font-medium transition-all duration-500 hover:border-cream"
+                    className="w-full sm:w-auto rounded-full bg-[hsl(var(--wood-deep))]/20 backdrop-blur-sm border-cream/30 text-cream hover:bg-cream hover:text-[hsl(var(--wood-deep))] px-9 h-[54px] text-[11px] uppercase tracking-[0.3em] font-medium transition-colors transition-opacity transition-transform duration-500 hover:border-cream"
                   >
                     <Link to="/contact">Book Consultation</Link>
                   </Button>
@@ -360,7 +360,7 @@ const HeroCanvas = () => {
 // ─── Static fallback for mobile / low-perf devices ────────────────────────────
 function StaticHeroFallback() {
   return (
-    <section className="relative min-h-screen w-full overflow-hidden grain">
+    <section className="relative min-h-dvh w-full overflow-hidden grain">
       <div className="absolute inset-0">
         <img
           src={getFrameUrl(1)}
@@ -370,7 +370,7 @@ function StaticHeroFallback() {
         />
       </div>
       <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--wood-deep))]/75 via-[hsl(var(--wood-deep))]/30 to-[hsl(var(--wood-deep))]/90" />
-      <div className="relative z-10 container-luxe flex min-h-screen flex-col justify-center pt-32 pb-28">
+      <div className="relative z-10 container-luxe flex min-h-dvh flex-col justify-center pt-32 pb-28">
         <p
           className="eyebrow text-[hsl(var(--gold-soft))] mb-7"
           style={{ letterSpacing: "0.05em" }}

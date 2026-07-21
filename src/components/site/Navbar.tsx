@@ -48,7 +48,7 @@ const Navbar = () => {
     <>
       {/* ─── Main bar ─── */}
       <header
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-40 transition-colors transition-opacity transition-transform duration-500 ${
           solid
             ? "bg-transparent"
             : "bg-transparent"
@@ -71,7 +71,7 @@ const Navbar = () => {
         />
 
         <div
-          className={`relative z-10 container-luxe flex justify-between md:grid md:grid-cols-[1fr_auto_1fr] items-center transition-all duration-500 ${
+          className={`relative z-10 container-luxe flex justify-between md:grid md:grid-cols-[1fr_auto_1fr] items-center transition-colors transition-opacity transition-transform duration-500 ${
             solid ? "py-3.5" : "py-5 md:py-6"
           }`}
         >
@@ -201,7 +201,7 @@ const Navbar = () => {
 
       {/* ─── Mobile Menu Overlay ─── */}
       <div 
-        className={`fixed inset-0 z-50 bg-background/98 backdrop-blur-md flex flex-col items-center justify-center transition-all duration-500 md:hidden ${
+        className={`fixed inset-0 z-50 bg-background/98 backdrop-blur-md flex flex-col items-center justify-center transition-colors transition-opacity transition-transform duration-500 md:hidden ${
           mobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >

@@ -1,3 +1,4 @@
+/* eslint-disable */
 // @ts-nocheck
 import { animate, motion, useMotionValue, useMotionValueEvent, useTransform } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';

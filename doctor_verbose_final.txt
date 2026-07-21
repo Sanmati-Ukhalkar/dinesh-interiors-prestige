@@ -1,0 +1,115 @@
+﻿[1mReact Doctor[22m [2mv0.8.3[22m
+
+[90m  [39m
+
+  [33mΓÜá[39m [33mMaintainability: deslop/unused-file[39m [90m├ù5[39m
+    Unused file is not reachable from any entry point, so it
+    adds maintenance surface without shipping any code.
+[2m    ΓåÆ Delete the file if it is truly unreachable, or import it[22m
+[2m    from an entry point.[22m
+
+[90m    src/components/site/AnimatedList.tsx[39m
+
+[90m    src/components/site/DecayCard.tsx[39m
+
+[90m    src/components/site/FlowingMenu.tsx[39m
+
+[90m    src/components/site/GlassIcons.tsx[39m
+
+[90m    src/components/site/GridMotion.tsx[39m
+
+  [33mΓÜá[39m [33mPerformance: transition: all animates everything[39m [90m├ù19[39m
+    [36mLearn more: https://react.doctor/docs/rules/react-doctor/no-transition-all[39m
+    Your users see janky animation because `transition-all`
+    animates every property that changes, including expensive
+    layout ones and instant ones like focus rings. Name the
+    properties: `transition-colors`, `transition-opacity`, or
+    `transition-transform`.
+[2m    ΓåÆ List the specific properties: `transition: "opacity[22m
+[2m    200ms, transform 200ms"`. In Tailwind, use[22m
+[2m    `transition-colors`, `transition-opacity`, or[22m
+[2m    `transition-transform`[22m
+
+[90m    src/components/site/Contact.tsx:76[39m
+
+[90m    src/components/site/Contact.tsx:198[39m
+
+[90m    src/components/site/Footer.tsx:45[39m
+
+[90m    src/components/site/HeroCanvas.tsx:318[39m
+
+[90m    src/components/site/HeroCanvas.tsx:327[39m
+
+[90m    src/components/site/PortfolioGrid.tsx:133[39m
+
+[90m    src/components/site/PortfolioGrid.tsx:154[39m
+
+[90m    src/components/site/PortfolioGrid.tsx:201[39m
+
+[90m    src/components/site/PortfolioGrid.tsx:234[39m
+
+[90m    src/components/site/ProcessStepper.tsx:160[39m
+
+[90m    src/components/site/ProcessStepper.tsx:175[39m
+
+[90m    src/components/site/ServicesSection.tsx:76[39m
+
+[90m    src/components/site/Styles.tsx:82[39m
+
+[90m    src/components/site/VideoWall.tsx:71[39m
+
+[90m    src/components/site/VideoWall.tsx:81[39m
+
+[90m    src/components/site/VideoWall.tsx:124-127[39m
+
+[90m    src/components/site/WhatsAppFab.tsx:46[39m
+
+[90m    src/pages/AboutPage.tsx:56[39m
+
+  [33mΓÜá[39m [33mMaintainability: Use dvh instead of vh for full height[39m [90m├ù5[39m
+    [36mLearn more: https://react.doctor/docs/rules/react-doctor/prefer-dvh-over-vh[39m
+    `100vh` is taller than the visible viewport on mobile (it
+    ignores the browser's dynamic toolbars), so full-height
+    layouts get clipped. Use the dynamic-viewport unit: `h-dvh`
+    / `min-h-dvh` (or `100dvh`).
+[2m    ΓåÆ Prefer `dvh` over `vh` for full-height elements. `100vh`[22m
+[2m    overflows under mobile browser chrome; `100dvh` tracks the[22m
+[2m    visible viewport. (`h-dvh`/`min-h-dvh` need Tailwind 3.4+.)[22m
+
+[90m    src/components/site/HeroCanvas.tsx:363[39m
+
+[90m    src/components/site/HeroCanvas.tsx:373[39m
+
+[90m    src/components/site/Layout.tsx:20[39m
+
+[90m    src/pages/NotFound.tsx:12[39m
+
+[90m    src/pages/PortfolioPage.tsx:98[39m
+
+
+[2m  ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ[22m
+
+  [1mAll 29 issues[22m
+
+  [1mPerformance[22m [2m>[22m [33m[2m19 warnings[22m[39m
+  [1mMaintainability[22m [2m>[22m [33m[2m10 warnings[22m[39m
+
+  [32mΓöîΓöÇΓöÇΓöÇΓöÇΓöÇΓöÉ[39m  [32m84[39m [2m/ 100[22m [32mNeeds work[39m
+  [32mΓöé Γùá Γùá Γöé[39m  [32mΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê[39m[2mΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ[22m
+  [32mΓöé  Γû╜  Γöé[39m  React Doctor [2m(https://react.doctor)[22m
+  [32mΓööΓöÇΓöÇΓöÇΓöÇΓöÇΓöÿ[39m
+
+[90m  Full diagnostics written to C:\Users\sanma\AppData\Local\Temp\react-doctor-11d2c852-764a-4db7-b20d-7266d5542e04[39m
+
+[2m  ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ[22m
+
+  [1mShare:[22m [36mhttps://react.doctor/share?p=vite_react_shadcn_ts&s=84&w=29&f=18[39m
+[2m  Tell others how you did on socials[22m
+
+  [1mDocs:[22m [36mhttps://react.doctor/docs[39m
+[2m  Learn more about fixing issues, setting up CI/CD, and[22m
+[2m  configuring rules with a config file[22m
+
+  [1mGitHub:[22m [36mhttps://github.com/millionco/react-doctor[39m
+[2m  Report issues and star the repository![22m
+

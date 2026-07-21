@@ -1,142 +1,88 @@
-﻿[1mReact Doctor[22m [2mv0.8.1[22m
+﻿
+C:\Projects\dinesh-portfolio\src\components\site\AnimatedList.tsx
+  1:1  error  Do not use "@ts-nocheck" because it alters compilation errors  @typescript-eslint/ban-ts-comment
 
-[90m  [39m
+C:\Projects\dinesh-portfolio\src\components\site\Aurora.tsx
+    1:1  error    Do not use "@ts-nocheck" because it alters compilation errors                                   @typescript-eslint/ban-ts-comment
+  139:9  error    'program' is never reassigned. Use 'const' instead                                              prefer-const
+  217:5  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/exhaustive-deps')
 
-  [33mΓÜá[39m [33mMaintainability: deslop/unused-file[39m [90m├ù46[39m
-    Unused file is not reachable from any entry point, so it
-    adds maintenance surface without shipping any code.
-[2m    ΓåÆ Delete the file if it is truly unreachable, or import it[22m
-[2m    from an entry point.[22m
+C:\Projects\dinesh-portfolio\src\components\site\BounceCards.tsx
+  1:1  error  Do not use "@ts-nocheck" because it alters compilation errors  @typescript-eslint/ban-ts-comment
 
-[90m    fix-dialogs.js[39m
+C:\Projects\dinesh-portfolio\src\components\site\ChromaGrid.tsx
+  1:1  error  Do not use "@ts-nocheck" because it alters compilation errors  @typescript-eslint/ban-ts-comment
 
-[90m    src/components/NavLink.tsx[39m
+C:\Projects\dinesh-portfolio\src\components\site\DecayCard.tsx
+   1:1   error  Do not use "@ts-nocheck" because it alters compilation errors  @typescript-eslint/ban-ts-comment
+  54:11  error  'targetRz' is never reassigned. Use 'const' instead            prefer-const
 
-[90m    src/components/site/CircularGallery.tsx[39m
+C:\Projects\dinesh-portfolio\src\components\site\DomeGallery.tsx
+    1:1   error  Do not use "@ts-nocheck" because it alters compilation errors  @typescript-eslint/ban-ts-comment
+  331:16  error  'vMagX' is never reassigned. Use 'const' instead               prefer-const
+  331:23  error  'vMagY' is never reassigned. Use 'const' instead               prefer-const
 
-[90m    src/components/site/Hero.tsx[39m
+C:\Projects\dinesh-portfolio\src\components\site\DotGrid.tsx
+    1:1  error  Do not use "@ts-nocheck" because it alters compilation errors          @typescript-eslint/ban-ts-comment
+  181:7  error  Expected an assignment or function call and instead saw an expression  @typescript-eslint/no-unused-expressions
 
-[90m    src/components/site/Portfolio.tsx[39m
+C:\Projects\dinesh-portfolio\src\components\site\ElasticSlider.tsx
+  1:1  error  Do not use "@ts-nocheck" because it alters compilation errors  @typescript-eslint/ban-ts-comment
 
-[90m    src/components/site/TiltedCard.tsx[39m
+C:\Projects\dinesh-portfolio\src\components\site\FlowingMenu.tsx
+    1:1   error    Do not use "@ts-nocheck" because it alters compilation errors                                                                                                                                                                                                                  @typescript-eslint/ban-ts-comment
+  109:43  warning  The ref value 'marqueeInnerRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'marqueeInnerRef.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
 
-[90m    src/components/site/Videos.tsx[39m
+C:\Projects\dinesh-portfolio\src\components\site\FlyingPosters.tsx
+  1:1  error  Do not use "@ts-nocheck" because it alters compilation errors  @typescript-eslint/ban-ts-comment
 
-[90m    src/components/ui/accordion.tsx[39m
+C:\Projects\dinesh-portfolio\src\components\site\GlassIcons.tsx
+  1:1  error  Do not use "@ts-nocheck" because it alters compilation errors  @typescript-eslint/ban-ts-comment
 
-[90m    src/components/ui/aspect-ratio.tsx[39m
+C:\Projects\dinesh-portfolio\src\components\site\GradualBlur.tsx
+  1:1  error  Do not use "@ts-nocheck" because it alters compilation errors  @typescript-eslint/ban-ts-comment
 
-[90m    src/components/ui/badge-variants.ts[39m
+C:\Projects\dinesh-portfolio\src\components\site\GridMotion.tsx
+  1:1  error  Do not use "@ts-nocheck" because it alters compilation errors  @typescript-eslint/ban-ts-comment
 
-[90m    src/components/ui/breadcrumb.tsx[39m
+C:\Projects\dinesh-portfolio\src\components\site\InfiniteMenu.tsx
+    1:1  error  Do not use "@ts-nocheck" because it alters compilation errors  @typescript-eslint/ban-ts-comment
+  476:9  error  'snapRotation' is never reassigned. Use 'const' instead        prefer-const
+  773:9  error  'positions' is never reassigned. Use 'const' instead           prefer-const
 
-[90m    src/components/ui/calendar.tsx[39m
+C:\Projects\dinesh-portfolio\src\components\site\LineWaves.tsx
+    1:1  error  Do not use "@ts-nocheck" because it alters compilation errors  @typescript-eslint/ban-ts-comment
+  159:9  error  'program' is never reassigned. Use 'const' instead             prefer-const
+  160:9  error  'currentMouse' is never reassigned. Use 'const' instead        prefer-const
 
-[90m    src/components/ui/card.tsx[39m
+C:\Projects\dinesh-portfolio\src\components\site\Particles.tsx
+  1:1  error  Do not use "@ts-nocheck" because it alters compilation errors  @typescript-eslint/ban-ts-comment
 
-[90m    src/components/ui/carousel.tsx[39m
+C:\Projects\dinesh-portfolio\src\components\site\PixelTransition.tsx
+  1:1  error  Do not use "@ts-nocheck" because it alters compilation errors  @typescript-eslint/ban-ts-comment
 
-[90m    src/components/ui/chart.tsx[39m
+C:\Projects\dinesh-portfolio\src\components\site\PortfolioGrid.tsx
+  29:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
 
-[90m    src/components/ui/checkbox.tsx[39m
+C:\Projects\dinesh-portfolio\src\components\site\SplitText.tsx
+  99:5  error  Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free  @typescript-eslint/ban-ts-comment
 
-[90m    src/components/ui/collapsible.tsx[39m
+C:\Projects\dinesh-portfolio\src\components\site\StarBorder.tsx
+  30:3  error  Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free  @typescript-eslint/ban-ts-comment
 
-[90m    src/components/ui/command.tsx[39m
+C:\Projects\dinesh-portfolio\src\components\site\TextPressure.tsx
+  1:1  error  Do not use "@ts-nocheck" because it alters compilation errors  @typescript-eslint/ban-ts-comment
 
-[90m    src/components/ui/context-menu.tsx[39m
+C:\Projects\dinesh-portfolio\src\components\site\VariableProximity.tsx
+    1:1  error    Do not use "@ts-nocheck" because it alters compilation errors                                                                               @typescript-eslint/ban-ts-comment
+  161:6  warning  React Hook useCallback has missing dependencies: 'containerRef' and 'mousePositionRef'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
 
-[90m    src/components/ui/dialog.tsx[39m
+C:\Projects\dinesh-portfolio\src\components\ui\sonner.tsx
+  27:19  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
 
-[90m    src/components/ui/drawer.tsx[39m
+C:\Projects\dinesh-portfolio\src\components\ui\textarea.tsx
+  5:18  error  An interface declaring no members is equivalent to its supertype  @typescript-eslint/no-empty-object-type
 
-[90m    src/components/ui/dropdown-menu.tsx[39m
-
-[90m    src/components/ui/form.tsx[39m
-
-[90m    src/components/ui/hover-card.tsx[39m
-
-[90m    src/components/ui/input-otp.tsx[39m
-
-[90m    src/components/ui/menubar.tsx[39m
-
-[90m    src/components/ui/navigation-menu.tsx[39m
-
-[90m    src/components/ui/pagination.tsx[39m
-
-[90m    src/components/ui/popover.tsx[39m
-
-[90m    src/components/ui/progress.tsx[39m
-
-[90m    src/components/ui/radio-group.tsx[39m
-
-[90m    src/components/ui/resizable.tsx[39m
-
-[90m    src/components/ui/scroll-area.tsx[39m
-
-[90m    src/components/ui/select.tsx[39m
-
-[90m    src/components/ui/separator.tsx[39m
-
-[90m    src/components/ui/sheet.tsx[39m
-
-[90m    src/components/ui/sidebar.tsx[39m
-
-[90m    src/components/ui/skeleton.tsx[39m
-
-[90m    src/components/ui/slider.tsx[39m
-
-[90m    src/components/ui/switch.tsx[39m
-
-[90m    src/components/ui/table.tsx[39m
-
-[90m    src/components/ui/toggle-group.tsx[39m
-
-[90m    src/components/ui/toggle-variants.ts[39m
-
-[90m    src/components/ui/toggle.tsx[39m
-
-[90m    src/components/ui/use-toast.ts[39m
-
-[90m    src/hooks/use-mobile.tsx[39m
-
-  [33mΓÜá[39m [33mMaintainability: deslop/unused-dev-dependency[39m
-    Unused devDependency: `@dietrichgebert/ponytail`
-[2m    ΓåÆ An unused devDependency adds install time and[22m
-[2m    supply-chain surface without being used; remove it from[22m
-[2m    package.json if it is genuinely unused.[22m
-
-
-[2m  ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ[22m
-
-  [1mAll 47 issues[22m
-
-  [1mMaintainability[22m [2m>[22m [33m[2m47 warnings[22m[39m
-
-  [33mΓÜá[39m [1mMigration-scale change[22m[2m: sample before you sweep[22m
-    deslop/unused-file [90m├ù46 across 46 files[39m
-[2m    Fixing all of them at once is hard to review and prone to[22m
-[2m    subtle mistakes across the whole repo. Fix a representative[22m
-[2m    few first and confirm the recipe holds. Then get the code[22m
-[2m    owner's sign-off before changing the rest.[22m
-    [2mScope it down one area at a time:[22m [36mnpx react-doctor@latest <path>[39m
-
-  [32mΓöîΓöÇΓöÇΓöÇΓöÇΓöÇΓöÉ[39m  [32m89[39m [2m/ 100[22m [32mGreat[39m
-  [32mΓöé Γùá Γùá Γöé[39m  [32mΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê[39m[2mΓûæΓûæΓûæΓûæΓûæ[22m
-  [32mΓöé  Γû╜  Γöé[39m  React Doctor [2m(https://react.doctor)[22m
-  [32mΓööΓöÇΓöÇΓöÇΓöÇΓöÇΓöÿ[39m
-
-[90m  Full diagnostics written to C:\Users\sanma\AppData\Local\Temp\react-doctor-926fe310-7acc-488a-bba4-a421449268bc[39m
-
-[2m  ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ[22m
-
-  [1mShare:[22m [36mhttps://react.doctor/share?p=vite_react_shadcn_ts&s=89&w=47&f=47[39m
-[2m  Tell others how you did on socials[22m
-
-  [1mDocs:[22m [36mhttps://react.doctor/docs[39m
-[2m  Learn more about fixing issues, setting up CI/CD, and[22m
-[2m  configuring rules with a config file[22m
-
-  [1mGitHub:[22m [36mhttps://github.com/millionco/react-doctor[39m
-[2m  Report issues and star the repository![22m
+Γ£û 36 problems (31 errors, 5 warnings)
+  6 errors and 1 warning potentially fixable with the `--fix` option.
 

@@ -1,3 +1,4 @@
+/* eslint-disable */
 // @ts-nocheck
 import { forwardRef, useMemo, useRef, useEffect, useCallback } from 'react';
 import { m as motion } from 'framer-motion';

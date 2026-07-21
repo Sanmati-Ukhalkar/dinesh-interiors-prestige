@@ -77,7 +77,7 @@ const Contact = ({ showHeading = true }: Props) => {
             href="https://wa.me/919999999999"
             target="_blank"
             rel="noreferrer"
-            className="mt-10 inline-flex items-center gap-3 bg-[hsl(var(--wood-deep))] text-cream px-7 h-12 rounded-sm hover:bg-[hsl(var(--wood))] transition-all duration-300 group border border-[hsl(var(--gold)/0.2)] hover:shadow-[0_8px_30px_-10px_hsl(var(--wood-deep)/0.3)] hover:gap-4 hover:-translate-y-0.5"
+            className="mt-10 inline-flex items-center gap-3 bg-[hsl(var(--wood-deep))] text-cream px-7 h-12 rounded-sm hover:bg-[hsl(var(--wood))] transition-colors transition-opacity transition-transform duration-300 group border border-[hsl(var(--gold)/0.2)] hover:shadow-[0_8px_30px_-10px_hsl(var(--wood-deep)/0.3)] hover:gap-4 hover:-translate-y-0.5"
           >
             <WhatsAppIcon />
             <span className="text-[11px] uppercase tracking-[0.28em]">Chat on WhatsApp</span>
@@ -198,7 +198,7 @@ const Contact = ({ showHeading = true }: Props) => {
              <Button
                type="submit"
                disabled={submitting}
-               className="w-full rounded-sm bg-[hsl(var(--wood-deep))] text-cream hover:bg-[hsl(var(--wood))] h-14 text-[11px] uppercase tracking-[0.3em] transition-all duration-500 hover:shadow-[0_8px_30px_-10px_hsl(var(--wood-deep)/0.4)] hover:-translate-y-0.5"
+               className="w-full rounded-sm bg-[hsl(var(--wood-deep))] text-cream hover:bg-[hsl(var(--wood))] h-14 text-[11px] uppercase tracking-[0.3em] transition-colors transition-opacity transition-transform duration-500 hover:shadow-[0_8px_30px_-10px_hsl(var(--wood-deep)/0.4)] hover:-translate-y-0.5"
              >
                {submitting ? "Sending…" : "Send Enquiry →"}
              </Button>

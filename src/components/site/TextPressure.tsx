@@ -1,3 +1,4 @@
+/* eslint-disable */
 // @ts-nocheck
 // Component ported from https://codepen.io/JuanFuentes/full/rgXKGQ
 

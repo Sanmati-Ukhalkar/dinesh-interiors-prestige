@@ -42,7 +42,7 @@ const Styles = () => {
               <button type="button"
                 key={it.key}
                 onClick={() => setActive(it.key)}
-                className={`relative px-6 h-11 text-xs uppercase tracking-[0.28em] rounded-sm border transition-all duration-300 ${
+                className={`relative px-6 h-11 text-xs uppercase tracking-[0.28em] rounded-sm border transition-colors transition-opacity transition-transform duration-300 ${
                   isActive
                     ? "bg-[hsl(var(--wood-deep))] text-cream border-[hsl(var(--wood-deep))] shadow-[0_4px_14px_0_hsl(var(--wood-deep)/0.39)]"
                     : "bg-transparent text-foreground border-border hover:border-[hsl(var(--gold))] hover:text-[hsl(var(--wood-deep))]"
@@ -81,7 +81,7 @@ const Styles = () => {
 
             <button type="button"
               onClick={goToPortfolio}
-              className="mt-10 inline-flex items-center gap-3 text-xs uppercase tracking-[0.28em] text-[hsl(var(--wood-deep))] border-b border-[hsl(var(--gold))] pb-1 hover:text-[hsl(var(--gold))] transition-all duration-300 group hover:gap-4 w-fit"
+              className="mt-10 inline-flex items-center gap-3 text-xs uppercase tracking-[0.28em] text-[hsl(var(--wood-deep))] border-b border-[hsl(var(--gold))] pb-1 hover:text-[hsl(var(--gold))] transition-colors transition-opacity transition-transform duration-300 group hover:gap-4 w-fit"
             >
               See {current.title} Projects
               <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>

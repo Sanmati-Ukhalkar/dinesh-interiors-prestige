@@ -1,7 +1,8 @@
 import { useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import PageHero from "@/components/site/PageHero";
-import PortfolioGrid, { Category, portfolioItems } from "@/components/site/PortfolioGrid";
+import PortfolioGrid from "@/components/site/PortfolioGrid";
+import { type Category, portfolioItems } from "@/components/site/portfolioData";
 import Contact from "@/components/site/Contact";
 import TextPressure from "@/components/site/TextPressure";
 import DomeGallery from "@/components/site/DomeGallery";
@@ -94,7 +95,7 @@ const PortfolioPage = () => {
       {/* Dome gallery — full viewport, edges dissolve into cream */}
       <div
         className="relative w-full bg-background"
-        style={{ height: "100vh" }}
+        style={{ height: "100dvh" }}
       >
         <DomeGallery
           images={portfolioItems.map(item => ({ src: item.img, alt: item.title }))}

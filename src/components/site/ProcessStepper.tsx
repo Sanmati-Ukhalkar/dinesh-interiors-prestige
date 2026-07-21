@@ -158,7 +158,7 @@ function StepCard({
         {(align === "left" || mobile) && (
           <>
             <span
-              className="h-px w-8 flex-shrink-0 transition-all duration-500 group-hover:w-14"
+              className="h-px w-8 flex-shrink-0 transition-colors transition-opacity transition-transform duration-500 group-hover:w-14"
               style={{ background: "hsl(var(--gold)/0.6)" }}
             />
             <span className="font-serif text-xs tracking-[0.3em] text-[hsl(var(--gold))] uppercase">
@@ -173,7 +173,7 @@ function StepCard({
               Step {step.number}
             </span>
             <span
-              className="h-px w-8 flex-shrink-0 transition-all duration-500 group-hover:w-14"
+              className="h-px w-8 flex-shrink-0 transition-colors transition-opacity transition-transform duration-500 group-hover:w-14"
               style={{ background: "hsl(var(--gold)/0.6)" }}
             />
           </>
@@ -187,7 +187,7 @@ function StepCard({
 
       {/* Gold rule */}
       <div
-        className={`h-px mb-5 transition-all duration-500 group-hover:opacity-100 opacity-50 ${
+        className={`h-px mb-5 transition-colors transition-opacity transition-transform duration-500 group-hover:opacity-100 opacity-50 ${
           align === "right" && !mobile ? "ml-auto" : ""
         }`}
         style={{

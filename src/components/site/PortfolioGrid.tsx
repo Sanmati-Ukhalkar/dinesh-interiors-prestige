@@ -1,13 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import kitchen from "@/assets/portfolio-kitchen.jpg";
-import bedroom from "@/assets/portfolio-bedroom.jpg";
-import living from "@/assets/portfolio-living.jpg";
-import storage from "@/assets/portfolio-storage.jpg";
-import hero from "@/assets/hero.jpg";
-import fusion from "@/assets/style-fusion.jpg";
-import traditional from "@/assets/style-traditional.jpg";
-import modern from "@/assets/style-modern.jpg";
 import Reveal from "./Reveal";
 import FadeContent from "./FadeContent";
 import JaliBackground from "./JaliBackground";
@@ -15,27 +7,8 @@ import GlareHover from "./GlareHover";
 import SplitText from "./SplitText";
 import FlyingPosters from "./FlyingPosters";
 import ChromaGrid from "./ChromaGrid";
-
-export type Category = "Kitchen" | "Bedroom" | "Living" | "Storage";
-
-type Item = {
-  title: string;
-  category: Category;
-  place: string;
-  img: string;
-  ratio: string;
-};
-
-export const portfolioItems: Item[] = [
-  { title: "Marble & Brass Kitchen", category: "Kitchen", place: "Pune Residence", img: kitchen, ratio: "aspect-[4/5]" },
-  { title: "Carved Heritage Bedroom", category: "Bedroom", place: "Jaipur Villa", img: bedroom, ratio: "aspect-[3/4]" },
-  { title: "Arched Living Room", category: "Living", place: "Pune Apartment", img: living, ratio: "aspect-[4/3]" },
-  { title: "Walk-in Wardrobe", category: "Storage", place: "Whitefield Home", img: storage, ratio: "aspect-[3/4]" },
-  { title: "Dawn Sitting Hall", category: "Living", place: "Hyderabad Home", img: hero, ratio: "aspect-[3/4]" },
-  { title: "Fusion Lounge", category: "Living", place: "Pune Penthouse", img: fusion, ratio: "aspect-[4/5]" },
-  { title: "Heritage Drawing Room", category: "Living", place: "Udaipur Haveli", img: traditional, ratio: "aspect-[3/4]" },
-  { title: "Minimal Master Bedroom", category: "Bedroom", place: "Bandra Apartment", img: modern, ratio: "aspect-[4/5]" },
-];
+import { type Category, type PortfolioItem, portfolioItems } from "./portfolioData";
+import hero from "@/assets/hero.jpg";
 
 const filters: ("All" | Category)[] = ["All", "Kitchen", "Bedroom", "Living", "Storage"];
 
@@ -52,7 +25,7 @@ const CloseIcon = () => (
 
 const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
   const [filter, setFilter] = useState<"All" | Category>(initialFilter);
-  const [open, setOpen] = useState<Item | null>(null);
+  const [open, setOpen] = useState<PortfolioItem | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => setFilter(initialFilter), [initialFilter]);
@@ -60,19 +33,20 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
   const visible = preview
     ? portfolioItems.slice(0, 3)
     : filter === "All"
-    ? portfolioItems
-    : portfolioItems.filter((i) => i.category === filter);
+      ? portfolioItems
+      : portfolioItems.filter((i) => i.category === filter);
 
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-      const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(null);
-      window.addEventListener("keydown", onKey);
-      return () => {
-        document.body.style.overflow = "";
-        window.removeEventListener("keydown", onKey);
-      };
-    }
+    if (!open) return;
+
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(null);
+    window.addEventListener("keydown", onKey);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
   }, [open]);
 
   return (
@@ -105,11 +79,10 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
               <button type="button"
                 key={f}
                 onClick={() => setFilter(f)}
-                className={`relative px-5 h-10 text-xs uppercase tracking-[0.24em] rounded-sm border transition-all duration-300 ${
-                  filter === f
+                className={`relative px-5 h-10 text-xs uppercase tracking-[0.24em] rounded-sm border transition-colors transition-opacity transition-transform duration-300 ${filter === f
                     ? "bg-[hsl(var(--wood-deep))] text-cream border-[hsl(var(--wood-deep))] shadow-[0_4px_14px_0_hsl(var(--wood-deep)/0.39)]"
                     : "border-border hover:border-[hsl(var(--gold))] hover:text-foreground"
-                }`}
+                  }`}
               >
                 {filter === f && (
                   <span
@@ -125,7 +98,7 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
 
         {preview && (
           <div className="relative w-full h-[60vh] mb-12 hidden md:block">
-            <FlyingPosters items={portfolioItems.map(i => i.img)} />
+            <FlyingPosters items={portfolioItems.map(i => i.img)} className="w-full h-full" />
           </div>
         )}
 
@@ -157,7 +130,7 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
                     {/* Gradient */}
                     <div className="absolute inset-0 z-10 bg-gradient-to-t from-[hsl(var(--wood-deep))]/80 via-[hsl(var(--wood-deep))]/20 to-transparent transition-opacity duration-500 group-hover:opacity-95 pointer-events-none" />
                     {/* Gold ring */}
-                    <div className="absolute inset-0 z-10 ring-1 ring-inset ring-[hsl(var(--gold))]/0 group-hover:ring-[hsl(var(--gold))]/35 transition-all duration-500 pointer-events-none" />
+                    <div className="absolute inset-0 z-10 ring-1 ring-inset ring-[hsl(var(--gold))]/0 group-hover:ring-[hsl(var(--gold))]/35 transition-colors transition-opacity transition-transform duration-500 pointer-events-none" />
                   </div>
                   {/* Caption */}
                   <div className="absolute bottom-0 left-0 right-0 p-5 lg:p-6 text-cream translate-y-1.5 group-hover:translate-y-0 transition-transform duration-500 z-20">
@@ -180,7 +153,7 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
           <Reveal className="mt-16 text-center">
             <button type="button"
               onClick={() => navigate("/portfolio")}
-              className="inline-flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[hsl(var(--wood-deep))] border-b border-[hsl(var(--gold))] pb-1 hover:text-[hsl(var(--gold))] transition-all duration-300 hover:gap-4 group"
+              className="inline-flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[hsl(var(--wood-deep))] border-b border-[hsl(var(--gold))] pb-1 hover:text-[hsl(var(--gold))] transition-colors transition-opacity transition-transform duration-300 hover:gap-4 group"
             >
               View Full Portfolio
               <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
@@ -190,7 +163,7 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
         {/* ChromaGrid Alternative View */}
         {!preview && (
           <Reveal className="mt-24 mb-24 relative w-full h-auto border border-border p-4 md:p-8">
-            <ChromaGrid 
+            <ChromaGrid
               items={[
                 ...visible.map(item => ({
                   image: item.img,
@@ -228,7 +201,7 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
           <button type="button"
             onClick={() => setOpen(null)}
             aria-label="Close"
-            className="absolute top-5 right-5 md:top-8 md:right-8 size-11 flex items-center justify-center text-cream border border-cream/20 rounded-sm hover:border-[hsl(var(--gold))] hover:text-[hsl(var(--gold))] transition-all duration-300 z-10"
+            className="absolute top-5 right-5 md:top-8 md:right-8 size-11 flex items-center justify-center text-cream border border-cream/20 rounded-sm hover:border-[hsl(var(--gold))] hover:text-[hsl(var(--gold))] transition-colors transition-opacity transition-transform duration-300 z-10"
           >
             <CloseIcon />
           </button>
@@ -260,7 +233,7 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
               </div>
               <button type="button"
                 onClick={() => { setOpen(null); navigate("/contact"); }}
-                className="mt-10 inline-flex items-center gap-3 text-xs uppercase tracking-[0.28em] text-[hsl(var(--wood-deep))] border-b border-[hsl(var(--gold))] pb-1 hover:text-[hsl(var(--gold))] transition-all duration-300 hover:gap-4 w-fit group hover:-translate-y-0.5"
+                className="mt-10 inline-flex items-center gap-3 text-xs uppercase tracking-[0.28em] text-[hsl(var(--wood-deep))] border-b border-[hsl(var(--gold))] pb-1 hover:text-[hsl(var(--gold))] transition-colors transition-opacity transition-transform duration-300 hover:gap-4 w-fit group hover:-translate-y-0.5"
               >
                 Enquire about this project
                 <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
