@@ -98,16 +98,17 @@ void main() {
 }
 `;
 
+const getAllProperties = object => {
+  const properties = new Set();
+  do {
+    for (const key of Reflect.ownKeys(object)) {
+      properties.add([object, key]);
+    }
+  } while ((object = Reflect.getPrototypeOf(object)) && object !== Object.prototype);
+  return properties;
+};
+
 function AutoBind(self, { include, exclude } = {}) {
-  const getAllProperties = object => {
-    const properties = new Set();
-    do {
-      for (const key of Reflect.ownKeys(object)) {
-        properties.add([object, key]);
-      }
-    } while ((object = Reflect.getPrototypeOf(object)) && object !== Object.prototype);
-    return properties;
-  };
 
   const filter = key => {
     const match = pattern => (typeof pattern === 'string' ? key === pattern : pattern.test(key));

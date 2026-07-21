@@ -49,9 +49,10 @@ const CountUp = ({
 
   // Sync spring → DOM (no state, avoids re-renders)
   useEffect(() => {
-    return spring.on("change", (latest) => {
+    const unsubscribe = spring.onChange((latest) => {
       if (ref.current) ref.current.textContent = format(latest);
     });
+    return unsubscribe;
   }, [spring, format]);
 
   // Trigger when in view

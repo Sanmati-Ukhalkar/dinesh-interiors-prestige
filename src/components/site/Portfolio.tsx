@@ -121,11 +121,12 @@ const Portfolio = () => {
 
       {/* Lightbox modal */}
       {open && (
-        <div
-          className="fixed inset-0 z-[60] flex items-center justify-center p-4 md:p-10 bg-[hsl(var(--wood-deep))]/92 backdrop-blur-sm animate-fade-in"
-          onClick={() => setOpen(null)}
-          role="dialog"
-          aria-modal="true"
+        <dialog
+          ref={(el) => { if (el && !el.open) el.showModal(); }}
+          onClose={() => setOpen(null)}
+          className="fixed inset-0 z-[60] m-0 max-w-none max-h-none h-full w-full flex items-center justify-center p-4 md:p-10 bg-[hsl(var(--wood-deep))]/92 backdrop-blur-sm animate-fade-in bg-transparent"
+          onClick={(e) => { if (e.target === e.currentTarget) setOpen(null); }}
+          aria-label={open.title}
         >
           <button type="button"
             onClick={() => setOpen(null)}
@@ -166,7 +167,7 @@ const Portfolio = () => {
               </a>
             </div>
           </div>
-        </div>
+        </dialog>
       )}
     </section>
   );

@@ -33,6 +33,20 @@ function FlowingMenu({
   );
 }
 
+const animationDefaults = { duration: 0.6, ease: 'expo' };
+
+const distMetric = (x, y, x2, y2) => {
+  const xDiff = x - x2;
+  const yDiff = y - y2;
+  return xDiff * xDiff + yDiff * yDiff;
+};
+
+const findClosestEdge = (mouseX, mouseY, width, height) => {
+  const topEdgeDist = distMetric(mouseX, mouseY, width / 2, 0);
+  const bottomEdgeDist = distMetric(mouseX, mouseY, width / 2, height);
+  return topEdgeDist < bottomEdgeDist ? 'top' : 'bottom';
+};
+
 function MenuItem({ link, text, image, speed, textColor, marqueeBgColor, marqueeTextColor, borderColor }) {
   const itemRef = useRef(null);
   const marqueeRef = useRef(null);
@@ -40,19 +54,7 @@ function MenuItem({ link, text, image, speed, textColor, marqueeBgColor, marquee
   const animationRef = useRef(null);
   const [repetitions, setRepetitions] = useState(4);
 
-  const animationDefaults = { duration: 0.6, ease: 'expo' };
 
-  const findClosestEdge = (mouseX, mouseY, width, height) => {
-    const topEdgeDist = distMetric(mouseX, mouseY, width / 2, 0);
-    const bottomEdgeDist = distMetric(mouseX, mouseY, width / 2, height);
-    return topEdgeDist < bottomEdgeDist ? 'top' : 'bottom';
-  };
-
-  const distMetric = (x, y, x2, y2) => {
-    const xDiff = x - x2;
-    const yDiff = y - y2;
-    return xDiff * xDiff + yDiff * yDiff;
-  };
 
   useEffect(() => {
     const calculateRepetitions = () => {

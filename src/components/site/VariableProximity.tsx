@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { forwardRef, useMemo, useRef, useEffect } from 'react';
+import { forwardRef, useMemo, useRef, useEffect, useCallback } from 'react';
 import { m as motion } from 'framer-motion';
 import './VariableProximity.css';
 
@@ -104,9 +104,9 @@ const VariableProximity = forwardRef((props, ref) => {
     }));
   }, [fromFontVariationSettings, toFontVariationSettings]);
 
-  const calculateDistance = (x1, y1, x2, y2) => Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+  const calculateDistance = useCallback((x1, y1, x2, y2) => Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2), []);
 
-  const calculateFalloff = distance => {
+  const calculateFalloff = useCallback(distance => {
     const norm = Math.min(Math.max(1 - distance / radius, 0), 1);
     switch (falloff) {
       case 'exponential':
@@ -117,9 +117,9 @@ const VariableProximity = forwardRef((props, ref) => {
       default:
         return norm;
     }
-  };
+  }, [radius, falloff]);
 
-  useAnimationFrame(() => {
+  const handleAnimationFrame = useCallback(() => {
     if (!containerRef?.current) return;
     const containerRect = containerRef.current.getBoundingClientRect();
     const { x, y } = mousePositionRef.current;
@@ -158,7 +158,9 @@ const VariableProximity = forwardRef((props, ref) => {
       interpolatedSettingsRef.current[index] = newSettings;
       letterRef.style.fontVariationSettings = newSettings;
     });
-  }, containerRef);
+  }, [radius, fromFontVariationSettings, parsedSettings, calculateDistance, calculateFalloff]);
+
+  useAnimationFrame(handleAnimationFrame, containerRef);
 
   const words = label.split(' ');
   let letterIndex = 0;

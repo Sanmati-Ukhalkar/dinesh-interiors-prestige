@@ -10,14 +10,14 @@ const gradientMapping = {
   green: 'linear-gradient(hsl(123, 90%, 40%), hsl(108, 90%, 40%))'
 };
 
-const GlassIcons = ({ items, className }) => {
-  const getBackgroundStyle = color => {
-    if (gradientMapping[color]) {
-      return { background: gradientMapping[color] };
-    }
-    return { background: color };
-  };
+const getBackgroundStyle = color => {
+  if (gradientMapping[color]) {
+    return { background: gradientMapping[color] };
+  }
+  return { background: color };
+};
 
+const GlassIcons = ({ items, className }) => {
   return (
     <div className={`icon-btns ${className || ''}`}>
       {items.map((item, index) => (
