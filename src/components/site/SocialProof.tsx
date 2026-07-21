@@ -67,10 +67,18 @@ const SocialProof = () => (
             pStorage,
             pLiving
           ]}
-          containerWidth={500}
-          containerHeight={250}
-          animationDelay={0.5}
-          animationStagger={0.06}
+          containerWidth={620}
+          containerHeight={320}
+          animationDelay={0.4}
+          animationStagger={0.08}
+          easeType="elastic.out(0.9, 0.75)"
+          transformStyles={[
+            'rotate(12deg) translate(-200px)',
+            'rotate(5deg) translate(-100px)',
+            'rotate(-2deg)',
+            'rotate(-8deg) translate(100px)',
+            'rotate(3deg) translate(200px)'
+          ]}
           enableHover={true}
         />
       </Reveal>

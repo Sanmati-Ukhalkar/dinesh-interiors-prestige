@@ -68,7 +68,7 @@ const HeroCanvas = () => {
   const stickyRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const [scrollIndicatorVisible, setScrollIndicatorVisible] = useState(true);
+  const scrollIndicatorRef = useRef<HTMLDivElement>(null);
   const [contentVisible, setContentVisible] = useState(false);
   const [isLowPerf, setIsLowPerf] = useState(() => {
     if (typeof navigator === "undefined") return false;
@@ -113,13 +113,15 @@ const HeroCanvas = () => {
         trigger: section,
         start: "top top",
         end: "bottom bottom",
-        scrub: 0.5,        // slight smoothing without lag
+        scrub: 1,           // ponytail: was 0.5 — Lenis already eases; true scrub is less laggy
         pin: sticky,
         pinSpacing: false,
         anticipatePin: 1,
         onUpdate: (self) => {
-          // Hide scroll indicator after first 5% scroll
-          setScrollIndicatorVisible(self.progress < 0.05);
+          // ponytail: direct DOM mutation — no setState on scroll
+          if (scrollIndicatorRef.current) {
+            scrollIndicatorRef.current.style.opacity = self.progress < 0.05 ? "1" : "0";
+          }
         },
       },
     });
@@ -219,7 +221,7 @@ const HeroCanvas = () => {
           <div className="absolute inset-0 pointer-events-none z-[5] opacity-60">
             <Particles
               particleColors={["#ffffff", "#d4af37", "#f3ead3"]}
-              particleCount={180}
+              particleCount={100}
               particleSpread={12}
               speed={0.06}
               particleBaseSize={70}
@@ -338,7 +340,16 @@ const HeroCanvas = () => {
           {/* Bottom bar */}
           <div className="hero-sequence-bottom container-luxe flex items-end justify-between text-cream/50 text-[10px] tracking-[0.32em] uppercase">
             <span>Pune</span>
-            <ScrollIndicator visible={scrollIndicatorVisible} />
+            <div
+              ref={scrollIndicatorRef}
+              className="scroll-indicator"
+              style={{ opacity: 1, transition: "opacity 0.6s ease" }}
+            >
+              <div className="scroll-indicator__track">
+                <div className="scroll-indicator__dot" />
+              </div>
+              <span className="scroll-indicator__label">Scroll</span>
+            </div>
           </div>
         </div>
       </section>

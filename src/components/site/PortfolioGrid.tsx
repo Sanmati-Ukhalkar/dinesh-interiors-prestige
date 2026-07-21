@@ -15,7 +15,6 @@ import GlareHover from "./GlareHover";
 import SplitText from "./SplitText";
 import FlyingPosters from "./FlyingPosters";
 import ChromaGrid from "./ChromaGrid";
-import DecayCard from "./DecayCard";
 
 export type Category = "Kitchen" | "Bedroom" | "Living" | "Storage";
 
@@ -149,10 +148,10 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
                 >
                   <div className={`relative ${it.ratio} overflow-hidden bg-secondary`}>
                     <div className="absolute inset-0 z-0">
-                      <DecayCard 
-                        image={it.img} 
-                        width="100%" 
-                        height="100%" 
+                      <img
+                        src={it.img}
+                        alt={it.title}
+                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                       />
                     </div>
                     {/* Gradient */}
@@ -190,16 +189,26 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
         )}
         {/* ChromaGrid Alternative View */}
         {!preview && (
-          <Reveal className="mt-24 mb-12 relative w-full h-[600px] border border-border">
+          <Reveal className="mt-24 mb-24 relative w-full h-auto border border-border p-4 md:p-8">
             <ChromaGrid 
-              items={visible.map(item => ({
-                image: item.img,
-                title: item.title,
-                subtitle: item.category,
-                handle: item.place,
-                borderColor: 'hsl(var(--gold-soft))',
-                gradient: 'linear-gradient(145deg, hsl(var(--wood-deep)), #000)'
-              }))}
+              items={[
+                ...visible.map(item => ({
+                  image: item.img,
+                  title: item.title,
+                  subtitle: item.category,
+                  handle: item.place,
+                  borderColor: 'hsl(var(--gold-soft))',
+                  gradient: 'linear-gradient(145deg, hsl(var(--wood-deep)), #000)'
+                })),
+                {
+                  image: hero,
+                  title: "Signature Residence",
+                  subtitle: "Showcase",
+                  handle: "Bespoke Design",
+                  borderColor: 'hsl(var(--gold-soft))',
+                  gradient: 'linear-gradient(145deg, hsl(var(--wood-deep)), #000)'
+                }
+              ]}
             />
           </Reveal>
         )}

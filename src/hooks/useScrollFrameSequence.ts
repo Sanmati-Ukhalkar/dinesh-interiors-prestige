@@ -46,7 +46,6 @@ export function useScrollFrameSequence({
     setLoadStatus("loading");
   }
   const [loadProgress, setLoadProgress] = useState(0);
-  const [currentFrame, setCurrentFrameState] = useState(0);
 
   // ── Render one frame to canvas ──────────────────────────────────────────────
   const renderFrame = useCallback((frameIndex: number) => {
@@ -168,7 +167,7 @@ export function useScrollFrameSequence({
       const clamped = Math.max(0, Math.min(totalFrames - 1, Math.round(frame)));
       if (clamped === currentFrameRef.current) return;
       currentFrameRef.current = clamped;
-      setCurrentFrameState(clamped);
+      // ponytail: no setState here — canvas is imperative, re-renders add lag
 
       prefetchWindow(clamped);
 
@@ -254,5 +253,5 @@ export function useScrollFrameSequence({
     };
   }, [totalFrames, priorityFrames, loadFrame, renderFrame, prefetchWindow]);
 
-  return { canvasRef, loadStatus, loadProgress, currentFrame, setCurrentFrame };
+  return { canvasRef, loadStatus, loadProgress, currentFrame: currentFrameRef.current, setCurrentFrame };
 }

@@ -1,17 +1,21 @@
 /**
  * ScrollVelocity — infinite marquee that speeds up/slows with scroll velocity.
  * Performance: Framer Motion useAnimationFrame + transform3d only.
- * Text is rendered once, looped via translateX modulo — no DOM duplication.
+ *
+ * Loop logic: translate the strip left continuously; when it has moved by
+ * exactly one copy width, snap back by that amount. This is the canonical
+ * seamless-loop pattern — no gap, no pop.
  */
 import { useRef, useLayoutEffect, useState } from "react";
-import { m as motion,
+import {
+  m as motion,
   useScroll,
   useSpring,
   useTransform,
   useMotionValue,
   useVelocity,
   useAnimationFrame,
- } from 'framer-motion';
+} from "framer-motion";
 
 function useElementWidth(ref: React.RefObject<HTMLElement | null>) {
   const [width, setWidth] = useState(0);
@@ -34,25 +38,39 @@ interface VelocityRowProps {
   className?: string;
 }
 
-function VelocityRow({ text, baseVelocity, numCopies = 5, className = "" }: VelocityRowProps) {
+function VelocityRow({
+  text,
+  baseVelocity,
+  numCopies = 6,
+  className = "",
+}: VelocityRowProps) {
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
-  const smoothVelocity = useSpring(scrollVelocity, { damping: 50, stiffness: 400 });
-  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], { clamp: false });
+  const smoothVelocity = useSpring(scrollVelocity, {
+    damping: 50,
+    stiffness: 400,
+  });
+  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
+    clamp: false,
+  });
 
+  // Measure one copy so we know exactly how far to snap back
   const copyRef = useRef<HTMLSpanElement>(null);
   const copyWidth = useElementWidth(copyRef);
+
   const dirFactor = useRef(baseVelocity > 0 ? 1 : -1);
 
+  // Canonical seamless loop: keep x in [-copyWidth, 0)
   const x = useTransform(baseX, (v) => {
     if (copyWidth === 0) return "0px";
-    const range = copyWidth;
-    const mod = ((v % range) + range) % range;
-    return `${mod - range}px`;
+    // wrap into [-copyWidth, 0)
+    const wrapped = ((v % copyWidth) - copyWidth) % copyWidth;
+    return `${wrapped}px`;
   });
 
   useAnimationFrame((_, delta) => {
+    if (copyWidth === 0) return;
     let moveBy = dirFactor.current * Math.abs(baseVelocity) * (delta / 1000);
     const vf = velocityFactor.get();
     if (vf < 0) dirFactor.current = -1;
@@ -63,9 +81,14 @@ function VelocityRow({ text, baseVelocity, numCopies = 5, className = "" }: Velo
 
   return (
     <div style={{ overflow: "hidden", display: "flex", whiteSpace: "nowrap" }}>
-      <motion.div style={{ x, display: "flex", gap: 0 }}>
+      <motion.div style={{ x, display: "flex" }}>
         {Array.from({ length: numCopies }).map((_, i) => (
-          <span ref={i === 0 ? copyRef : null} key={i} className={className}>
+          <span
+            ref={i === 0 ? copyRef : null}
+            key={i}
+            className={className}
+            aria-hidden={i > 0 ? true : undefined}
+          >
             {text}&nbsp;&nbsp;·&nbsp;&nbsp;
           </span>
         ))}
@@ -85,7 +108,7 @@ const ScrollVelocity = ({
   texts,
   velocity = 60,
   className = "",
-  numCopies = 5,
+  numCopies = 6,
 }: ScrollVelocityProps) => (
   <div style={{ userSelect: "none" }}>
     {texts.map((text, i) => (

@@ -1,0 +1,64 @@
+﻿[1mReact Doctor[22m [2mv0.8.1[22m
+
+[90m  [39m
+
+  [33mΓÜá[39m [33mMaintainability: deslop/unused-dependency[39m [90m├ù29[39m
+    Unused dependency: `@radix-ui/react-accordion`
+    Unused dependency: `@radix-ui/react-aspect-ratio`
+    Unused dependency: `@radix-ui/react-checkbox`
+    Unused dependency: `@radix-ui/react-collapsible`
+    Unused dependency: `@radix-ui/react-context-menu`
+    Unused dependency: `@radix-ui/react-dialog`
+    Unused dependency: `@radix-ui/react-dropdown-menu`
+    Unused dependency: `@radix-ui/react-hover-card`
+    Unused dependency: `@radix-ui/react-menubar`
+    Unused dependency: `@radix-ui/react-navigation-menu`
+    Unused dependency: `@radix-ui/react-popover`
+    Unused dependency: `@radix-ui/react-progress`
+    Unused dependency: `@radix-ui/react-radio-group`
+    Unused dependency: `@radix-ui/react-scroll-area`
+    Unused dependency: `@radix-ui/react-select`
+    Unused dependency: `@radix-ui/react-separator`
+    Unused dependency: `@radix-ui/react-slider`
+    Unused dependency: `@radix-ui/react-switch`
+    Unused dependency: `@radix-ui/react-toggle-group`
+    Unused dependency: `@radix-ui/react-toggle`
+    Unused dependency: `cmdk`
+    Unused dependency: `date-fns`
+    Unused dependency: `embla-carousel-react`
+    Unused dependency: `input-otp`
+    Unused dependency: `react-day-picker`
+    Unused dependency: `react-hook-form`
+    Unused dependency: `react-resizable-panels`
+    Unused dependency: `recharts`
+    Unused dependency: `vaul`
+[2m    ΓåÆ An unused dependency adds install time and supply-chain[22m
+[2m    surface without being used; remove it from package.json if[22m
+[2m    it is genuinely unused.[22m
+
+
+[2m  ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ[22m
+
+  [1mAll 29 issues[22m
+
+  [1mMaintainability[22m [2m>[22m [33m[2m29 warnings[22m[39m
+
+  [32mΓöîΓöÇΓöÇΓöÇΓöÇΓöÇΓöÉ[39m  [32m92[39m [2m/ 100[22m [32mGreat[39m
+  [32mΓöé Γùá Γùá Γöé[39m  [32mΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê[39m[2mΓûæΓûæΓûæΓûæ[22m
+  [32mΓöé  Γû╜  Γöé[39m  React Doctor [2m(https://react.doctor)[22m
+  [32mΓööΓöÇΓöÇΓöÇΓöÇΓöÇΓöÿ[39m
+
+[90m  Full diagnostics written to C:\Users\sanma\AppData\Local\Temp\react-doctor-cbbce25b-4201-4099-af89-0d0023482e0c[39m
+
+[2m  ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ[22m
+
+  [1mShare:[22m [36mhttps://react.doctor/share?p=vite_react_shadcn_ts&s=92&w=29&f=1[39m
+[2m  Tell others how you did on socials[22m
+
+  [1mDocs:[22m [36mhttps://react.doctor/docs[39m
+[2m  Learn more about fixing issues, setting up CI/CD, and[22m
+[2m  configuring rules with a config file[22m
+
+  [1mGitHub:[22m [36mhttps://github.com/millionco/react-doctor[39m
+[2m  Report issues and star the repository![22m
+

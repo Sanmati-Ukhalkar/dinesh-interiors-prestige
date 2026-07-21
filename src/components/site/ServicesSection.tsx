@@ -6,8 +6,7 @@ import GlareHover from "./GlareHover";
 import ProcessStepper from "./ProcessStepper";
 import GradientText from "./GradientText";
 import DotGrid from "./DotGrid";
-import GlassIcons from "./GlassIcons";
-import { Home, CookingPot, Shirt, Hammer } from "lucide-react";
+
 
 const services = [
   {
@@ -60,16 +59,6 @@ const ServicesSection = () => (
           </SplitText>
         </Reveal>
 
-        <Reveal className="mb-12" delay={0.1}>
-          <GlassIcons
-            items={[
-              { icon: <Home size={24} strokeWidth={1.5} />, color: "orange", label: "Interiors" },
-              { icon: <CookingPot size={24} strokeWidth={1.5} />, color: "blue", label: "Kitchens" },
-              { icon: <Shirt size={24} strokeWidth={1.5} />, color: "purple", label: "Wardrobes" },
-              { icon: <Hammer size={24} strokeWidth={1.5} />, color: "green", label: "Renovation" }
-            ]}
-          />
-        </Reveal>
 
         <div className="grid md:grid-cols-2 gap-px bg-border border border-border">
           {services.map((s, i) => (
@@ -106,12 +95,27 @@ const ServicesSection = () => (
       </div>
     </section>
 
-    {/* Process steps — replaced with ProcessStepper */}
-    <section className="py-24 md:py-36 bg-secondary/40">
-      <div className="container-luxe">
-        <Reveal className="max-w-2xl mb-16 md:mb-20">
-          <p className="eyebrow mb-5">Our Process</p>
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1]">
+    {/* Process steps */}
+    <section
+      className="relative py-28 md:py-40 overflow-hidden"
+    >
+      {/* Decorative Jali overlay */}
+      <JaliBackground opacity={0.06} />
+
+      {/* Warm gradient veil */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 60% at 50% 50%, hsl(var(--gold)/0.06) 0%, transparent 70%)",
+        }}
+      />
+
+      <div className="relative container-luxe">
+        <Reveal className="max-w-2xl mb-16 md:mb-24">
+          <p className="eyebrow mb-5" style={{ color: "hsl(var(--gold-soft))" }}>Our Process</p>
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1] text-foreground">
             From first conversation to{" "}
             <GradientText
               colors={["hsl(33,70%,55%)", "hsl(43,90%,82%)", "hsl(33,70%,55%)"]}

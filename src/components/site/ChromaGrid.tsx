@@ -150,7 +150,7 @@ export const ChromaGrid = ({
       {data.map((c, i) => (
         <article
           key={i}
-          className="chroma-card"
+          className={`chroma-card ${c.fullWidth ? 'full-width' : ''}`}
           onMouseMove={handleCardMove}
           onClick={() => handleCardClick(c.url)}
           style={{

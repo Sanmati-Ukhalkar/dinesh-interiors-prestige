@@ -9,10 +9,17 @@ interface Props {
   title: ReactNode;
   intro?: ReactNode;
   archFill?: string;
+  bgClass?: string;
 }
 
-const PageHero = ({ eyebrow, title, intro, archFill = "hsl(var(--background))" }: Props) => (
-  <section className="relative pt-44 pb-24 md:pt-52 md:pb-32 bg-[hsl(var(--wood-deep))] text-cream overflow-hidden grain">
+const PageHero = ({ 
+  eyebrow, 
+  title, 
+  intro, 
+  archFill = "hsl(var(--background))",
+  bgClass = "bg-[hsl(var(--wood-deep))] text-cream" 
+}: Props) => (
+  <section className={`relative pt-44 pb-24 md:pt-52 md:pb-32 overflow-hidden grain ${bgClass}`}>
     <div className="absolute inset-0 pointer-events-none opacity-20 z-0">
       <Aurora 
         colorStops={["#573d2a", "#875f3a", "#a27a4d"]} 
@@ -42,7 +49,7 @@ const PageHero = ({ eyebrow, title, intro, archFill = "hsl(var(--background))" }
       {typeof title === "string" ? (
         <SplitText
           tag="h1"
-          className="font-serif text-[clamp(2.8rem,6vw,4.5rem)] leading-[1.05] text-cream max-w-[22ch]"
+          className="font-serif text-[clamp(2.8rem,6vw,4.5rem)] leading-[1.05] max-w-[22ch]"
           delay={0.065}
           duration={0.9}
           from={{ opacity: 0, y: 30 }}
@@ -50,7 +57,7 @@ const PageHero = ({ eyebrow, title, intro, archFill = "hsl(var(--background))" }
           {title}
         </SplitText>
       ) : (
-        <h1 className="font-serif text-[clamp(2.8rem,6vw,4.5rem)] leading-[1.05] text-cream animate-fade-up max-w-[22ch]">
+        <h1 className="font-serif text-[clamp(2.8rem,6vw,4.5rem)] leading-[1.05] animate-fade-up max-w-[22ch]">
           {title}
         </h1>
       )}
@@ -66,7 +73,7 @@ const PageHero = ({ eyebrow, title, intro, archFill = "hsl(var(--background))" }
 
       {intro && (
         <p
-          className="mt-8 max-w-[52ch] text-cream/70 text-lg leading-[1.85] animate-fade-up"
+          className="mt-8 max-w-[52ch] opacity-80 text-lg leading-[1.85] animate-fade-up"
           style={{ animationDelay: "150ms" }}
         >
           {intro}

@@ -199,6 +199,7 @@
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  transform: translateZ(0);  /* isolate compositing layer */
 }
 
 /* ── Canvas: fills entire sticky area ── */
@@ -209,6 +210,8 @@
   height: 100%;
   display: block;
   background: hsl(var(--wood-deep));
+  will-change: transform;       /* promote to GPU compositing layer */
+  transform: translateZ(0);     /* force layer creation in older browsers */
 }
 
 /* ── Gradient overlay (darkens/lightens on scroll via GSAP) ── */

@@ -86,12 +86,15 @@ const About = () => {
       {/* Text column */}
       <Reveal delay={120}>
         <p className="eyebrow mb-6">The Studio</p>
-        <div className="font-serif text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.1] text-foreground mb-6">
+        <div
+          className="font-serif text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.1] text-foreground mb-6 overflow-hidden"
+          style={{ minHeight: "calc(1.1em * 2)" }}
+        >
           <VariableProximity
-            label="A quiet philosophy of living, beautifully made."
+            label={`A quiet philosophy of living, beautifully\u00A0made.`}
             containerRef={containerRef}
             fromFontVariationSettings="'wght' 400"
-            toFontVariationSettings="'wght' 900, 'ital' 1"
+            toFontVariationSettings="'wght' 650"
             falloff="linear"
             radius={200}
           />
