@@ -160,7 +160,7 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
                     <div className="absolute inset-0 z-10 ring-1 ring-inset ring-[hsl(var(--gold))]/0 group-hover:ring-[hsl(var(--gold))]/35 transition-all duration-500 pointer-events-none" />
                   </div>
                   {/* Caption */}
-                  <div className="absolute bottom-0 left-0 right-0 p-5 lg:p-6 text-cream translate-y-1.5 group-hover:translate-y-0 transition-transform duration-500">
+                  <div className="absolute bottom-0 left-0 right-0 p-5 lg:p-6 text-cream translate-y-1.5 group-hover:translate-y-0 transition-transform duration-500 z-20">
                     <p className="text-[10px] uppercase tracking-[0.3em] text-[hsl(var(--gold-soft))]">
                       {it.category} · {it.place}
                     </p>
@@ -198,7 +198,7 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
                   subtitle: item.category,
                   handle: item.place,
                   borderColor: 'hsl(var(--gold-soft))',
-                  gradient: 'linear-gradient(145deg, hsl(var(--wood-deep)), #000)'
+                  gradient: 'linear-gradient(145deg, hsl(var(--wood-deep)), hsl(var(--wood)))'
                 })),
                 {
                   image: hero,
@@ -206,7 +206,7 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
                   subtitle: "Showcase",
                   handle: "Bespoke Design",
                   borderColor: 'hsl(var(--gold-soft))',
-                  gradient: 'linear-gradient(145deg, hsl(var(--wood-deep)), #000)'
+                  gradient: 'linear-gradient(145deg, hsl(var(--wood-deep)), hsl(var(--wood)))'
                 }
               ]}
             />

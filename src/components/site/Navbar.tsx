@@ -31,7 +31,7 @@ const Navbar = () => {
   }, []);
 
 
-  const solid = scrolled || !isHome;
+  const solid = scrolled;
 
   const linkClass = (isActive: boolean) =>
     `group relative flex items-center gap-2 text-[12px] tracking-[0.12em] uppercase transition-colors duration-300 py-1 ${
@@ -71,122 +71,126 @@ const Navbar = () => {
         />
 
         <div
-          className={`relative z-10 container-luxe grid grid-cols-[1fr_auto_1fr] md:grid-cols-[1fr_auto_1fr] items-center transition-all duration-500 ${
+          className={`relative z-10 container-luxe flex justify-between md:grid md:grid-cols-[1fr_auto_1fr] items-center transition-all duration-500 ${
             solid ? "py-3.5" : "py-5 md:py-6"
           }`}
         >
           {/* LEFT links */}
-          <nav className="hidden md:flex items-center gap-8 lg:gap-10 justify-start">
-            {leftLinks.map((l) => (
-              <NavLink
-                key={l.to}
-                to={l.to}
-                className={({ isActive }) => linkClass(isActive)}
-              >
-                {({ isActive }) => (
-                  <>
-                    {/* Number prefix */}
-                    <span
-                      className={`font-serif text-[10px] transition-colors duration-300 ${
-                        solid
-                          ? isActive
-                            ? "text-[hsl(var(--gold))]"
-                            : "text-[hsl(var(--border))] group-hover:text-[hsl(var(--gold)/0.6)]"
-                          : isActive
-                          ? "text-[hsl(var(--gold-soft))]"
-                          : "text-cream/30 group-hover:text-cream/50"
-                      }`}
-                    >
-                      {l.n}
-                    </span>
-
-                    <span>{l.label}</span>
-
-                    {/* Badge */}
-                    {"badge" in l && (
-                      <span className="text-[10px] font-bold uppercase tracking-[0.18em] bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] px-2 py-0.5 rounded-sm leading-none ml-1 shadow-sm">
-                        {l.badge}
-                      </span>
-                    )}
-
-                    {/* Active dot */}
-                    {isActive && (
+          <div className="hidden md:flex justify-start">
+            <nav className="hidden md:flex items-center gap-8 lg:gap-10">
+              {leftLinks.map((l) => (
+                <NavLink
+                  key={l.to}
+                  to={l.to}
+                  className={({ isActive }) => linkClass(isActive)}
+                >
+                  {({ isActive }) => (
+                    <>
+                      {/* Number prefix */}
                       <span
-                        className="absolute -bottom-1 left-0 right-0 flex justify-center"
-                        aria-hidden="true"
+                        className={`font-serif text-[10px] transition-colors duration-300 ${
+                          solid
+                            ? isActive
+                              ? "text-[hsl(var(--gold))]"
+                              : "text-[hsl(var(--border))] group-hover:text-[hsl(var(--gold)/0.6)]"
+                            : isActive
+                            ? "text-[hsl(var(--gold-soft))]"
+                            : "text-cream/30 group-hover:text-cream/50"
+                        }`}
                       >
-                        <span className="size-1 rounded-full bg-[hsl(var(--gold))]" />
+                        {l.n}
                       </span>
-                    )}
-                  </>
-                )}
-              </NavLink>
-            ))}
-          </nav>
+
+                      <span>{l.label}</span>
+
+                      {/* Badge */}
+                      {"badge" in l && (
+                        <span className="text-[10px] font-bold uppercase tracking-[0.18em] bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] px-2 py-0.5 rounded-sm leading-none ml-1 shadow-sm">
+                          {l.badge}
+                        </span>
+                      )}
+
+                      {/* Active dot */}
+                      {isActive && (
+                        <span
+                          className="absolute -bottom-1 left-0 right-0 flex justify-center"
+                          aria-hidden="true"
+                        >
+                          <span className="size-1 rounded-full bg-[hsl(var(--gold))]" />
+                        </span>
+                      )}
+                    </>
+                  )}
+                </NavLink>
+              ))}
+            </nav>
+          </div>
 
           {/* CENTER wordmark */}
-          <Link
-            to="/"
-            className={`font-serif text-lg md:text-xl lg:text-2xl tracking-wide transition-colors text-center leading-tight ${
-              solid ? "text-foreground" : "text-cream"
-            }`}
-          >
-            <span className="block leading-none">Interiors</span>
-            <span
-              className={`block text-[0.7em] tracking-[0.2em] uppercase font-sans font-light transition-colors ${
-                solid
-                  ? "text-[hsl(var(--gold))]"
-                  : "text-[hsl(var(--gold-soft))]"
+          <div className="flex justify-start md:justify-center">
+            <Link
+              to="/"
+              className={`font-serif text-lg md:text-xl lg:text-2xl tracking-wide transition-colors text-center leading-tight ${
+                solid ? "text-foreground" : "text-cream"
               }`}
             >
-              by Dinesh
-            </span>
-          </Link>
+              <span className="block leading-none">Interiors</span>
+              <span
+                className={`block text-[0.7em] tracking-[0.2em] uppercase font-sans font-light transition-colors ${
+                  solid
+                    ? "text-[hsl(var(--gold))]"
+                    : "text-[hsl(var(--gold-soft))]"
+                }`}
+              >
+                by Dinesh
+              </span>
+            </Link>
+          </div>
 
           {/* RIGHT links */}
-          <nav className="hidden md:flex items-center gap-8 lg:gap-10 justify-end">
-            {rightLinks.map((l) => (
-              <NavLink
-                key={l.to}
-                to={l.to}
-                className={({ isActive }) => linkClass(isActive)}
-              >
-                {({ isActive }) => (
-                  <>
-                    <span
-                      className={`font-serif text-[10px] transition-colors duration-300 ${
-                        solid
-                          ? isActive
-                            ? "text-[hsl(var(--gold))]"
-                            : "text-[hsl(var(--border))] group-hover:text-[hsl(var(--gold)/0.6)]"
-                          : isActive
-                          ? "text-[hsl(var(--gold-soft))]"
-                          : "text-cream/30 group-hover:text-cream/50"
-                      }`}
-                    >
-                      {l.n}
-                    </span>
-                    <span>{l.label}</span>
-                    {isActive && (
+          <div className="flex justify-end">
+            <nav className="hidden md:flex items-center gap-8 lg:gap-10">
+              {rightLinks.map((l) => (
+                <NavLink
+                  key={l.to}
+                  to={l.to}
+                  className={({ isActive }) => linkClass(isActive)}
+                >
+                  {({ isActive }) => (
+                    <>
                       <span
-                        className="absolute -bottom-1 left-0 right-0 flex justify-center"
-                        aria-hidden="true"
+                        className={`font-serif text-[10px] transition-colors duration-300 ${
+                          solid
+                            ? isActive
+                              ? "text-[hsl(var(--gold))]"
+                              : "text-[hsl(var(--border))] group-hover:text-[hsl(var(--gold)/0.6)]"
+                            : isActive
+                            ? "text-[hsl(var(--gold-soft))]"
+                            : "text-cream/30 group-hover:text-cream/50"
+                        }`}
                       >
-                        <span className="size-1 rounded-full bg-[hsl(var(--gold))]" />
+                        {l.n}
                       </span>
-                    )}
-                  </>
-                )}
-              </NavLink>
-            ))}
-          </nav>
+                      <span>{l.label}</span>
+                      {isActive && (
+                        <span
+                          className="absolute -bottom-1 left-0 right-0 flex justify-center"
+                          aria-hidden="true"
+                        >
+                          <span className="size-1 rounded-full bg-[hsl(var(--gold))]" />
+                        </span>
+                      )}
+                    </>
+                  )}
+                </NavLink>
+              ))}
+            </nav>
 
-          {/* MOBILE MENU TOGGLE */}
-          <div className="md:hidden flex justify-end">
+            {/* MOBILE MENU TOGGLE */}
             <button 
               type="button" 
               onClick={() => setMobileMenuOpen(true)}
-              className={`p-2 -mr-2 transition-colors ${solid ? "text-foreground" : "text-cream"}`}
+              className={`md:hidden p-2 -mr-2 transition-colors ${solid ? "text-foreground" : "text-cream"}`}
               aria-label="Open menu"
             >
               <Menu size={22} strokeWidth={1.5} />

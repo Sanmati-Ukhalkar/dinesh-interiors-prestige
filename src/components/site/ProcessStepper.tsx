@@ -72,14 +72,14 @@ const ProcessStepper = ({ steps, className = "" }: ProcessStepperProps) => {
               </div>
 
               {/* ── Left column: content when isLeft (even), spacer when isRight (odd) ── */}
-              <div className={`${isRight ? "lg:block hidden" : ""}`}>
+              <div className="hidden lg:block">
                 {!isRight && (
                   <StepCard step={step} index={i} inView={inView} align="right" />
                 )}
               </div>
 
               {/* ── Right column: content when isRight, spacer when isLeft ── */}
-              <div className={`${!isRight ? "lg:block hidden" : ""}`}>
+              <div className="hidden lg:block">
                 {isRight && (
                   <StepCard step={step} index={i} inView={inView} align="left" />
                 )}
@@ -181,7 +181,7 @@ function StepCard({
       </div>
 
       {/* Title */}
-      <h3 className="font-serif text-3xl lg:text-[2.2rem] leading-tight text-cream mb-4 transition-colors duration-300 group-hover:text-[hsl(var(--gold))]">
+      <h3 className="font-serif text-3xl lg:text-[2.2rem] leading-tight text-foreground mb-4 transition-colors duration-300 group-hover:text-[hsl(var(--gold))]">
         {step.title}
       </h3>
 
@@ -197,7 +197,7 @@ function StepCard({
       />
 
       {/* Description */}
-      <p className="text-cream/60 leading-[1.9] text-[0.95rem] max-w-[38ch]">
+      <p className="text-muted-foreground leading-[1.9] text-[0.95rem] max-w-[38ch]">
         {step.description}
       </p>
     </motion.div>
