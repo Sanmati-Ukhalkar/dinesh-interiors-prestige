@@ -130,13 +130,13 @@ const Navbar = () => {
           <div className="flex justify-start md:justify-center">
             <Link
               to="/"
-              className={`font-serif text-lg md:text-xl lg:text-2xl tracking-wide transition-colors text-center leading-tight ${
+              className={`font-serif text-xl md:text-2xl tracking-wide transition-colors leading-none flex items-center gap-1.5 ${
                 solid ? "text-foreground" : "text-cream"
               }`}
             >
-              <span className="block leading-none">Interiors</span>
+              <span>Interiors</span>
               <span
-                className={`block text-[0.7em] tracking-[0.2em] uppercase font-sans font-light transition-colors ${
+                className={`transition-colors ${
                   solid
                     ? "text-[hsl(var(--gold))]"
                     : "text-[hsl(var(--gold-soft))]"

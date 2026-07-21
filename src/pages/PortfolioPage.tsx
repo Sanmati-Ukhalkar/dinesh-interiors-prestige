@@ -70,20 +70,23 @@ const PortfolioPage = () => {
       <PageHero
         eyebrow="Archive"
         title={
-          <div className="h-[120px] md:h-[180px] w-full mt-4">
-            <TextPressure
-              text="PORTFOLIO"
-              flex={true}
-              alpha={false}
-              stroke={false}
-              width={true}
-              weight={true}
-              italic={false}
-              textColor="hsl(var(--cream))"
-              className="font-serif tracking-widest"
-              minFontSize={60}
-            />
-          </div>
+          <>
+            <div className="hidden md:block h-[140px] md:h-[180px] w-full mt-4">
+              <TextPressure
+                text="PORTFOLIO"
+                flex={true}
+                alpha={false}
+                stroke={false}
+                width={true}
+                weight={true}
+                italic={false}
+                textColor="hsl(var(--cream))"
+                className="font-serif tracking-widest"
+                minFontSize={60}
+              />
+            </div>
+            <span className="md:hidden">PORTFOLIO</span>
+          </>
         }
         intro="Browse selected projects across kitchens, bedrooms, living spaces and storage. Click any image for a closer look."
       />

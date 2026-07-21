@@ -49,7 +49,7 @@ const PageHero = ({
       {typeof title === "string" ? (
         <SplitText
           tag="h1"
-          className="font-serif text-[clamp(2.8rem,6vw,4.5rem)] leading-[1.05] max-w-[22ch]"
+          className="font-serif text-[clamp(2rem,11vw,4.5rem)] leading-[1.05] max-w-[22ch]"
           delay={0.065}
           duration={0.9}
           from={{ opacity: 0, y: 30 }}
@@ -57,7 +57,7 @@ const PageHero = ({
           {title}
         </SplitText>
       ) : (
-        <h1 className="font-serif text-[clamp(2.8rem,6vw,4.5rem)] leading-[1.05] animate-fade-up max-w-[22ch]">
+        <h1 className="font-serif text-[clamp(2rem,11vw,4.5rem)] leading-[1.05] animate-fade-up max-w-[22ch]">
           {title}
         </h1>
       )}
