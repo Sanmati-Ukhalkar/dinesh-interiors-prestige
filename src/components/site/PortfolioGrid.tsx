@@ -50,7 +50,7 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
   }, [open]);
 
   return (
-    <section id="portfolio" className="relative py-24 md:py-36 bg-background overflow-hidden">
+    <section id="portfolio" className="relative pt-12 pb-24 md:pt-16 md:pb-36 bg-background overflow-hidden">
       <JaliBackground opacity={0.04} />
 
       <div className="relative container-luxe">
