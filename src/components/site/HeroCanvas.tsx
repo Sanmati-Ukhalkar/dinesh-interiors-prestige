@@ -72,7 +72,7 @@ const HeroCanvas = () => {
   const [contentVisible, setContentVisible] = useState(false);
   const [isLowPerf, setIsLowPerf] = useState(() => {
     if (typeof navigator === "undefined") return false;
-    return "deviceMemory" in navigator && (navigator as Navigator & { deviceMemory: number }).deviceMemory < 2;
+    return "deviceMemory" in navigator && (navigator as any).deviceMemory < 2;
   });
 
   const { canvasRef, loadStatus, loadProgress, setCurrentFrame } =
@@ -113,7 +113,7 @@ const HeroCanvas = () => {
         trigger: section,
         start: "top top",
         end: "bottom bottom",
-        scrub: 1,           // ponytail: was 0.5 — Lenis already eases; true scrub is less laggy
+        scrub: 0.2,         // reduced from 1 to 0.2 so it feels instantly responsive without heavy rubber-banding
         pin: sticky,
         pinSpacing: false,
         anticipatePin: 1,
@@ -217,19 +217,21 @@ const HeroCanvas = () => {
             style={{ opacity: 0.55 }}
           />
 
-          {/* Golden particles overlay */}
-          <div className="absolute inset-0 pointer-events-none z-[5] opacity-60">
-            <Particles
-              particleColors={["#ffffff", "#d4af37", "#f3ead3"]}
-              particleCount={100}
-              particleSpread={12}
-              speed={0.06}
-              particleBaseSize={70}
-              alphaParticles={true}
-              disableRotation={false}
-              className="size-full"
-            />
-          </div>
+          {/* Golden particles overlay - disabled on mobile to prevent extreme compositing lag */}
+          {typeof window !== 'undefined' && window.innerWidth >= 768 && (
+            <div className="absolute inset-0 pointer-events-none z-[5] opacity-60">
+              <Particles
+                particleColors={["#ffffff", "#d4af37", "#f3ead3"]}
+                particleCount={100}
+                particleSpread={12}
+                speed={0.06}
+                particleBaseSize={70}
+                alphaParticles={true}
+                disableRotation={false}
+                className="size-full"
+              />
+            </div>
+          )}
 
           {/* Decorative gold arch — right */}
           <svg
@@ -267,18 +269,18 @@ const HeroCanvas = () => {
             className="hero-sequence-content"
             style={{ visibility: contentVisible ? "visible" : "hidden" }}
           >
-            <div className="container-luxe flex flex-col justify-center h-full pt-32 pb-28">
+            <div className="container-luxe flex flex-col justify-center h-full pt-20 pb-16 md:pt-32 md:pb-28">
               {/* Eyebrow */}
               <p
-                className="hero-content-item mb-7"
+                className="hero-content-item mb-4 md:mb-7"
                 style={{ letterSpacing: "0.05em" }}
               >
-                <ShinyText text="Est. 2009 · Pune" className="eyebrow" speed={4} />
+                <ShinyText text="Est. 2009 · Pune" className="eyebrow text-xs md:text-sm" speed={4} />
               </p>
 
               {/* Headline */}
               <h1
-                className="hero-content-item font-serif text-[clamp(2.8rem,7vw,5.5rem)] leading-[1.03] text-cream max-w-[17ch]"
+                className="hero-content-item font-serif text-[clamp(2.1rem,9vw,5.5rem)] leading-[1.05] text-cream max-w-[17ch]"
                 style={{ fontWeight: 300 }}
               >
                 <BlurText className="text-cream" threshold={0.1}>
@@ -288,37 +290,37 @@ const HeroCanvas = () => {
 
               {/* Gold rule */}
               <div
-                className="hero-content-item mt-9 h-px w-16"
+                className="hero-content-item mt-5 md:mt-9 h-px w-12 md:w-16"
                 style={{
                   background: "linear-gradient(90deg, hsl(var(--gold-soft)), transparent)",
                 }}
               />
 
               {/* Subtext */}
-              <p className="hero-content-item mt-8 max-w-[46ch] text-base md:text-[1.05rem] text-cream/75 leading-[1.8]">
+              <p className="hero-content-item mt-5 md:mt-8 max-w-[46ch] text-[0.9rem] md:text-[1.05rem] text-cream/75 leading-[1.6] md:leading-[1.8]">
                 A premium interior design studio crafting homes that honour Indian
                 heritage through a quiet, modern lens — handpicked materials,
                 considered light, and rooms that feel like you.
               </p>
 
               {/* Rotating room types */}
-              <p className="hero-content-item mt-6 flex items-center gap-3 text-[hsl(var(--gold-soft))] text-sm uppercase tracking-[0.28em]">
+              <p className="hero-content-item mt-4 md:mt-6 flex items-center gap-2 md:gap-3 text-[hsl(var(--gold-soft))] text-[10px] md:text-sm uppercase tracking-[0.2em] md:tracking-[0.28em]">
                 <span className="text-cream/50">Crafting</span>
                 <RotatingText
                   texts={["Kitchens", "Bedrooms", "Living Rooms", "Wardrobes", "Dining Spaces"]}
                   interval={2000}
                   className="text-[hsl(var(--gold-soft))] font-medium"
-                  mainClassName="min-w-[130px]"
+                  mainClassName="min-w-[110px] md:min-w-[130px]"
                 />
               </p>
 
               {/* CTAs */}
-              <div className="hero-content-item mt-12 flex flex-col sm:flex-row gap-4">
+              <div className="hero-content-item mt-8 md:mt-12 flex flex-col sm:flex-row gap-3 md:gap-4">
                 <Magnet magnetStrength={3} padding={60}>
                   <Button
                     asChild
                     size="lg"
-                    className="w-full sm:w-auto rounded-full bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] hover:bg-[hsl(var(--gold-soft))] px-9 h-[54px] text-[11px] uppercase tracking-[0.3em] font-medium transition-colors transition-opacity transition-transform duration-500 hover:shadow-[0_8px_30px_-10px_hsl(var(--gold)/0.6)]"
+                    className="w-full sm:w-auto rounded-full bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] hover:bg-[hsl(var(--gold-soft))] px-7 md:px-9 h-[48px] md:h-[54px] text-[10px] md:text-[11px] uppercase tracking-[0.2em] md:tracking-[0.3em] font-medium transition-colors transition-opacity transition-transform duration-500 hover:shadow-[0_8px_30px_-10px_hsl(var(--gold)/0.6)]"
                   >
                     <Link to="/portfolio">Explore Portfolio</Link>
                   </Button>
@@ -328,7 +330,7 @@ const HeroCanvas = () => {
                     asChild
                     size="lg"
                     variant="outline"
-                    className="w-full sm:w-auto rounded-full bg-[hsl(var(--wood-deep))]/20 backdrop-blur-sm border-cream/30 text-cream hover:bg-cream hover:text-[hsl(var(--wood-deep))] px-9 h-[54px] text-[11px] uppercase tracking-[0.3em] font-medium transition-colors transition-opacity transition-transform duration-500 hover:border-cream"
+                    className="w-full sm:w-auto rounded-full bg-[hsl(var(--wood-deep))]/20 backdrop-blur-sm border-cream/30 text-cream hover:bg-cream hover:text-[hsl(var(--wood-deep))] px-7 md:px-9 h-[48px] md:h-[54px] text-[10px] md:text-[11px] uppercase tracking-[0.2em] md:tracking-[0.3em] font-medium transition-colors transition-opacity transition-transform duration-500 hover:border-cream"
                   >
                     <Link to="/contact">Book Consultation</Link>
                   </Button>

@@ -13,7 +13,7 @@ const stats = [
 
 import reel1 from "@/assets/reel-1.jpg";
 import pBedroom from "@/assets/portfolio-bedroom.jpg";
-import pKitchen from "@/assets/portfolio-kitchen.jpg";
+import pKitchen from "@/assets/portfolio-kitchen.webp";
 import pStorage from "@/assets/portfolio-storage.jpg";
 import pLiving from "@/assets/portfolio-living.jpg";
 

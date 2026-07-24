@@ -1,7 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import traditional from "@/assets/style-traditional.jpg";
-import modern from "@/assets/style-modern.jpg";
+import modern from "@/assets/style-modern.webp";
 import fusion from "@/assets/style-fusion.jpg";
 import Reveal from "./Reveal";
 import JaliBackground from "./JaliBackground";
@@ -19,6 +19,14 @@ const Styles = () => {
   const navigate = useNavigate();
 
   const goToPortfolio = () => navigate(`/portfolio?style=${current.filter}`);
+
+  const menuItems = React.useMemo(() => items.map(i => ({
+    key: i.key,
+    image: i.img,
+    link: `/portfolio?style=${i.filter}`,
+    title: i.title,
+    description: i.desc
+  })), []);
 
   return (
     <section id="styles" className="relative py-24 md:py-36 bg-secondary/40 overflow-hidden">
@@ -61,14 +69,11 @@ const Styles = () => {
         </Reveal>
 
         <Reveal className="grid lg:grid-cols-5 gap-10 lg:gap-16 items-center">
-          <div className="lg:col-span-3 relative h-[600px] border border-border overflow-hidden">
+          <div className="lg:col-span-3 relative h-[400px] lg:h-[600px] border border-border overflow-hidden rounded-md">
             <InfiniteMenu 
-              items={items.map(i => ({
-                image: i.img,
-                link: `/portfolio?style=${i.filter}`,
-                title: i.title,
-                description: i.desc
-              }))}
+              items={menuItems}
+              activeKey={active}
+              onItemChange={(item) => setActive(item.key)}
             />
           </div>
 
