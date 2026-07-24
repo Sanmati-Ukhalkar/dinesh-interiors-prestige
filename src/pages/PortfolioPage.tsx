@@ -95,7 +95,7 @@ const PortfolioPage = () => {
       {/* Dome gallery — full viewport, edges dissolve into cream */}
       <div
         className="relative w-full bg-background"
-        style={{ height: "100dvh" }}
+        style={{ height: "75dvh" }}
       >
         <DomeGallery
           images={portfolioItems.map(item => ({ src: item.img, alt: item.title }))}
