@@ -597,6 +597,11 @@ class InfiniteGridMenu {
   smoothRotationVelocity = 0;
   scaleFactor = 1.0;
   movementActive = false;
+  forcedTargetIndex = null;
+
+  scrollToIndex(itemIndex) {
+    this.forcedTargetIndex = itemIndex;
+  }
 
   constructor(canvas, items, onActiveItemChange, onMovementChange, onInit = null, scale = 1.0) {
     this.canvas = canvas;
@@ -643,7 +648,7 @@ class InfiniteGridMenu {
   }
 
   #init(onInit) {
-    this.gl = this.canvas.getContext('webgl2', { antialias: true, alpha: false });
+    this.gl = this.canvas.getContext('webgl2', { antialias: true, alpha: true });
     const gl = this.gl;
     if (!gl) {
       throw new Error('No WebGL 2 context!');
@@ -724,6 +729,12 @@ class InfiniteGridMenu {
             const img = new Image();
             img.crossOrigin = 'anonymous';
             img.onload = () => resolve(img);
+            img.onerror = () => {
+              console.warn("Failed to load image:", item.image);
+              const fallback = document.createElement('canvas');
+              fallback.width = 512; fallback.height = 512;
+              resolve(fallback);
+            };
             img.src = item.image;
           })
       )
@@ -876,12 +887,44 @@ class InfiniteGridMenu {
     }
 
     if (!this.control.isPointerDown) {
-      const nearestVertexIndex = this.#findNearestVertexIndex();
-      const itemIndex = nearestVertexIndex % Math.max(1, this.items.length);
-      this.onActiveItemChange(itemIndex);
-      const snapDirection = vec3.normalize(vec3.create(), this.#getVertexWorldPosition(nearestVertexIndex));
-      this.control.snapTargetDirection = snapDirection;
+      let targetVertexIndex;
+
+      if (this.forcedTargetIndex !== null) {
+        let maxD = -Infinity;
+        const n = this.control.snapDirection;
+        const inversOrientation = quat.conjugate(quat.create(), this.control.orientation);
+        const nt = vec3.transformQuat(vec3.create(), n, inversOrientation);
+
+        for (let i = 0; i < this.instancePositions.length; ++i) {
+          if (i % Math.max(1, this.items.length) === this.forcedTargetIndex) {
+            const d = vec3.dot(nt, this.instancePositions[i]);
+            if (d > maxD) {
+              maxD = d;
+              targetVertexIndex = i;
+            }
+          }
+        }
+
+        if (targetVertexIndex !== undefined) {
+           const currentNearest = this.#findNearestVertexIndex();
+           if (currentNearest === targetVertexIndex) {
+               this.forcedTargetIndex = null;
+           }
+        }
+      }
+
+      if (this.forcedTargetIndex === null) {
+        targetVertexIndex = this.#findNearestVertexIndex();
+        const itemIndex = targetVertexIndex % Math.max(1, this.items.length);
+        this.onActiveItemChange(itemIndex);
+      }
+
+      if (targetVertexIndex !== undefined) {
+        const snapDirection = vec3.normalize(vec3.create(), this.#getVertexWorldPosition(targetVertexIndex));
+        this.control.snapTargetDirection = snapDirection;
+      }
     } else {
+      this.forcedTargetIndex = null;
       cameraTargetZ += this.control.rotationVelocity * 80 + 2.5;
       damping = 7 / timeScale;
     }
@@ -922,10 +965,21 @@ const defaultItems = [
   }
 ];
 
-export default function InfiniteMenu({ items = [], scale = 1.0 }) {
+export default function InfiniteMenu({ items = [], scale = 1.0, onItemChange, activeKey }) {
   const canvasRef = useRef(null);
   const [activeItem, setActiveItem] = useState(null);
   const [isMoving, setIsMoving] = useState(false);
+  const activeTitleRef = useRef(null);
+  const sketchRef = useRef(null);
+
+  useEffect(() => {
+    if (sketchRef.current && activeKey) {
+      const index = items.findIndex(i => i.key === activeKey);
+      if (index !== -1) {
+         sketchRef.current.scrollToIndex(index);
+      }
+    }
+  }, [activeKey, items]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -933,7 +987,13 @@ export default function InfiniteMenu({ items = [], scale = 1.0 }) {
 
     const handleActiveItem = index => {
       const itemIndex = index % items.length;
-      setActiveItem(items[itemIndex]);
+      const item = items[itemIndex];
+      
+      if (activeTitleRef.current !== item.title) {
+        activeTitleRef.current = item.title;
+        setActiveItem(item);
+        if (onItemChange) onItemChange(item);
+      }
     };
 
     if (canvas) {
@@ -945,6 +1005,7 @@ export default function InfiniteMenu({ items = [], scale = 1.0 }) {
         sk => sk.run(),
         scale
       );
+      sketchRef.current = sketch;
     }
 
     const handleResize = () => {
@@ -988,15 +1049,9 @@ export default function InfiniteMenu({ items = [], scale = 1.0 }) {
       <canvas id="infinite-grid-menu-canvas" ref={canvasRef} />
 
       {activeItem && (
-        <>
-          <h2 className={`face-title ${isMoving ? 'inactive' : 'active'}`}>{activeItem.title}</h2>
-
-          <p className={`face-description ${isMoving ? 'inactive' : 'active'}`}> {activeItem.description}</p>
-
-          <div onClick={handleButtonClick} className={`action-button ${isMoving ? 'inactive' : 'active'}`}>
-            <p className="action-button-icon">&#x2197;</p>
-          </div>
-        </>
+        <div onClick={handleButtonClick} className={`action-button ${isMoving ? 'inactive' : 'active'}`}>
+          <p className="action-button-icon">&#x2197;</p>
+        </div>
       )}
     </div>
   );

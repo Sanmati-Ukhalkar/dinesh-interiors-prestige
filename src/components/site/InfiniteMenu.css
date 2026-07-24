@@ -17,15 +17,23 @@
   position: absolute;
   left: 50%;
   z-index: 10;
-  width: 60px;
-  height: 60px;
+  width: 56px;
+  height: 56px;
   display: grid;
   place-items: center;
-  background: #5227ff;
+  background: hsl(var(--gold));
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  border: 5px solid #000;
+  border: 4px solid hsl(var(--wood-deep));
+  box-shadow: 0 4px 15px -2px hsl(var(--gold)/0.4);
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.action-button:hover {
+  transform: translateX(-50%) scale(1.1);
+  background: hsl(var(--gold-soft));
+  box-shadow: 0 8px 25px -5px hsl(var(--gold)/0.6);
 }
 
 .face-title {
@@ -40,52 +48,10 @@
 .action-button-icon {
   user-select: none;
   position: relative;
-  color: #fff;
-  top: 2px;
-  font-size: 26px;
-}
-
-.face-title {
-  position: absolute;
-  top: 50%;
-  transform: translate(20%, -50%);
-}
-
-.face-title.active {
-  opacity: 1;
-  transform: translate(20%, -50%);
-  pointer-events: auto;
-  transition: 0.5s ease;
-}
-
-.face-title.inactive {
-  pointer-events: none;
-  opacity: 0;
-  transition: 0.1s ease;
-}
-
-.face-description {
-  user-select: none;
-  position: absolute;
-  max-width: 10ch;
-  top: 50%;
-  font-size: 1.2rem;
-  right: 1%;
-  transform: translate(0, -50%);
-}
-
-.face-description.active {
-  opacity: 1;
-  transform: translate(-90%, -50%);
-  pointer-events: auto;
-  transition: 0.5s ease;
-}
-
-.face-description.inactive {
-  pointer-events: none;
-  transform: translate(-60%, -50%);
-  opacity: 0;
-  transition: 0.1s ease;
+  color: hsl(var(--wood-deep));
+  top: 1px;
+  font-size: 22px;
+  font-weight: bold;
 }
 
 .action-button {
@@ -107,11 +73,4 @@
   opacity: 0;
   pointer-events: none;
   transition: 0.1s ease;
-}
-
-@media (max-width: 1500px) {
-  .face-title,
-  .face-description {
-    display: none;
-  }
 }
