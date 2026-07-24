@@ -6,6 +6,7 @@ import { type Category, portfolioItems } from "@/components/site/portfolioData";
 import Contact from "@/components/site/Contact";
 import TextPressure from "@/components/site/TextPressure";
 import DomeGallery from "@/components/site/DomeGallery";
+import GridMotion from "@/components/site/GridMotion";
 
 const validCategories: Category[] = ["Kitchen", "Bedroom", "Living", "Storage"];
 
@@ -118,6 +119,20 @@ const PortfolioPage = () => {
       </div>
 
       <PortfolioGrid initialFilter={initial} />
+
+      {/* Dynamic Grid Motion Gallery */}
+      <div className="relative w-full h-[60vh] md:h-[70vh] overflow-hidden bg-background border-t border-[hsl(38_40%_72%/0.25)]">
+        <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+          <div className="bg-[hsl(22_35%_16%/0.8)] backdrop-blur-md px-8 py-4 rounded-full border border-[hsl(38_40%_72%/0.3)] shadow-2xl">
+            <h3 className="font-serif text-cream text-xl md:text-2xl tracking-wide">More from the Archive</h3>
+          </div>
+        </div>
+        <GridMotion 
+          items={portfolioItems.slice(0, 28).map(i => i.img)} 
+          gradientColor={CREAM_HEX} 
+        />
+      </div>
+
       <Contact />
     </>
   );
