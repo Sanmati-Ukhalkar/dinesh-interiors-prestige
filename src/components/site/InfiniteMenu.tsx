@@ -645,6 +645,10 @@ class InfiniteGridMenu {
       cancelAnimationFrame(this.rafId);
       this.rafId = null;
     }
+    if (this.gl) {
+      const ext = this.gl.getExtension('WEBGL_lose_context');
+      if (ext) ext.loseContext();
+    }
   }
 
   #init(onInit) {
@@ -727,7 +731,9 @@ class InfiniteGridMenu {
         item =>
           new Promise(resolve => {
             const img = new Image();
-            img.crossOrigin = 'anonymous';
+            if (item.image.startsWith('http')) {
+              img.crossOrigin = 'anonymous';
+            }
             img.onload = () => resolve(img);
             img.onerror = () => {
               console.warn("Failed to load image:", item.image);

@@ -185,7 +185,9 @@ class Media {
     });
 
     const img = new Image();
-    img.crossOrigin = 'anonymous';
+    if (this.image.startsWith('http')) {
+      img.crossOrigin = 'anonymous';
+    }
     img.src = this.image;
     img.onload = () => {
       texture.image = img;
@@ -329,7 +331,9 @@ class Canvas {
 
     this.items.forEach(src => {
       const image = new Image();
-      image.crossOrigin = 'anonymous';
+      if (src.startsWith('http')) {
+        image.crossOrigin = 'anonymous';
+      }
       image.src = src;
       image.onload = () => {
         this.loaded += 1;

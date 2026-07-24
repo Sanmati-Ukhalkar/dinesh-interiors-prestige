@@ -6,9 +6,15 @@ import { type Category, portfolioItems } from "@/components/site/portfolioData";
 import Contact from "@/components/site/Contact";
 import TextPressure from "@/components/site/TextPressure";
 import DomeGallery from "@/components/site/DomeGallery";
-import GridMotion from "@/components/site/GridMotion";
+import Masonry from "react-masonry-css";
 
 const validCategories: Category[] = ["Kitchen", "Bedroom", "Living", "Storage"];
+
+const masonryBreakpoints = {
+  default: 3,
+  1024: 2,
+  640: 1
+};
 
 // cream background hex — matches hsl(38 33% 96%)
 const CREAM_HEX = "#f7f3ec";
@@ -120,17 +126,35 @@ const PortfolioPage = () => {
 
       <PortfolioGrid initialFilter={initial} />
 
-      {/* Dynamic Grid Motion Gallery */}
-      <div className="relative w-full h-[60vh] md:h-[70vh] overflow-hidden bg-background border-t border-[hsl(38_40%_72%/0.25)]">
-        <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
-          <div className="bg-[hsl(22_35%_16%/0.8)] backdrop-blur-md px-8 py-4 rounded-full border border-[hsl(38_40%_72%/0.3)] shadow-2xl">
-            <h3 className="font-serif text-cream text-xl md:text-2xl tracking-wide">More from the Archive</h3>
+      {/* Simple Masonry Highlights */}
+      <div className="w-full bg-background border-t border-[hsl(38_40%_72%/0.2)] py-24">
+        <div className="container-luxe">
+          <div className="text-center mb-16">
+            <h2 className="font-serif text-3xl md:text-5xl text-[hsl(var(--wood-deep))] tracking-tight mb-4">
+              Selected Highlights
+            </h2>
+            <p className="text-[hsl(var(--wood-deep))]/60 uppercase tracking-[0.2em] text-xs">
+              A brief look at our favorite moments
+            </p>
           </div>
+          <Masonry
+            breakpointCols={masonryBreakpoints}
+            className="flex -ml-4 md:-ml-6 w-auto"
+            columnClassName="pl-4 md:pl-6 bg-clip-padding space-y-4 md:space-y-6"
+          >
+            {portfolioItems.slice(0, 9).map((item, i) => (
+              <div key={i} className="relative overflow-hidden rounded-md group">
+                <img 
+                  src={item.img} 
+                  alt={item.title} 
+                  className="w-full h-auto object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.2,1,0.2,1)] group-hover:scale-110"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--wood-deep))]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+              </div>
+            ))}
+          </Masonry>
         </div>
-        <GridMotion 
-          items={portfolioItems.slice(0, 28).map(i => i.img)} 
-          gradientColor={CREAM_HEX} 
-        />
       </div>
 
       <Contact />

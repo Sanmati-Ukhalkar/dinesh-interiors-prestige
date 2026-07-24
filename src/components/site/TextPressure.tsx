@@ -28,7 +28,7 @@ const debounce = (func, delay) => {
 const TextPressure = ({
   text = 'Compressa',
   fontFamily = 'Compressa VF',
-  fontUrl = 'https://res.cloudinary.com/dr6lvwubh/raw/upload/v1529908256/CompressaPRO-GX.woff2',
+  fontUrl = 'https://fonts.gstatic.com/s/oswald/v49/TK3iWkUHHAIjg752GT8Gl-1PKw.woff2',
 
   width = true,
   weight = true,
