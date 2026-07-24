@@ -24,7 +24,7 @@ export interface FrameSequenceResult {
 export function useScrollFrameSequence({
   totalFrames,
   getFrameUrl,
-  windowSize = 30,
+  windowSize = typeof window !== 'undefined' && window.innerWidth < 768 ? 12 : 30,
   priorityFrames = 8,
 }: FrameSequenceOptions): FrameSequenceResult {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -53,10 +53,11 @@ export function useScrollFrameSequence({
     const img = imageMapRef.current.get(frameIndex);
     if (!canvas || !img || !img.complete || img.naturalWidth === 0) return;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: false });
     if (!ctx) return;
 
-    const dpr = window.devicePixelRatio || 1;
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1 : 1.5);
     const dw = canvas.clientWidth;
     const dh = canvas.clientHeight;
 
