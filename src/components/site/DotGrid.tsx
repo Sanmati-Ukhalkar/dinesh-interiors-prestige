@@ -30,11 +30,31 @@ function hexToRgb(hex) {
   };
 }
 
-const DotGrid = ({
-  dotSize = 16,
+export interface DotGridProps {
+  dotSize?: number;
+  gap?: number;
+  baseColor?: string;
+  activeColor?: string;
+  proximity?: number;
+  speedTrigger?: number;
+  shockRadius?: number;
+  shockStrength?: number;
+  maxSpeed?: number;
+  resistance?: number;
+  returnDuration?: number;
+  className?: string;
+  style?: any;
+  color?: string;
+  size?: number;
+}
+
+const DotGrid: React.FC<DotGridProps> = ({
+  color,
+  size,
+  dotSize = size ?? 16,
   gap = 32,
-  baseColor = '#5227FF',
-  activeColor = '#5227FF',
+  baseColor = color ?? '#5227FF',
+  activeColor = color ?? '#5227FF',
   proximity = 150,
   speedTrigger = 100,
   shockRadius = 250,
