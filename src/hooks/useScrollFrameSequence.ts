@@ -10,6 +10,8 @@ export interface FrameSequenceOptions {
   windowSize?: number;
   /** How many frames to preload before showing canvas (default 8) */
   priorityFrames?: number;
+  /** ponytail: allow completely disabling frame streaming and resize listeners on low-perf/mobile */
+  enabled?: boolean;
 }
 
 export interface FrameSequenceResult {
@@ -26,6 +28,7 @@ export function useScrollFrameSequence({
   getFrameUrl,
   windowSize = typeof window !== 'undefined' && window.innerWidth < 768 ? 12 : 30,
   priorityFrames = 8,
+  enabled = true,
 }: FrameSequenceOptions): FrameSequenceResult {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -184,6 +187,7 @@ export function useScrollFrameSequence({
 
   // ── Resize: force canvas resize + redraw ───────────────────────────────────
   useEffect(() => {
+    if (!enabled) return;
     const handleResize = () => {
       const canvas = canvasRef.current;
       if (!canvas) return;
@@ -193,10 +197,11 @@ export function useScrollFrameSequence({
     };
     window.addEventListener("resize", handleResize, { passive: true });
     return () => window.removeEventListener("resize", handleResize);
-  }, [renderFrame]);
+  }, [renderFrame, enabled]);
 
   // ── Bootstrap: priority frames → ready, then stream rest in background ─────
   useEffect(() => {
+    if (!enabled) return;
     let isActive = true;
     let timerId: ReturnType<typeof setTimeout>;
 
@@ -252,7 +257,7 @@ export function useScrollFrameSequence({
       clearTimeout(timerId);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [totalFrames, priorityFrames, loadFrame, renderFrame, prefetchWindow]);
+  }, [totalFrames, priorityFrames, loadFrame, renderFrame, prefetchWindow, enabled]);
 
   return { canvasRef, loadStatus, loadProgress, currentFrame: currentFrameRef.current, setCurrentFrame };
 }
