@@ -27,7 +27,6 @@ const StarBorder = ({
   style,
   onClick,
 }: StarBorderProps) => (
-  // @ts-expect-error polymorphic
   <Tag
     className={`star-border-rb ${className}`}
     style={{ padding: `${thickness}px 0`, ...style } as CSSProperties}
