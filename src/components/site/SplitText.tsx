@@ -96,7 +96,6 @@ const SplitText = ({
   const childVariants = unitVariants(from, duration);
 
   return (
-    // @ts-expect-error — polymorphic tag
     <Tag className={className} ref={ref} style={{ overflow: "visible" }}>
       <motion.span
         aria-label={text}
