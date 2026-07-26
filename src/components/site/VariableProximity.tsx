@@ -1,8 +1,20 @@
 /* eslint-disable */
 // @ts-nocheck
-import { forwardRef, useMemo, useRef, useEffect, useCallback } from 'react';
+import { forwardRef, useMemo, useRef, useEffect, useCallback, HTMLAttributes, RefObject, CSSProperties } from 'react';
 import { m as motion } from 'framer-motion';
 import './VariableProximity.css';
+
+export interface VariableProximityProps extends HTMLAttributes<HTMLSpanElement> {
+  label: string;
+  fromFontVariationSettings: string;
+  toFontVariationSettings: string;
+  containerRef: RefObject<any>;
+  radius?: number;
+  falloff?: string;
+  className?: string;
+  onClick?: (e: any) => void;
+  style?: CSSProperties;
+}
 
 function useAnimationFrame(callback, containerRef) {
   useEffect(() => {
@@ -64,7 +76,7 @@ function useMousePositionRef(containerRef) {
   return positionRef;
 }
 
-const VariableProximity = forwardRef((props, ref) => {
+const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((props, ref) => {
   const {
     label,
     fromFontVariationSettings,
