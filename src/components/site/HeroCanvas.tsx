@@ -70,16 +70,31 @@ const HeroCanvas = () => {
   const contentRef = useRef<HTMLDivElement>(null);
   const scrollIndicatorRef = useRef<HTMLDivElement>(null);
   const [contentVisible, setContentVisible] = useState(false);
-  const [isLowPerf, setIsLowPerf] = useState(() => {
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.innerWidth < 768;
+  });
+
+  const [isLowPerf] = useState(() => {
     if (typeof navigator === "undefined") return false;
     return "deviceMemory" in navigator && (navigator as any).deviceMemory < 2;
   });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize, { passive: true });
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const shouldDisableSequence = isMobile || isLowPerf;
 
   const { canvasRef, loadStatus, loadProgress, setCurrentFrame } =
     useScrollFrameSequence({
       totalFrames: TOTAL_FRAMES,
       getFrameUrl,
       priorityFrames: 10,
+      enabled: !shouldDisableSequence,
     });
 
   // ── Fade in hero content when frames are ready ────────────────────────────
@@ -92,7 +107,7 @@ const HeroCanvas = () => {
 
   // ── GSAP ScrollTrigger scroll → frame mapping ─────────────────────────────
   useEffect(() => {
-    if (loadStatus !== "ready" || isLowPerf) return;
+    if (loadStatus !== "ready" || shouldDisableSequence) return;
 
     const section = sectionRef.current;
     const sticky = stickyRef.current;
@@ -174,10 +189,10 @@ const HeroCanvas = () => {
       contentFade.kill();
       ScrollTrigger.refresh();
     };
-  }, [loadStatus, isLowPerf, setCurrentFrame]);
+  }, [loadStatus, shouldDisableSequence, setCurrentFrame]);
 
   // ── Fallback: static hero image for low-perf / mobile ────────────────────
-  if (isLowPerf) {
+  if (shouldDisableSequence) {
     return <StaticHeroFallback />;
   }
 
@@ -365,43 +380,56 @@ function StaticHeroFallback() {
     <section className="relative min-h-dvh w-full overflow-hidden grain">
       <div className="absolute inset-0">
         <img
-          src={getFrameUrl(1)}
-          alt="Luxury concrete interior transforms to warm Indian living"
+          src={getFrameUrl(123)}
+          alt="Luxury finished interior by Dinesh"
           className="absolute inset-0 h-[115%] w-full object-cover"
           loading="eager"
         />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--wood-deep))]/75 via-[hsl(var(--wood-deep))]/30 to-[hsl(var(--wood-deep))]/90" />
-      <div className="relative z-10 container-luxe flex min-h-dvh flex-col justify-center pt-32 pb-28">
+      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--wood-deep))]/80 via-[hsl(var(--wood-deep))]/40 to-[hsl(var(--wood-deep))]/95" />
+      <div className="relative z-10 container-luxe flex min-h-dvh flex-col justify-center pt-28 pb-24 md:pt-32 md:pb-28">
         <p
-          className="eyebrow text-[hsl(var(--gold-soft))] mb-7"
+          className="mb-4 md:mb-7"
           style={{ letterSpacing: "0.05em" }}
         >
-          Est. 2009 · Pune
+          <ShinyText text="Est. 2009 · Pune" className="eyebrow text-xs md:text-sm" speed={4} />
         </p>
         <h1
-          className="font-serif text-[clamp(2.8rem,7vw,5.5rem)] leading-[1.03] text-cream max-w-[17ch]"
+          className="font-serif text-[clamp(2.2rem,8.5vw,5.5rem)] leading-[1.05] text-cream max-w-[17ch]"
           style={{ fontWeight: 300 }}
         >
-          Where Tradition{" "}
-          <em className="not-italic text-[hsl(var(--gold-soft))]">Meets</em>{" "}
-          Modern Living
+          <BlurText className="text-cream" threshold={0.1}>
+            Where Tradition Meets Modern Living
+          </BlurText>
         </h1>
-        <div className="mt-9 h-px w-16" style={{ background: "linear-gradient(90deg, hsl(var(--gold-soft)), transparent)" }} />
-        <p className="mt-8 max-w-[46ch] text-base text-cream/75 leading-[1.8]">
+        <div className="mt-5 md:mt-9 h-px w-12 md:w-16" style={{ background: "linear-gradient(90deg, hsl(var(--gold-soft)), transparent)" }} />
+        <p className="mt-5 md:mt-8 max-w-[46ch] text-[0.9rem] md:text-[1.05rem] text-cream/75 leading-[1.6] md:leading-[1.8]">
           A premium interior design studio crafting homes that honour Indian
-          heritage through a quiet, modern lens.
+          heritage through a quiet, modern lens — handpicked materials,
+          considered light, and rooms that feel like you.
         </p>
-        <div className="mt-12 flex flex-col sm:flex-row gap-4">
+
+        {/* Rotating room types */}
+        <p className="mt-4 md:mt-6 flex items-center gap-2 md:gap-3 text-[hsl(var(--gold-soft))] text-[10px] md:text-sm uppercase tracking-[0.2em] md:tracking-[0.28em]">
+          <span className="text-cream/50">Crafting</span>
+          <RotatingText
+            texts={["Kitchens", "Bedrooms", "Living Rooms", "Wardrobes", "Dining Spaces"]}
+            interval={2000}
+            className="text-[hsl(var(--gold-soft))] font-medium"
+            mainClassName="min-w-[110px] md:min-w-[130px]"
+          />
+        </p>
+
+        <div className="mt-8 md:mt-12 flex flex-col sm:flex-row gap-3 md:gap-4">
           <Button
             asChild size="lg"
-            className="w-full sm:w-auto rounded-full bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] px-9 h-[54px] text-[11px] uppercase tracking-[0.3em] font-medium"
+            className="w-full sm:w-auto rounded-full bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] hover:bg-[hsl(var(--gold-soft))] px-7 md:px-9 h-[48px] md:h-[54px] text-[10px] md:text-[11px] uppercase tracking-[0.2em] md:tracking-[0.3em] font-medium"
           >
             <Link to="/portfolio">Explore Portfolio</Link>
           </Button>
           <Button
             asChild size="lg" variant="outline"
-            className="w-full sm:w-auto rounded-full border-cream/30 text-cream px-9 h-[54px] text-[11px] uppercase tracking-[0.3em] font-medium"
+            className="w-full sm:w-auto rounded-full bg-[hsl(var(--wood-deep))]/20 backdrop-blur-sm border-cream/30 text-cream hover:bg-cream hover:text-[hsl(var(--wood-deep))] px-7 md:px-9 h-[48px] md:h-[54px] text-[10px] md:text-[11px] uppercase tracking-[0.2em] md:tracking-[0.3em] font-medium"
           >
             <Link to="/contact">Book Consultation</Link>
           </Button>
