@@ -5,7 +5,6 @@ import FadeContent from "./FadeContent";
 import JaliBackground from "./JaliBackground";
 import GlareHover from "./GlareHover";
 import SplitText from "./SplitText";
-import FlyingPosters from "./FlyingPosters";
 import ChromaGrid from "./ChromaGrid";
 import { type Category, type PortfolioItem, portfolioItems } from "./portfolioData";
 import hero from "@/assets/hero.jpg";
@@ -94,12 +93,6 @@ const PortfolioGrid = ({ preview = false, initialFilter = "All" }: Props) => {
               </button>
             ))}
           </Reveal>
-        )}
-
-        {preview && (
-          <div className="relative w-full h-[60vh] mb-12 hidden md:block">
-            <FlyingPosters items={portfolioItems.map(i => i.img)} className="w-full h-full" />
-          </div>
         )}
 
         {/* Masonry grid */}
