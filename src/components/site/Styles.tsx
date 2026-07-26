@@ -5,7 +5,6 @@ import modern from "@/assets/style-modern.webp";
 import fusion from "@/assets/style-fusion.jpg";
 import Reveal from "./Reveal";
 import JaliBackground from "./JaliBackground";
-import InfiniteMenu from "./InfiniteMenu";
 
 const items = [
   { key: "traditional", title: "Traditional", desc: "Carved teak, jharokhas, brass and rich textiles rooted in Indian heritage.", note: "For homes that celebrate craft, story, and the depth of ornament.", img: traditional, filter: "Living" },
@@ -19,14 +18,6 @@ const Styles = () => {
   const navigate = useNavigate();
 
   const goToPortfolio = () => navigate(`/portfolio?style=${current.filter}`);
-
-  const menuItems = React.useMemo(() => items.map(i => ({
-    key: i.key,
-    image: i.img,
-    link: `/portfolio?style=${i.filter}`,
-    title: i.title,
-    description: i.desc
-  })), []);
 
   return (
     <section id="styles" className="relative py-24 md:py-36 bg-secondary/40 overflow-hidden">
@@ -69,12 +60,38 @@ const Styles = () => {
         </Reveal>
 
         <Reveal className="grid lg:grid-cols-5 gap-10 lg:gap-16 items-center">
-          <div className="lg:col-span-3 relative h-[400px] lg:h-[600px] border border-border overflow-hidden rounded-md">
-            <InfiniteMenu 
-              items={menuItems}
-              activeKey={active}
-              onItemChange={(item) => setActive(item.key)}
-            />
+          {/* ponytail: clean responsive image showcase with smooth opacity crossfade */}
+          <div
+            onClick={goToPortfolio}
+            className="lg:col-span-3 relative h-[360px] sm:h-[450px] lg:h-[540px] border border-[hsl(var(--gold)/0.25)] overflow-hidden rounded-lg group cursor-pointer shadow-xl bg-[hsl(var(--wood-deep))]"
+          >
+            {items.map((item) => (
+              <div
+                key={item.key}
+                className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                  item.key === active ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+                }`}
+              >
+                <img
+                  src={item.img}
+                  alt={`${item.title} interior design style`}
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  loading="eager"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--wood-deep))/0.85] via-transparent to-black/20" />
+                <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end">
+                  <div>
+                    <span className="text-[10px] uppercase tracking-[0.25em] text-[hsl(var(--gold-soft))] font-medium block mb-1">
+                      {item.title} Style
+                    </span>
+                    <h4 className="text-cream font-serif text-2xl sm:text-3xl">{item.title}</h4>
+                  </div>
+                  <div className="size-11 rounded-full bg-[hsl(var(--gold))] text-[hsl(var(--wood-deep))] flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110">
+                    <span className="text-lg font-bold" aria-hidden="true">↗</span>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
 
           <div className="lg:col-span-2">
